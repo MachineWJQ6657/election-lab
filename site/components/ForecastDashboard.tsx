@@ -53,6 +53,7 @@ const stateNames: Record<string, string> = {
   SD: "South Dakota", TN: "Tennessee", TX: "Texas", UT: "Utah", VT: "Vermont", VA: "Virginia", WA: "Washington", WV: "West Virginia", WI: "Wisconsin", WY: "Wyoming", DC: "District of Columbia",
 };
 const pct = (value: number | null, digits = 1) => value == null ? "—" : `${(100 * value).toFixed(digits)}%`;
+const counted = (count: number, label: string) => `${count} ${label}${count === 1 ? "" : "s"}`;
 const observationTime = (value: string | null) => value == null ? "unavailable" : `${new Intl.DateTimeFormat("en-US", { dateStyle: "medium", timeStyle: "short", timeZone: "America/New_York" }).format(new Date(value))} ET`;
 const margin = (value: number | null) => value == null ? "—" : `${value >= 0 ? "D" : "R"} +${Math.abs(value).toFixed(1)}`;
 const controlRead = (office: "House" | "Senate", value: number) => value >= 0.6 ? `${office} leans Democratic.` : value <= 0.4 ? `${office} leans Republican.` : `${office} remains a toss-up.`;
@@ -167,14 +168,14 @@ export function ForecastDashboard({ data }: { data: ForecastData }) {
         <label className="race-search"><span>Search races</span><input value={query} onChange={(event) => setQuery(event.target.value)} placeholder="State, district or candidate" /></label>
       </div>
 
-      <div className="race-workspace">
+      <div className={`race-workspace${query.trim() && races.length <= 3 ? " compact-results" : ""}`}>
         <div className="race-table-wrap" key={`${office}:${query}`}>
           <table className="race-table">
-            <thead><tr><th>Race</th><th>Matchup</th><th>Polls</th><th>Model</th><th>Market</th><th>D win</th></tr></thead>
+            <thead><tr><th>Race</th><th>Matchup</th><th title="Weighted polling average after historical house-effect adjustment">Adj. polls</th><th>Model</th><th>Market</th><th>D win</th></tr></thead>
             <tbody>{races.map((race) => <tr key={race.id} className={selectedRace?.id === race.id ? "selected" : ""}>
               <td><button type="button" onClick={() => selectRace(race.id)} aria-label={`Open ${race.location} forecast`}>{race.location}<small>{race.rating ?? "Polled race"}</small></button></td>
               <td><span className="candidate dem">{race.dem_side_party}</span>{race.dem}<br /><span className="candidate rep">R</span>{race.rep}</td>
-              <td>{margin(race.poll_margin)}<small>{race.poll_count} polls</small></td>
+              <td>{margin(race.poll_margin)}<small>{counted(race.poll_count, "poll")}</small></td>
               <td>{margin(race.model_margin)}<small>{compactModelLabel(race.model)}</small></td>
               <td>{pct(race.market_probability, 0)}<small>{race.market_probability == null ? "No market" : `Weight ${pct(race.market_weight, 0)}`}</small></td>
               <td>{race.probability_event === "pairwise_comparison_only" ? <small>3-way: not modeled</small> : <><ProbabilityLine value={race.dem_probability} />{race.dem_side_party !== "D" && <small>{race.dem_side_party} candidate win</small>}</>}</td>
@@ -193,7 +194,7 @@ export function ForecastDashboard({ data }: { data: ForecastData }) {
               <div><dt>Model margin</dt><dd>{margin(selectedRace.model_margin)}</dd></div>
               <div><dt>Market</dt><dd>{pct(selectedRace.market_probability)}</dd></div>
             </dl>
-            <p className="inspector-note">{selectedRace.poll_count ? `${selectedRace.poll_count} polls with ${selectedRace.pollster_count} reported labels${selectedRace.normalized_pollster_count != null ? ` and ${selectedRace.normalized_pollster_count} conservative organization keys` : ""} feed this matchup. Neither labels nor keys establish independent surveys or panels.` : `No qualifying direct poll snapshot. This race currently uses a provisional ${selectedRace.rating} rating prior.`}</p>
+            <p className="inspector-note">{selectedRace.poll_count ? `${counted(selectedRace.poll_count, "poll")} with ${counted(selectedRace.pollster_count, "reported label")}${selectedRace.normalized_pollster_count != null ? ` and ${counted(selectedRace.normalized_pollster_count, "conservative organization key")}` : ""} feed this matchup. Neither labels nor keys establish independent surveys or panels.` : `No qualifying direct poll snapshot. This race currently uses a provisional ${selectedRace.rating} rating prior.`}</p>
             {selectedRace.poll_house_effect != null && <p className="inspector-note">The adjusted average subtracts an estimated prior-cycle pollster house effect of {selectedRace.poll_house_effect >= 0 ? "+" : ""}{selectedRace.poll_house_effect.toFixed(2)} points from the raw average. This is a model correction, not additional poll evidence.</p>}
             {selectedRace.multi_candidate_warning && <p className="early-flag">{selectedRace.multi_candidate_warning}</p>}
             {selectedRace.district_boundary_changed && <p className="early-flag">Verified boundary change: the old district result is excluded from this forecast. A comparable reconstructed district baseline is not yet available.</p>}

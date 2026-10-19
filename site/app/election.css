@@ -126,6 +126,11 @@ button:focus-visible, input:focus-visible, a:focus-visible { outline: 2px solid 
 .race-search input { width: 100%; height: 41px; padding: 0 12px; border: 1px solid var(--line); border-radius: 0; background: var(--surface); color: var(--ink); outline: none; font-size: 13px; }
 .race-search input:focus { border-color: var(--ink); box-shadow: inset 3px 0 var(--signal); }
 .race-workspace { display: grid; grid-template-columns: minmax(0, 1.6fr) minmax(360px, .72fr); gap: 18px; align-items: start; }
+.race-workspace.compact-results { grid-template-columns: minmax(0, 1fr); }
+.race-workspace.compact-results .race-inspector { position: static; order: 0; }
+@media (min-width: 801px) {
+  .race-workspace.compact-results .inspector-metrics { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+}
 .race-table-wrap { max-height: 650px; overflow: auto; scrollbar-gutter: stable; border: 1px solid var(--ink); background: var(--surface); }
 .race-table { width: 100%; border-collapse: collapse; font-size: 12.5px; }
 .race-table thead { position: sticky; top: 0; z-index: 3; background: var(--paper); }
