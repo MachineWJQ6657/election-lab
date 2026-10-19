@@ -1,0 +1,9 @@
+state,region,electoral_votes,previous_margin,national_environment,incumbency_adjustment,prior_sigma
+AZ,west,11,0.31,-1.00,0.20,4.00
+GA,south,16,0.24,-1.00,0.20,4.00
+MI,midwest,15,2.78,-1.00,0.20,3.80
+NV,west,6,2.39,-1.00,0.20,4.20
+NC,south,16,-1.35,-1.00,0.20,3.80
+PA,northeast,19,1.16,-1.00,0.20,3.70
+WI,midwest,10,0.63,-1.00,0.20,3.90
+

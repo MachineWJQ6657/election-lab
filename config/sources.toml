@@ -1,0 +1,18 @@
+[history]
+# Stable public 538 pollster-rating dataset. It includes final outcomes and is
+# therefore used for historical backtests, never as a source of current polls.
+url = "https://raw.githubusercontent.com/fivethirtyeight/data/master/pollster-ratings/raw_polls.csv"
+
+[latest]
+cycle = 2026
+election_date = "2026-11-03"
+attribution = "PollingSource + Decision Labs (CC BY 4.0) + 270toWin + Silver Bulletin + UH Hobby"
+
+[latest.urls]
+senate = "https://pollingsource.com/senate/polls"
+house = "https://pollingsource.com/house/"
+generic_ballot_silver = "https://docs.google.com/spreadsheets/d/e/2PACX-1vRsvXNCZ0ubJr8D_yNcU5q6C0_HBa35K7oDK03KpO7Ca43UwdXaIdvVLWoXEmHHph0EREz5430Hm5yZ/pub?output=csv"
+senate_270towin_map = "https://www.270towin.com/partials/maps/custom_map.php?id=senate-polls-26&show_dc=0&show_evotes=0"
+governor_270towin_map = "https://www.270towin.com/partials/maps/custom_map.php?id=governor-polls-26&show_dc=0&show_evotes=0"
+uh_hobby_statewide = "https://www.uh.edu/hobby/texas2026/index.php"
+uh_hobby_tx09 = "https://www.uh.edu/hobby/congress2026/index.php"
