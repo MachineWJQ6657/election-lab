@@ -4,6 +4,7 @@ import pandas as pd
 
 from election_forecast.market_calibration import (
     MarketCalibrationConfig,
+    _candidate_matches,
     add_chamber_market_context,
     build_market_consensus,
     calibrate_race_probabilities,
@@ -11,6 +12,13 @@ from election_forecast.market_calibration import (
 from election_forecast.sources.prediction_markets import _kalshi_record, _polymarket_record
 
 NOW = datetime(2026, 8, 20, tzinfo=UTC)
+
+
+def test_market_matching_rejects_same_family_predecessor_but_keeps_name_extensions():
+    assert not _candidate_matches("Darline Graham", "Lindsey O. Graham (R)", "R")
+    assert _candidate_matches("Darline Graham", "Darline Graham Nordone (R)", "R")
+    assert _candidate_matches("Darline Graham", "Graham (R)", "R")
+    assert not _candidate_matches("Democratic nominee TBD", "Democratic Party", "D")
 
 
 def test_polymarket_record_devigs_two_party_prices():

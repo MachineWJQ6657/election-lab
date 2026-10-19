@@ -227,6 +227,7 @@ def main() -> None:
     lag = matching_research("publication_lag_experiment_20261019")
     house_validation = matching_research("house_control_backtest_20261019")
     research_audit = matching_research("research_audit_20261019")
+    correlation = matching_research("correlation_experiment_20261019")
 
     payload = {
         "updated_at": str(forecast["as_of_date"].iloc[0]),
@@ -245,6 +246,7 @@ def main() -> None:
         "publication_lag_experiment": lag,
         "house_control_validation": house_validation,
         "research_audit": research_audit,
+        "correlation_experiment": correlation,
         "snapshot_verified": True,
         "control": control,
         "races": _records(races),
@@ -262,6 +264,8 @@ def main() -> None:
             "hashes_verified": authenticity["cache"]["payload_hashes_verified"],
             "fec_matches": authenticity["fec_candidate_check"]["matched"],
             "fec_checked": authenticity["fec_candidate_check"]["checked"],
+            "fec_name_review_flags": authenticity["fec_candidate_check"]["unmatched_review_flags"],
+            "fec_match_note": authenticity["fec_candidate_check"]["important_note"],
             "top_source_domains": list(authenticity["latest_source_domains"].items())[:16],
         },
         "model_card": model_card,

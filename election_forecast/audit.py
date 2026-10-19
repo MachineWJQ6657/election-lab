@@ -10,7 +10,7 @@ from urllib.parse import urlparse
 
 import pandas as pd
 
-from .names import candidate_key
+from .names import candidate_key, candidate_name_match
 from .settings import Settings, settings
 
 
@@ -44,11 +44,21 @@ def audit_fec_candidates(catalog: pd.DataFrame, fec: pd.DataFrame) -> pd.DataFra
             if candidate.endswith("TBD"):
                 continue
             last_name = _last_name(candidate)
-            matches = official[
+            surname_matches = official[
                 (official["office_name"] == race.office)
                 & (official["location"] == race.location)
                 & (official["party_normalized"] == party)
                 & (official["last_name"] == last_name)
+            ]
+            strengths = surname_matches["candidate_name"].map(
+                lambda value, name=candidate: candidate_name_match(
+                    name, value, right_fec_format=True
+                )
+            )
+            matches = surname_matches.loc[
+                strengths.isin(
+                    ["given_name_compatible", "initial_compatible", "verified_alias_compatible"]
+                )
             ]
             rows.append(
                 {
@@ -59,6 +69,14 @@ def audit_fec_candidates(catalog: pd.DataFrame, fec: pd.DataFrame) -> pd.DataFra
                     "fec_last_name": last_name,
                     "fec_match": not matches.empty,
                     "fec_candidate_ids": ",".join(matches["candidate_id"].astype(str)),
+                    "surname_candidate_ids_for_review": ",".join(
+                        surname_matches["candidate_id"].astype(str)
+                    ),
+                    "name_match_strength": (
+                        ",".join(sorted(set(strengths.loc[matches.index])))
+                        if not matches.empty
+                        else ",".join(sorted(set(strengths))) or "no_compatible_filing"
+                    ),
                     "interpretation": (
                         "compatible FEC filing found"
                         if not matches.empty
@@ -125,9 +143,15 @@ def run_authenticity_audit(
         after_election = dates > elections
         future = dates.dt.date > as_of if name == "latest" else pd.Series(False, index=frame.index)
         duplicates = frame.duplicated(["source", "source_id"], keep=False)
-        valid_url = frame["source_url"].fillna("").map(
-            lambda value: urlparse(str(value)).scheme in {"http", "https"}
-            and bool(urlparse(str(value)).netloc)
+        valid_url = (
+            frame["source_url"]
+            .fillna("")
+            .map(
+                lambda value: (
+                    urlparse(str(value)).scheme in {"http", "https"}
+                    and bool(urlparse(str(value)).netloc)
+                )
+            )
         )
         for check, mask, severity in (
             ("invalid_percentage", invalid_pct, "error"),
@@ -160,6 +184,18 @@ def run_authenticity_audit(
 
     candidate_audit = audit_fec_candidates(catalog, fec)
     unmatched = int((~candidate_audit["fec_match"]).sum()) if not candidate_audit.empty else 0
+    if unmatched:
+        issues.append(
+            {
+                "dataset": "candidate_catalog",
+                "check": "candidate_name_identity_requires_review",
+                "severity": "warning",
+                "rows": unmatched,
+                "detail": "Given names/initials could not establish a compatible filing. "
+                "Nicknames, middle names and surname-only records can require adjudication; "
+                "this is not proof of invalid candidacy.",
+            }
+        )
     comparison = result_comparison.copy()
     discrepancies = comparison[comparison["absolute_margin_difference"] > 0.25]
     if len(discrepancies):
@@ -191,7 +227,14 @@ def run_authenticity_audit(
             "checked": len(candidate_audit),
             "matched": int(candidate_audit["fec_match"].sum()) if len(candidate_audit) else 0,
             "unmatched_review_flags": unmatched,
-            "important_note": "FEC filing is neither ballot qualification nor nomination proof.",
+            "match_strength_counts": {
+                str(key): int(value)
+                for key, value in candidate_audit.name_match_strength.value_counts().items()
+            }
+            if len(candidate_audit)
+            else {},
+            "important_note": "Name-compatible filings are not identity, ballot qualification "
+            "or nomination proof. Unresolved nicknames are review flags, not invalid candidates.",
         },
         "mit_result_crosscheck": {
             "races": len(comparison),

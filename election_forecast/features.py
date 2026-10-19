@@ -8,7 +8,7 @@ from collections.abc import Iterable
 import numpy as np
 import pandas as pd
 
-from .names import candidate_key
+from .names import COMPATIBLE_NAME_MATCHES, candidate_key, candidate_name_match
 from .pollsters import pollster_key
 
 OFFICES = ("president", "senate", "house", "governor", "generic_ballot")
@@ -110,8 +110,8 @@ def build_race_snapshots(
                 prior_lookup[key] = float(prior_row["actual_margin"])
                 prior_cycle_lookup[key] = int(prior_row["cycle"])
                 prior_candidate_lookup[key] = (
-                    _candidate_key(prior_row["dem_candidate"]),
-                    _candidate_key(prior_row["rep_candidate"]),
+                    str(prior_row["dem_candidate"]),
+                    str(prior_row["rep_candidate"]),
                 )
     generic_outcomes = outcome_history[
         (outcome_history["office"] == "generic_ballot") & (outcome_history["location"] == "US")
@@ -247,12 +247,12 @@ def build_race_snapshots(
                 0.5
                 * (
                     int(
-                        bool(_candidate_key(dem_candidate))
-                        and _candidate_key(dem_candidate) == previous_candidates[0]
+                        candidate_name_match(dem_candidate, previous_candidates[0])
+                        in COMPATIBLE_NAME_MATCHES
                     )
                     + int(
-                        bool(_candidate_key(rep_candidate))
-                        and _candidate_key(rep_candidate) == previous_candidates[1]
+                        candidate_name_match(rep_candidate, previous_candidates[1])
+                        in COMPATIBLE_NAME_MATCHES
                     )
                 )
                 if previous_candidates

@@ -29,9 +29,15 @@ test("server-renders the forecast dashboard and social metadata", async () => {
   assert.match(html, /not votes for a candidate/);
   const data = JSON.parse(await readFile(new URL("../lib/forecast-data.json", import.meta.url), "utf8"));
   assert.match(html, new RegExp(`${data.days_to_election}(?:<!-- -->)? DAYS OUT`));
-  assert.match(html, /14(?:<!-- -->)?-day Brier/);
-  assert.doesNotMatch(html, /60-day Brier|71 DAYS OUT/);
-  assert.match(html, /506<!-- --> races covered|506 races covered/);
+  assert.match(html, new RegExp(`${data.validation_horizon}(?:<!-- -->)?-day Brier`));
+  const races = data.races.filter((race) => ["senate", "house", "governor"].includes(race.office));
+  assert.match(html, new RegExp(`${races.length}(?:<!-- -->)? races covered`));
+  assert.equal(new Set(races.map((race) => race.id)).size, races.length);
+  if (data.research_audit) {
+    const expected = (100 * data.research_audit.subsets.current_offices.winner_accuracy).toFixed(1);
+    assert.match(html.replace(/<!--.*?-->/g, ""), new RegExp(`Winner accuracy</span><strong>${expected}%`));
+    assert.match(html, /competitive races and shared election errors/);
+  }
   assert.match(html, /election-forecast-lab-og-v2-1200x630\.png/);
   assert.doesNotMatch(html, /codex-preview|react-loading-skeleton/i);
 });

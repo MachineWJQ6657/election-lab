@@ -1,16 +1,39 @@
 import json
 from datetime import date
 
+import httpx
 import pandas as pd
 import pytest
 
 from election_forecast.sources.early_voting import (
     election_day,
+    observation_day,
     parse_civic,
     parse_florida,
     parse_nc_counts,
+    read_capabilities,
     reconcile_demographics,
 )
+
+
+def test_observation_day_does_not_treat_utc_midnight_as_tomorrow_in_new_york():
+    assert observation_day("2026-10-20T00:30:00+00:00") == date(2026, 10, 19)
+    with pytest.raises(ValueError, match="timezone"):
+        observation_day("2026-10-19T12:00:00")
+
+
+def test_capability_fallback_uses_only_verified_discovery_not_old_ballot_totals():
+    class Client:
+        def get(self, url, **kwargs):
+            response = httpx.Response(503, request=httpx.Request("GET", url))
+            response.raise_for_status()
+
+        def get_cached(self, url):
+            return b'{"categories":{"returned":{"race":true}}}'
+
+    data, fallback = read_capabilities(Client(), "https://example.test/capabilities", refresh=True)
+    assert fallback and data["categories"]["returned"]["race"]
+    assert "total" not in data
 
 
 def test_north_carolina_grid_is_not_counted_again_for_each_demographic():

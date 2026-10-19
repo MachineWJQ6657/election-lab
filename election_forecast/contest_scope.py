@@ -4,7 +4,7 @@ import json
 
 import pandas as pd
 
-from .names import candidate_key
+from .names import COMPATIBLE_NAME_MATCHES, candidate_key, candidate_name_match
 
 
 def _surname(value: object) -> str:
@@ -28,12 +28,18 @@ def annotate_contest_scope(
             frame.loc[index, "catalog_candidate_match"] = bool(
                 named_dem
                 and named_rep
-                and named_dem == candidate_key(row.dem_candidate)
-                and named_rep == candidate_key(row.rep_candidate)
+                and candidate_name_match(row.dem_candidate, entry.iloc[0]["dem_candidate"])
+                in COMPATIBLE_NAME_MATCHES
+                and candidate_name_match(row.rep_candidate, entry.iloc[0]["rep_candidate"])
+                in COMPATIBLE_NAME_MATCHES
             )
         if not entry.empty and "nominees_json" in entry:
             for candidate in json.loads(entry.iloc[0]["nominees_json"] or "[]"):
-                if _surname(candidate.get("n")) == _surname(row.dem_candidate):
+                if (
+                    not candidate.get("w")
+                    and candidate_name_match(row.dem_candidate, candidate.get("n"))
+                    in COMPATIBLE_NAME_MATCHES
+                ):
                     frame.loc[index, "dem_side_party"] = candidate.get("p", "D")
         polls = raw_polls[(raw_polls.office == row.office) & (raw_polls.location == row.location)]
         if not polls.empty and "ind_pct" in polls:

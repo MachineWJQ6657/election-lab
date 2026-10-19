@@ -1,7 +1,12 @@
+import numpy as np
 import pandas as pd
 import pytest
 
-from election_forecast.diagnostics import paired_cycle_bootstrap, probability_diagnostics
+from election_forecast.diagnostics import (
+    integer_distribution_score,
+    paired_cycle_bootstrap,
+    probability_diagnostics,
+)
 
 
 def fixture():
@@ -20,6 +25,14 @@ def fixture():
             for i in (0, 1)
         ]
     )
+
+
+def test_ranked_probability_loss_matches_absolute_error_for_deterministic_counts():
+    assert integer_distribution_score(np.array([3, 3, 3]), 5, 8) == 2
+    assert integer_distribution_score(np.array([0, 2]), 1, 2) == 0.5
+    assert integer_distribution_score(np.array([2, 2]), 2, 2) == 0
+    with pytest.raises(ValueError, match="integer counts"):
+        integer_distribution_score(np.array([1.5]), 1, 3)
 
 
 def test_diagnostics_and_cluster_comparison_use_same_races():

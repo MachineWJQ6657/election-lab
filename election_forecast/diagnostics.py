@@ -8,6 +8,29 @@ import pandas as pd
 from .metrics import calibration_bins
 
 
+def integer_distribution_score(samples: np.ndarray, actual: int, maximum: int) -> float:
+    """Ranked probability loss on a bounded integer count (lower is better).
+
+    Summed squared CDF errors over unit-spaced thresholds are the discrete
+    analogue of CRPS. A deterministic forecast reduces to absolute error.
+    """
+    values = np.asarray(samples)
+    if (
+        values.ndim != 1
+        or not len(values)
+        or not np.isfinite(values).all()
+        or (values < 0).any()
+        or (values > maximum).any()
+        or not np.equal(values, np.rint(values)).all()
+        or not 0 <= actual <= maximum
+        or int(actual) != actual
+    ):
+        raise ValueError("Samples and outcome must be valid integer counts")
+    cdf = np.cumsum(np.bincount(values.astype(int), minlength=maximum + 1)) / len(values)
+    actual_cdf = (np.arange(maximum + 1) >= actual).astype(float)
+    return float(np.square(cdf - actual_cdf).sum())
+
+
 def probability_diagnostics(frame: pd.DataFrame) -> dict:
     if frame.empty:
         return {"races": 0}

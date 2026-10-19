@@ -4,7 +4,12 @@ from datetime import date
 import pandas as pd
 import pytest
 
-from election_forecast.lineage import fingerprint, verify_forecast_manifest, verify_observed_cutoff
+from election_forecast.lineage import (
+    fingerprint,
+    verify_engine,
+    verify_forecast_manifest,
+    verify_observed_cutoff,
+)
 
 
 def test_export_rejects_source_refresh_and_partial_output_rewrite(tmp_path):
@@ -42,3 +47,12 @@ def test_live_tables_cannot_be_backdated_and_use_new_york_day_boundary():
         verify_observed_cutoff(
             pd.DataFrame({"end_date": ["2026-10-05"]}), date(2026, 10, 5), "test"
         )
+
+
+def test_changed_model_code_is_not_exported_as_an_unchanged_forecast(monkeypatch):
+    monkeypatch.setattr(
+        "election_forecast.lineage.engine_fingerprints", lambda: {"simulation.py": "v2"}
+    )
+    with pytest.raises(ValueError, match="engine changed"):
+        verify_engine({"simulation.py": "v1"})
+    verify_engine({"simulation.py": "v2"})

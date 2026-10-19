@@ -8,6 +8,22 @@ import numpy as np
 import pandas as pd
 
 
+def _validate_simulation_parameters(
+    simulations: int, national_correlation: float, office_correlation: float
+) -> None:
+    if (
+        isinstance(simulations, bool)
+        or not isinstance(simulations, (int, np.integer))
+        or simulations < 1
+    ):
+        raise ValueError("simulations must be a positive integer")
+    components = np.asarray([national_correlation, office_correlation], dtype=float)
+    if not np.isfinite(components).all() or (components < 0).any():
+        raise ValueError("correlation components must be finite and nonnegative")
+    if float(components.sum()) >= 1.0:
+        raise ValueError("correlation components must sum to less than one")
+
+
 def select_race_matchups(
     forecast: pd.DataFrame, *, strategy: str = "central"
 ) -> tuple[pd.DataFrame, int]:
@@ -81,6 +97,11 @@ def _seat_summary(values: np.ndarray, threshold: int | None = None) -> dict[str,
 def _simulate_house_seats(
     mean_seats: float, sigma_seats: float, *, simulations: int, seed: int
 ) -> np.ndarray:
+    _validate_simulation_parameters(simulations, 0.0, 0.0)
+    if not np.isfinite(mean_seats) or not 0 <= mean_seats <= 435:
+        raise ValueError("House mean seats must be finite and within 0..435")
+    if not np.isfinite(sigma_seats) or sigma_seats < 0:
+        raise ValueError("House seat sigma must be finite and nonnegative")
     rng = np.random.default_rng(seed)
     draws = np.rint(mean_seats + max(float(sigma_seats), 1.0) * rng.standard_normal(simulations))
     return np.clip(draws, 0, 435).astype(int)
@@ -94,9 +115,21 @@ def _simulate_wins(
     national_correlation: float,
     office_correlation: float,
 ) -> dict[str, np.ndarray]:
-    probabilities = selected["dem_win_probability"].astype(float).clip(0.001, 0.999)
+    _validate_simulation_parameters(simulations, national_correlation, office_correlation)
+    probabilities = selected["dem_win_probability"].astype(float)
+    if not np.isfinite(probabilities).all() or not probabilities.between(0, 1).all():
+        raise ValueError("Race probabilities must be finite and within 0..1")
     inverse = NormalDist().inv_cdf
-    thresholds = np.array([inverse(float(probability)) for probability in probabilities])
+    thresholds = np.array(
+        [
+            -np.inf
+            if probability == 0
+            else np.inf
+            if probability == 1
+            else inverse(float(probability))
+            for probability in probabilities
+        ]
+    )
     rng = np.random.default_rng(seed)
     national = rng.standard_normal((simulations, 1))
     offices = sorted(selected["office"].unique())
@@ -131,8 +164,7 @@ def simulate_2026_control(
     aligned seats. Independents in the current 47-seat aligned caucus are
     counted with Democrats.
     """
-    if national_correlation + office_correlation >= 1.0:
-        raise ValueError("correlation components must sum to less than one")
+    _validate_simulation_parameters(simulations, national_correlation, office_correlation)
     selected, discarded_matchups = select_race_matchups(forecast)
     selected = selected[selected["office"].isin(["house", "senate", "governor"])].copy()
     independent_sensitivity = None

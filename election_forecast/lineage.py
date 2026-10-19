@@ -21,10 +21,34 @@ FORECAST_OUTPUTS = (
 )
 INPUT_TABLES = ("polls_latest", "polls_latest_raw_sources", "race_catalog_latest")
 OPTIONAL_TRAINING_TABLES = ("polls_history", "polls_archive", "house_national_history")
+FORECAST_ENGINE_FILES = (
+    "cli.py",
+    "features.py",
+    "backtest.py",
+    "history.py",
+    "coverage.py",
+    "house_seats.py",
+    "simulation.py",
+    "market_calibration.py",
+    "probability_calibration.py",
+    "names.py",
+    "contest_scope.py",
+    "evidence.py",
+    "explain.py",
+)
 
 
 def fingerprint(path: Path) -> str:
     return hashlib.sha256(path.read_bytes()).hexdigest()
+
+
+def engine_fingerprints() -> dict[str, str]:
+    return {name: fingerprint(Path(__file__).parent / name) for name in FORECAST_ENGINE_FILES}
+
+
+def verify_engine(expected: dict[str, str]) -> None:
+    if engine_fingerprints() != expected:
+        raise ValueError("Forecast engine changed during computation; rerun before exporting")
 
 
 def source_fingerprints() -> dict[str, str]:
@@ -57,13 +81,20 @@ def verify_sources(expected: dict[str, str]) -> None:
 
 
 def write_forecast_manifest(
-    *, as_of: str, sources: dict[str, str], validation_engine_key: str | None = None
+    *,
+    as_of: str,
+    sources: dict[str, str],
+    validation_engine_key: str | None = None,
+    engine_versions: dict[str, str] | None = None,
 ) -> None:
     verify_sources(sources)
+    versions = engine_versions if engine_versions is not None else engine_fingerprints()
+    verify_engine(versions)
     manifest = {
         "as_of": as_of,
         "generated_at": datetime.now(UTC).isoformat(),
         "validation_engine_key": validation_engine_key,
+        "engine_sha256": versions,
         "source_sha256": sources,
         "output_sha256": {
             name: fingerprint(settings.artifact_dir / name) for name in FORECAST_OUTPUTS
@@ -78,6 +109,8 @@ def write_forecast_manifest(
 
 def verify_forecast_manifest(artifact_dir: Path, processed_dir: Path) -> dict:
     manifest = json.loads((artifact_dir / "forecast_manifest.json").read_text(encoding="utf-8"))
+    if "engine_sha256" in manifest:
+        verify_engine(manifest["engine_sha256"])
     for name, expected in manifest["source_sha256"].items():
         if fingerprint(processed_dir / f"{name}.parquet") != expected:
             raise ValueError(f"Forecast source snapshot mismatch: {name}; regenerate forecast")

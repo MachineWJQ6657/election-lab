@@ -5,8 +5,9 @@ from __future__ import annotations
 import hashlib
 import json
 from concurrent.futures import ThreadPoolExecutor
-from datetime import date, timedelta
+from datetime import date, datetime, timedelta
 from io import BytesIO, StringIO
+from zoneinfo import ZoneInfo
 
 import httpx
 import pandas as pd
@@ -21,6 +22,29 @@ NC_COUNTS = (
 NC_REFERENCE = "https://www.ncsbe.gov/results-data/absentee-and-provisional-data"
 CATEGORIES = ("requested", "returned", "inperson")
 FL_STATS = "https://countyfilesvbm-ev.floridados.gov/VoteByMailEarlyVotingReports/PublicStats"
+
+
+def observation_day(timestamp: str) -> date:
+    observed = datetime.fromisoformat(timestamp)
+    if observed.tzinfo is None:
+        raise ValueError("Source observation timestamp requires a timezone")
+    return observed.astimezone(ZoneInfo("America/New_York")).date()
+
+
+def read_capabilities(client: CachedHTTPClient, url: str, *, refresh: bool) -> tuple[dict, bool]:
+    """A verified older schema can aid discovery; it supplies no ballot counts."""
+    fallback = False
+    try:
+        payload = client.get(url, refresh=refresh)
+    except (httpx.TransportError, httpx.HTTPStatusError) as exc:
+        if isinstance(exc, httpx.HTTPStatusError) and exc.response.status_code < 500:
+            raise
+        payload = client.get_cached(url)
+        fallback = True
+    data = json.loads(payload)
+    if not isinstance(data, dict) or "categories" not in data:
+        raise ValueError("Invalid early-vote capability discovery response")
+    return data, fallback
 
 
 def parse_florida(payload: bytes, *, as_of: date) -> list[dict]:
@@ -202,7 +226,7 @@ def fetch_early_voting(
     try:
         payload = client.get(NC_COUNTS, refresh=refresh)
         _, metadata_path = client._paths(NC_COUNTS)
-        fetched = date.fromisoformat(json.loads(metadata_path.read_text())["fetched_at"][:10])
+        fetched = observation_day(json.loads(metadata_path.read_text())["fetched_at"])
         if fetched > as_of:
             raise ValueError("Live NCSBE response cannot be used for a past forecast")
         official, demographics = parse_nc_counts(payload, as_of=fetched)
@@ -261,9 +285,11 @@ def fetch_early_voting(
             return [], []  # NC official grid is authoritative; FL totals differ from provider.
         output, flags = [], []
         try:
-            capabilities = json.loads(
-                client.get(f"{CIVIC_BASE}/{state}/capabilities", refresh=refresh)
+            capabilities, discovery_fallback = read_capabilities(
+                client, f"{CIVIC_BASE}/{state}/capabilities", refresh=refresh
             )
+            if discovery_fallback:
+                flags.append({"state": state, "check": "capabilities_cache_fallback"})
             for mode in ("returned", "inperson"):
                 if not demographic_totals.get((state, mode), 0):
                     continue
@@ -272,7 +298,20 @@ def fetch_early_voting(
                         continue
                     by = "age_range" if dimension == "age" else dimension
                     url = f"{CIVIC_BASE}/{state}/{mode}/demographics?by={by}"
-                    data = json.loads(client.get(url, refresh=refresh))
+                    try:
+                        data = json.loads(client.get(url, refresh=refresh))
+                    except httpx.HTTPError as exc:
+                        flags.append(
+                            {
+                                "state": state,
+                                "check": "demographic_source_unavailable",
+                                "category": mode,
+                                "dimension": dimension,
+                                "source_url": url,
+                                "detail": str(exc),
+                            }
+                        )
+                        continue
                     snapshot = date.fromisoformat(data["snapshot_date"])
                     if snapshot > as_of:
                         raise ValueError("Future-dated demographic response")

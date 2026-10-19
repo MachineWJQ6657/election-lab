@@ -6,6 +6,34 @@ from election_forecast.contest_scope import annotate_contest_scope
 from election_forecast.simulation import select_race_matchups
 
 
+def test_nominee_preference_does_not_confuse_same_surname_successors():
+    forecast = pd.DataFrame(
+        [
+            {
+                "office": "senate",
+                "location": "SC",
+                "dem_candidate": "Annie Andrews",
+                "rep_candidate": name,
+                "as_of_date": "2026-10-19",
+            }
+            for name in ("Darline Graham", "Lindsey Graham")
+        ]
+    )
+    catalog = pd.DataFrame(
+        [
+            {
+                "office": "senate",
+                "location": "SC",
+                "dem_candidate": "Annie Andrews",
+                "rep_candidate": "Darline Graham",
+                "nominees_json": "[]",
+            }
+        ]
+    )
+    result = annotate_contest_scope(forecast, catalog, pd.DataFrame(columns=["office", "location"]))
+    assert result.catalog_candidate_match.tolist() == [True, False]
+
+
 def test_independent_caucus_and_three_way_forecast_are_distinct():
     forecast = pd.DataFrame(
         [

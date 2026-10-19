@@ -11,7 +11,7 @@ from typing import Any
 import numpy as np
 import pandas as pd
 
-from .names import candidate_key
+from .names import COMPATIBLE_NAME_MATCHES, candidate_key, candidate_name_match
 
 
 @dataclass(frozen=True)
@@ -127,9 +127,16 @@ def _candidate_matches(candidate: object, labels: object, party: str) -> bool:
         )
     ]
     if candidate_labels:
-        return any(
-            re.search(rf"\b{re.escape(candidate_key)}\b", label) for label in candidate_labels
-        )
+        for label in candidate_labels:
+            clean = re.sub(r"\([^)]*\)", "", label).strip()
+            surname = re.search(rf"\b{re.escape(candidate_key)}\b", clean)
+            if (
+                surname
+                and candidate_name_match(candidate, clean[: surname.end()])
+                in COMPATIBLE_NAME_MATCHES
+            ):
+                return True
+        return False
     return any(
         (party == "D" and "democrat" in item) or (party == "R" and "republican" in item)
         for item in label_items

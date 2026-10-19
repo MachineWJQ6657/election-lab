@@ -33,8 +33,10 @@ from .features import build_race_snapshots
 from .history import merge_historical_sources
 from .house_seats import calibrate_house_forecast
 from .lineage import (
+    engine_fingerprints,
     fingerprint,
     source_fingerprints,
+    verify_engine,
     verify_observed_cutoff,
     verify_sources,
     write_forecast_manifest,
@@ -282,6 +284,18 @@ def fetch_latest(
     console.print(
         f"Race catalog: {len(catalog):,} races -> {catalog_path} | report -> {catalog_report}"
     )
+
+
+@data_app.command("fetch-fec")
+def fetch_fec_command(
+    refresh: Annotated[
+        bool, typer.Option(help="Refresh official FEC candidate master file")
+    ] = False,
+) -> None:
+    """Update candidate filings without refetching historical election outcomes."""
+    frame = fetch_fec_candidates(refresh=refresh)
+    path = Warehouse().write("fec_candidates_2026", frame)
+    console.print(f"Official FEC candidate records: {len(frame):,} -> {path}")
 
 
 @data_app.command("fetch-markets")
@@ -613,6 +627,7 @@ def forecast_latest(
         warehouse.read("polls_archive") if warehouse.exists("polls_archive") else None,
     )
     input_versions = source_fingerprints()
+    engine_versions = engine_fingerprints()
     latest = warehouse.read("polls_latest")
     if as_of is not None:
         try:
@@ -732,6 +747,7 @@ def forecast_latest(
         forecast, catalogs, warehouse.read("polls_latest_raw_sources")
     )
     verify_sources(input_versions)
+    verify_engine(engine_versions)
     coverage = summarize_coverage(forecast)
     csv_path = settings.artifact_dir / "latest_forecast.csv"
     json_path = settings.artifact_dir / "latest_forecast.json"
@@ -815,6 +831,7 @@ def forecast_latest(
         as_of=forecast_date.isoformat(),
         sources=input_versions,
         validation_engine_key=cache_key(history[history["cycle"] >= 2008], supplemental_outcomes),
+        engine_versions=engine_versions,
     )
     console.print(f"Forecast frozen at {forecast_date}; CSV -> {csv_path}; JSON -> {json_path}")
     console.print(f"Coverage audit -> {coverage_path}")

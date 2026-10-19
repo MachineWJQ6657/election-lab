@@ -41,6 +41,43 @@ def test_quality_weighting_never_learns_from_target_cycle_results():
     )
 
 
+def test_same_family_successor_does_not_inherit_candidate_continuity():
+    old = {
+        "source": "test",
+        "source_id": "past",
+        "race_id": "2020:senate:SC",
+        "cycle": 2020,
+        "office": "senate",
+        "location": "SC",
+        "pollster": "Example",
+        "election_date": "2020-11-03",
+        "end_date": "2020-10-01",
+        "sample_size": 800,
+        "partisan": None,
+        "margin": -9,
+        "actual_margin": -10,
+        "dem_candidate": "Jaime Harrison",
+        "rep_candidate": "Lindsey Graham",
+    }
+    current = dict(
+        old,
+        source_id="current",
+        race_id="2026:senate:SC",
+        cycle=2026,
+        election_date="2026-11-03",
+        end_date="2026-10-01",
+        margin=-3,
+        actual_margin=float("nan"),
+        dem_candidate="Annie Andrews",
+        rep_candidate="Darline Graham",
+    )
+    result = build_race_snapshots(
+        pd.DataFrame([old, current]), (14,), min_polls=1, target_cycles=(2026,)
+    ).iloc[0]
+    assert result.previous_margin == -10  # The state's prior remains relevant.
+    assert result.candidate_continuity == 0  # The named candidate is not the predecessor.
+
+
 def test_snapshot_excludes_polls_after_as_of_date():
     rows = [
         {
