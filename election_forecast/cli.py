@@ -26,12 +26,13 @@ from .backtest import (
     select_champions_by_office,
 )
 from .contest_scope import annotate_contest_scope
-from .coverage import combine_forecast_coverage, summarize_coverage
+from .coverage import attach_snapshot_metadata, combine_forecast_coverage, summarize_coverage
 from .evidence import build_poll_evidence
 from .explain import build_forecast_explanations
 from .features import build_race_snapshots
 from .history import merge_historical_sources
 from .house_seats import calibrate_house_forecast
+from .http_cache import CachedHTTPClient
 from .lineage import (
     engine_fingerprints,
     fingerprint,
@@ -53,6 +54,7 @@ from .simulation import simulate_2026_control
 from .sources import (
     fetch_270towin_polls,
     fetch_decision_labs_polls,
+    fetch_enjoyer_polls,
     fetch_fec_candidates,
     fetch_fte_full_archive,
     fetch_fte_generic_archive,
@@ -223,13 +225,14 @@ def fetch_latest(
     ]
     frames: list[pd.DataFrame] = []
     catalogs: list[pd.DataFrame] = []
+    client = CachedHTTPClient()
     for office in requested:
         if office in (Office.SENATE, Office.HOUSE, Office.GOVERNOR):
-            catalogs.append(fetch_polling_source_catalog(office, refresh=refresh))
+            catalogs.append(fetch_polling_source_catalog(office, refresh=refresh, client=client))
         if office == Office.GOVERNOR:
-            frames.append(fetch_polling_source_governors(refresh=refresh))
+            frames.append(fetch_polling_source_governors(refresh=refresh, client=client))
         elif office in (Office.SENATE, Office.HOUSE, Office.GENERIC_BALLOT):
-            frames.append(fetch_polling_source(office, refresh=refresh))
+            frames.append(fetch_polling_source(office, refresh=refresh, client=client))
         else:
             console.print(f"[yellow]Skipping unsupported live office: {office.value}[/yellow]")
     if not frames:
@@ -240,21 +243,26 @@ def fetch_latest(
         else pd.DataFrame()
     )
     if any(office in requested for office in (Office.SENATE, Office.GOVERNOR)):
-        decision_labs = fetch_decision_labs_polls(catalog, refresh=refresh)
+        decision_labs = fetch_decision_labs_polls(catalog, refresh=refresh, client=client)
         if not decision_labs.empty:
             frames.append(decision_labs)
         two_seventy = fetch_270towin_polls(
             tuple(office for office in (Office.SENATE, Office.GOVERNOR) if office in requested),
             refresh=refresh,
+            client=client,
         )
         if not two_seventy.empty:
             frames.append(two_seventy)
     if Office.GENERIC_BALLOT in requested:
-        frames.append(fetch_silver_generic_ballot(refresh=refresh))
+        frames.append(fetch_silver_generic_ballot(refresh=refresh, client=client))
     if any(office in requested for office in (Office.SENATE, Office.HOUSE, Office.GOVERNOR)):
-        primary = fetch_hobby_polls(refresh=refresh)
-        if not primary.empty:
-            frames.append(primary[primary["office"].isin([office.value for office in requested])])
+        for primary in (
+            fetch_hobby_polls(refresh=refresh, client=client),
+            fetch_enjoyer_polls(refresh=refresh, client=client),
+        ):
+            if not primary.empty:
+                selected_offices = [office.value for office in requested]
+                frames.append(primary[primary["office"].isin(selected_offices)])
     raw_frame = pd.concat(frames, ignore_index=True).drop_duplicates(["source", "source_id"])
     raw_path = Warehouse().write("polls_latest_raw_sources", raw_frame)
     frame, excluded = _exclude_non_model_polls(merge_current_polls(raw_frame))
@@ -267,6 +275,25 @@ def fetch_latest(
         else "not updated (generic-ballot-only request)"
     )
     report = _write_quality_report("polls_latest", frame)
+    collection = {
+        "checked_at": datetime.now(UTC).isoformat(),
+        "refresh_requested": refresh,
+        "request_status_counts": pd.Series(
+            [row["status"] for row in client.request_log], dtype="object"
+        ).value_counts().to_dict(),
+        "raw_rows_by_source": raw_frame.groupby("source").size().to_dict(),
+        "requests": client.request_log,
+        "dataset_sha256": {
+            "polls_latest": fingerprint(path),
+            "polls_latest_raw_sources": fingerprint(raw_path),
+        },
+        "scope": "HTTP acquisition log, not certification of parser completeness. Failed "
+        "discovery requests may have a verified link-directory fallback; a failure alone "
+        "does not establish missing poll rows. Cache hits retain their original observation "
+        "timestamps and are not newly observed data.",
+    }
+    collection_path = settings.artifact_dir / "latest_collection_report.json"
+    collection_path.write_text(json.dumps(collection, indent=2), encoding="utf-8")
     catalog_report = (
         _write_catalog_report("race_catalog_latest", catalog) if not catalog.empty else "n/a"
     )
@@ -277,13 +304,14 @@ def fetch_latest(
     )
     console.print(
         "Attribution: PollingSource + Decision Labs (CC BY 4.0) + 270toWin + "
-        f"Silver Bulletin + UH Hobby primary releases | raw source rows -> {raw_path} "
+        f"Silver Bulletin + UH Hobby/Michigan Enjoyer primary releases | raw rows -> {raw_path} "
         f"| excluded -> {excluded_path} "
         f"| quality report -> {report}"
     )
     console.print(
         f"Race catalog: {len(catalog):,} races -> {catalog_path} | report -> {catalog_report}"
     )
+    console.print(f"Collection request statuses: {collection['request_status_counts']}")
 
 
 @data_app.command("fetch-fec")
@@ -470,6 +498,9 @@ def audit_data(
     report_path = settings.artifact_dir / "authenticity_report.json"
     issue_path = settings.artifact_dir / "authenticity_issues.csv"
     candidate_path = settings.artifact_dir / "candidate_fec_audit.csv"
+    report["dataset_sha256"] = {
+        name: fingerprint(settings.processed_dir / f"{name}.parquet") for name in required
+    }
     report_path.write_text(json.dumps(report, indent=2), encoding="utf-8")
     issues.to_csv(issue_path, index=False)
     candidates.to_csv(candidate_path, index=False)
@@ -692,6 +723,7 @@ def forecast_latest(
             )
         )
     poll_forecast = pd.concat(forecast_frames, ignore_index=True)
+    poll_forecast = attach_snapshot_metadata(poll_forecast, current_snapshots)
     catalogs = warehouse.read("race_catalog_latest")
     if as_of is not None:
         try:

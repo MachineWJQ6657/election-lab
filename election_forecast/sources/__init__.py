@@ -1,6 +1,7 @@
 """External polling data source adapters."""
 
 from .decision_labs import fetch_decision_labs_polls
+from .enjoyer import fetch_enjoyer_polls
 from .fec import fetch_fec_candidates
 from .fte_archive import fetch_fte_full_archive, fetch_fte_generic_archive
 from .fte_history import fetch_fte_history
@@ -24,6 +25,7 @@ __all__ = [
     "fetch_fte_generic_archive",
     "fetch_fte_history",
     "fetch_hobby_polls",
+    "fetch_enjoyer_polls",
     "fetch_fte_reference_results",
     "fetch_house_national_history",
     "fetch_mit_2024_results",

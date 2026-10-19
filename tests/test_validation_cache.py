@@ -4,6 +4,17 @@ from election_forecast import validation_cache as module
 from election_forecast.backtest import summarize_predictions
 
 
+def test_validation_cache_separates_identity_ablation_settings():
+    history = pd.DataFrame({"value": [1, 2]})
+    baseline = module.cache_key(history, None)
+    frequency = module.cache_key(history, None, pollster_pooling=("frequency",))
+    counts = module.cache_key(history, None, pollster_pooling=("counts",))
+    assert len({baseline, frequency, counts}) == 3
+    assert module.cache_key(history, None, pollster_pooling=("frequency", "counts")) == (
+        module.cache_key(history, None, pollster_pooling=("counts", "frequency", "counts"))
+    )
+
+
 def test_validation_cache_reuses_only_matching_uncorrupted_inputs(tmp_path, monkeypatch):
     calls = []
     history = pd.DataFrame({"value": [1, 2]})

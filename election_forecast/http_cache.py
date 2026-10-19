@@ -17,6 +17,7 @@ class CachedHTTPClient:
     def __init__(self, project_settings: Settings = settings) -> None:
         self.settings = project_settings
         self.settings.ensure_directories()
+        self.request_log: list[dict] = []
 
     def _paths(self, url: str) -> tuple[Path, Path]:
         digest = hashlib.sha256(url.encode("utf-8")).hexdigest()[:20]
@@ -88,6 +89,37 @@ class CachedHTTPClient:
         return content, metadata
 
     def get(self, url: str, *, refresh: bool = False, ttl_hours: int | None = None) -> bytes:
+        """Record successful cache/network reads and failures without hiding exceptions."""
+        try:
+            content, origin, metadata = self._get(url, refresh=refresh, ttl_hours=ttl_hours)
+        except (httpx.HTTPError, OSError, ValueError) as exc:
+            self.request_log.append(
+                {
+                    "url": url,
+                    "checked_at": datetime.now(UTC).isoformat(),
+                    "status": "failed",
+                    "error_class": type(exc).__name__,
+                    "http_status": (
+                        exc.response.status_code if isinstance(exc, httpx.HTTPStatusError) else None
+                    ),
+                }
+            )
+            raise
+        self.request_log.append(
+            {
+                "url": url,
+                "checked_at": datetime.now(UTC).isoformat(),
+                "status": origin,
+                "observed_at": metadata["fetched_at"],
+                "sha256": metadata["sha256"],
+                "http_status": metadata.get("status_code"),
+            }
+        )
+        return content
+
+    def _get(
+        self, url: str, *, refresh: bool, ttl_hours: int | None
+    ) -> tuple[bytes, str, dict]:
         payload_path, metadata_path = self._paths(url)
         ttl = timedelta(hours=ttl_hours if ttl_hours is not None else self.settings.cache_ttl_hours)
         if payload_path.exists() and metadata_path.exists():
@@ -95,7 +127,7 @@ class CachedHTTPClient:
             fetched_at = datetime.fromisoformat(metadata["fetched_at"])
             cached = self.get_cached(url)
             if not refresh and datetime.now(UTC) - fetched_at <= ttl:
-                return cached
+                return cached, "cache", metadata
 
         with httpx.Client(
             follow_redirects=True,
@@ -117,20 +149,15 @@ class CachedHTTPClient:
             },
         )
         payload_path.write_bytes(content)
-        metadata_path.write_text(
-            json.dumps(
-                {
-                    "url": url,
-                    "final_url": str(response.url),
-                    "fetched_at": now.isoformat(),
-                    "status_code": response.status_code,
-                    "content_type": response.headers.get("content-type"),
-                    "etag": response.headers.get("etag"),
-                    "sha256": hashlib.sha256(content).hexdigest(),
-                    "bytes": len(content),
-                },
-                indent=2,
-            ),
-            encoding="utf-8",
-        )
-        return content
+        metadata = {
+            "url": url,
+            "final_url": str(response.url),
+            "fetched_at": now.isoformat(),
+            "status_code": response.status_code,
+            "content_type": response.headers.get("content-type"),
+            "etag": response.headers.get("etag"),
+            "sha256": hashlib.sha256(content).hexdigest(),
+            "bytes": len(content),
+        }
+        metadata_path.write_text(json.dumps(metadata, indent=2), encoding="utf-8")
+        return content, "network", metadata

@@ -13,6 +13,7 @@ from .pollsters import pollster_key
 
 OFFICES = ("president", "senate", "house", "governor", "generic_ballot")
 SENATE_SPECIAL_PRIOR_CYCLES = {(2026, "FL"): 2022, (2026, "OH"): 2022}
+POLLSTER_POOLING_COMPONENTS = frozenset({"frequency", "counts", "house_effects"})
 
 
 def _candidate_key(value: object) -> str:
@@ -46,6 +47,7 @@ def build_race_snapshots(
     publication_lag_days: int = 0,
     target_cycles: Iterable[int] | None = None,
     supplemental_outcomes: pd.DataFrame | None = None,
+    pollster_pooling: Iterable[str] = (),
 ) -> pd.DataFrame:
     """Create one feature row per race and forecast horizon.
 
@@ -54,7 +56,16 @@ def build_race_snapshots(
     """
     if publication_lag_days < 0:
         raise ValueError("Publication lag cannot be negative")
+    pooling = frozenset(pollster_pooling)
+    if pooling - POLLSTER_POOLING_COMPONENTS:
+        raise ValueError(f"Unknown pollster pooling components: {sorted(pooling)}")
     frame = polls.copy()
+    # Keep reported labels intact. Normalized fieldwork keys are optional research
+    # groupings, not evidence that surveys or their panels are independent.
+    frame["_organization_key"] = frame["pollster"].map(pollster_key)
+    frequency_column = "_organization_key" if "frequency" in pooling else "pollster"
+    count_column = "_organization_key" if "counts" in pooling else "pollster"
+    bias_column = "_organization_key" if "house_effects" in pooling else "pollster"
     requested_cycles = None if target_cycles is None else {int(cycle) for cycle in target_cycles}
     target_cycle_values = sorted(
         int(cycle)
@@ -120,7 +131,7 @@ def build_race_snapshots(
     # collapse repeated releases within a race so prolific pollsters do not dominate.
     completed = frame.dropna(subset=["actual_margin"]).copy()
     completed["poll_error"] = completed["margin"] - completed["actual_margin"]
-    pollster_races = completed.groupby(["cycle", "pollster", "race_id"], as_index=False)[
+    pollster_races = completed.groupby(["cycle", bias_column, "race_id"], as_index=False)[
         "poll_error"
     ].median()
     pollster_bias_lookup: dict[tuple[int, str], float] = {}
@@ -137,7 +148,7 @@ def build_race_snapshots(
         earlier = pollster_races[pollster_races["cycle"] < target_cycle]
         if earlier.empty:
             continue
-        stats = earlier.groupby("pollster")["poll_error"].agg(["median", "count"])
+        stats = earlier.groupby(bias_column)["poll_error"].agg(["median", "count"])
         shrinkage = stats["count"] / (stats["count"] + 8.0)
         shrunk = (stats["median"] * shrinkage).clip(-5.0, 5.0)
         pollster_bias_lookup.update(
@@ -189,7 +200,7 @@ def build_race_snapshots(
                 .to_numpy(float)
             )
             pollster_frequency = (
-                eligible.groupby("pollster")["pollster"].transform("size").to_numpy(float)
+                eligible.groupby(frequency_column)["pollster"].transform("size").to_numpy(float)
             )
             organization_cap = 1.0 / np.sqrt(pollster_frequency)
             weights = recency * size * partisan_discount * population_weight * organization_cap
@@ -197,7 +208,7 @@ def build_race_snapshots(
             pollster_biases = np.array(
                 [
                     pollster_bias_lookup.get((int(race["cycle"].iloc[0]), str(pollster)), 0.0)
-                    for pollster in eligible["pollster"]
+                    for pollster in eligible[bias_column]
                 ]
             )
             adjusted_margins = margins - pollster_biases
@@ -277,7 +288,7 @@ def build_race_snapshots(
                 "latest_margin": float(latest["margin"].mean()),
                 "poll_std": float(np.std(margins, ddof=1)) if len(margins) > 1 else 0.0,
                 "log_poll_count": math.log1p(len(eligible)),
-                "log_pollster_count": math.log1p(eligible["pollster"].nunique()),
+                "log_pollster_count": math.log1p(eligible[count_column].nunique()),
                 "log_sample_size": math.log1p(float(samples.mean())),
                 "partisan_share": float(np.mean(partisan)),
                 "days_since_latest": int((as_of - latest_date).days),
@@ -299,7 +310,9 @@ def build_race_snapshots(
                 "dem_candidate": dem_candidate,
                 "rep_candidate": rep_candidate,
                 "poll_count": len(eligible),
-                "pollster_count": int(eligible["pollster"].nunique()),
+                "pollster_count": int(eligible[count_column].nunique()),
+                "reported_pollster_count": int(eligible["pollster"].nunique()),
+                "normalized_pollster_count": int(eligible["_organization_key"].nunique()),
             }
             for known_office in OFFICES:
                 row[f"is_{known_office}"] = int(office == known_office)

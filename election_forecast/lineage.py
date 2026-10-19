@@ -24,6 +24,8 @@ OPTIONAL_TRAINING_TABLES = ("polls_history", "polls_archive", "house_national_hi
 FORECAST_ENGINE_FILES = (
     "cli.py",
     "features.py",
+    "pollsters.py",
+    "validation_cache.py",
     "backtest.py",
     "history.py",
     "coverage.py",
@@ -35,11 +37,22 @@ FORECAST_ENGINE_FILES = (
     "contest_scope.py",
     "evidence.py",
     "explain.py",
+    "lineage.py",
 )
 
 
 def fingerprint(path: Path) -> str:
     return hashlib.sha256(path.read_bytes()).hexdigest()
+
+
+def verify_table_report(report: dict, processed_dir: Path, *, required: tuple[str, ...]) -> None:
+    """An audit of a different table snapshot must not decorate today's forecast."""
+    expected = report.get("dataset_sha256", {})
+    if not set(required).issubset(expected):
+        raise ValueError("Audit report lacks dataset fingerprints; regenerate the audit")
+    for name in required:
+        if fingerprint(processed_dir / f"{name}.parquet") != expected[name]:
+            raise ValueError(f"Audit dataset snapshot mismatch: {name}; regenerate the audit")
 
 
 def engine_fingerprints() -> dict[str, str]:

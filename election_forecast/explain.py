@@ -137,7 +137,7 @@ def build_forecast_explanations(
             summary = (
                 f"Exact adaptive blend: house-effect-adjusted polls contribute "
                 f"{poll_component:+.2f}; the previous result contributes "
-                f"{prior_component:+.2f}. {row.pollster_count} independent pollsters "
+                f"{prior_component:+.2f}. {row.pollster_count} reported pollster labels "
                 f"reduce the old-result prior to {prior_weight:.1%}."
             )
         elif model in {"robust_poll_ml_blend", "candidate_evidence_ml_blend"}:

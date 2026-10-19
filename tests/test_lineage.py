@@ -9,6 +9,7 @@ from election_forecast.lineage import (
     verify_engine,
     verify_forecast_manifest,
     verify_observed_cutoff,
+    verify_table_report,
 )
 
 
@@ -56,3 +57,15 @@ def test_changed_model_code_is_not_exported_as_an_unchanged_forecast(monkeypatch
     with pytest.raises(ValueError, match="engine changed"):
         verify_engine({"simulation.py": "v1"})
     verify_engine({"simulation.py": "v2"})
+
+
+def test_audit_cannot_describe_a_different_source_snapshot(tmp_path):
+    table = tmp_path / "polls_latest.parquet"
+    table.write_bytes(b"A")
+    report = {"dataset_sha256": {"polls_latest": fingerprint(table)}}
+    verify_table_report(report, tmp_path, required=("polls_latest",))
+    with pytest.raises(ValueError, match="lacks dataset"):
+        verify_table_report({}, tmp_path, required=("polls_latest",))
+    table.write_bytes(b"B")
+    with pytest.raises(ValueError, match="Audit dataset snapshot mismatch"):
+        verify_table_report(report, tmp_path, required=("polls_latest",))

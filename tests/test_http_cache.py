@@ -21,6 +21,13 @@ def test_refresh_preserves_old_response_and_checks_cached_integrity(tmp_path, mo
     url = "https://example.org/counts.csv"
     assert client.get(url, refresh=True) == b"first snapshot"
     assert client.get(url, refresh=True) == b"second snapshot"
+    assert client.get(url) == b"second snapshot"
+    assert [row["status"] for row in client.request_log] == ["network", "network", "cache"]
+    assert all(
+        datetime.fromisoformat(row["observed_at"]) <= datetime.fromisoformat(row["checked_at"])
+        for row in client.request_log
+    )
+    assert client.request_log[-1]["observed_at"] == client.request_log[-2]["observed_at"]
     archived = sorted(client.settings.raw_dir.glob("http_snapshots/*/*.csv"))
     assert {path.read_bytes() for path in archived} == {b"first snapshot", b"second snapshot"}
     assert client.get_cached(url) == b"second snapshot"
@@ -28,6 +35,23 @@ def test_refresh_preserves_old_response_and_checks_cached_integrity(tmp_path, mo
     payload.write_bytes(b"corrupted")
     with pytest.raises(ValueError, match="verification"):
         client.get_cached(url)
+
+
+def test_collection_log_preserves_failure_without_claiming_a_fresh_response(tmp_path, monkeypatch):
+    real_client = httpx.Client
+    transport = httpx.MockTransport(lambda request: httpx.Response(503))
+    monkeypatch.setattr(
+        httpx, "Client", lambda **kwargs: real_client(transport=transport, **kwargs)
+    )
+    client = CachedHTTPClient(
+        Settings(data_dir=tmp_path / "data", artifact_dir=tmp_path / "artifacts")
+    )
+    with pytest.raises(httpx.HTTPStatusError):
+        client.get("https://example.org/unavailable")
+    assert len(client.request_log) == 1
+    event = client.request_log[0]
+    assert event["status"] == "failed" and event["http_status"] == 503
+    assert "observed_at" not in event
 
 
 def test_point_in_time_replay_imports_old_cache_without_backdating(tmp_path):

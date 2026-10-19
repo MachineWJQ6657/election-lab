@@ -22,6 +22,24 @@ RATING_PRIORS = {
 }
 
 
+def attach_snapshot_metadata(forecast: pd.DataFrame, snapshots: pd.DataFrame) -> pd.DataFrame:
+    """Preserve disclosure flags that are not inputs to the fitted prediction model."""
+    if not forecast["race_id"].isin(snapshots["race_id"]).all():
+        raise ValueError("Forecast race lacks a matching source snapshot")
+    metadata = [
+        column
+        for column in (
+            "district_boundary_changed",
+            "normalized_pollster_count",
+            "reported_pollster_count",
+        )
+        if column in snapshots and column not in forecast
+    ]
+    return forecast.merge(
+        snapshots[["race_id", *metadata]], on="race_id", how="left", validate="one_to_one"
+    )
+
+
 def build_rating_prior_forecast(
     catalogs: pd.DataFrame, *, as_of_date: date, horizon: int
 ) -> pd.DataFrame:

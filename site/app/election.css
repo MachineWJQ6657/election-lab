@@ -356,6 +356,7 @@ footer > a:last-child { justify-self: end; }
 .early-method summary { cursor: pointer; font-weight: 650; font-size: 14px; }
 .early-method p { max-width: 1000px; font-size: 14px; color: var(--muted); line-height: 1.6; }
 .early-method a { margin-right: 14px; }
+.early-method .early-table td:first-child { text-align: left; white-space: normal; }
 @media (max-width: 850px) { .early-layout { grid-template-columns: 1fr; } .early-table-wrap { max-height: 370px; } .early-detail { border-left: 0; border-top: 1px solid var(--line); } }
 @media (max-width: 480px) { .early-table th, .early-table td { padding: 9px 7px; font-size: 12px; } .early-detail { padding: 16px; } .desk-header nav { gap: 13px; font-size: 10px; } }
 

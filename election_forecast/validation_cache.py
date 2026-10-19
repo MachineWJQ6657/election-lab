@@ -6,6 +6,7 @@ import hashlib
 import json
 import os
 import sys
+from collections.abc import Iterable
 from pathlib import Path
 
 import numpy as np
@@ -28,7 +29,12 @@ def _frame_digest(frame: pd.DataFrame | None) -> str | None:
     return digest.hexdigest()
 
 
-def cache_key(history: pd.DataFrame, outcomes: pd.DataFrame | None) -> str:
+def cache_key(
+    history: pd.DataFrame,
+    outcomes: pd.DataFrame | None,
+    *,
+    pollster_pooling: Iterable[str] = (),
+) -> str:
     directory = Path(__file__).parent
     signature = {
         "history": _frame_digest(history),
@@ -49,6 +55,7 @@ def cache_key(history: pd.DataFrame, outcomes: pd.DataFrame | None) -> str:
         "lookback": 120,
         "publication_lag": 0,
         "min_polls": 2,
+        "pollster_pooling": sorted(set(pollster_pooling)),
         "runtime": [sys.version, np.__version__, pd.__version__, sklearn.__version__],
     }
     return hashlib.sha256(json.dumps(signature, sort_keys=True).encode()).hexdigest()
@@ -59,8 +66,10 @@ def cached_validation(
     outcomes: pd.DataFrame | None,
     *,
     cache_dir: Path | None = None,
+    pollster_pooling: Iterable[str] = (),
 ) -> tuple[pd.DataFrame, BacktestResult, bool]:
-    key = cache_key(history, outcomes)
+    pooling = tuple(sorted(set(pollster_pooling)))
+    key = cache_key(history, outcomes, pollster_pooling=pooling)
     directory = (cache_dir or settings.artifact_dir / "validation_cache") / key
     manifest_path = directory / "manifest.json"
     if manifest_path.exists():
@@ -74,7 +83,12 @@ def cached_validation(
                 return snapshots, summarize_predictions(predictions), True
         except (OSError, ValueError):
             pass  # Recompute rather than silently accepting an incomplete/corrupt cache.
-    snapshots = build_race_snapshots(history, (7, 14, 30, 60, 90), supplemental_outcomes=outcomes)
+    snapshots = build_race_snapshots(
+        history,
+        (7, 14, 30, 60, 90),
+        supplemental_outcomes=outcomes,
+        pollster_pooling=pooling,
+    )
     result = run_walk_forward_backtest(snapshots)
     directory.mkdir(parents=True, exist_ok=True)
     for name, frame in [

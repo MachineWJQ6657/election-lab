@@ -1,8 +1,68 @@
 from datetime import date
 
 import pandas as pd
+import pytest
 
 from election_forecast.features import build_race_snapshots
+
+
+def test_identity_ablation_changes_only_the_requested_components():
+    rows = []
+    for cycle in (2020, 2026):
+        for index, (name, margin) in enumerate(
+            [("YouGov", 10), ("CBS News/YouGov", 10), ("Example", -10)]
+        ):
+            rows.append(
+                {
+                    "source": "test",
+                    "source_id": f"{cycle}:{index}",
+                    "race_id": f"{cycle}:senate:TX",
+                    "cycle": cycle,
+                    "office": "senate",
+                    "location": "TX",
+                    "pollster": name,
+                    "election_date": f"{cycle}-11-03",
+                    "end_date": f"{cycle}-10-15",
+                    "margin": margin,
+                    "actual_margin": 0 if cycle == 2020 else float("nan"),
+                    "partisan": None,
+                    "sample_size": 600,
+                    "dem_candidate": "A",
+                    "rep_candidate": "B",
+                }
+            )
+    data = pd.DataFrame(rows)
+    separate_race = data.cycle.eq(2020) & data.pollster.eq("CBS News/YouGov")
+    data.loc[separate_race, "location"] = "NY"
+    data.loc[separate_race, "race_id"] = "2020:senate:NY"
+
+    def snapshot(pooling=()):
+        return build_race_snapshots(
+            data, (14,), target_cycles=(2026,), pollster_pooling=pooling
+        ).iloc[0]
+
+    baseline = snapshot()
+    count = snapshot(("counts",))
+    frequency = snapshot(("frequency",))
+    bias = snapshot(("house_effects",))
+    assert baseline.pollster_count == 3
+    assert baseline.reported_pollster_count == 3
+    assert baseline.normalized_pollster_count == 2
+    assert count.pollster_count == 2
+    assert count.weighted_margin == baseline.weighted_margin
+    assert count.house_effect_adjusted_margin == baseline.house_effect_adjusted_margin
+    assert frequency.pollster_count == 3
+    assert frequency.weighted_margin < baseline.weighted_margin
+    assert bias.pollster_count == 3
+    assert bias.weighted_margin == baseline.weighted_margin
+    assert bias.mean_pollster_house_effect != baseline.mean_pollster_house_effect
+    before = snapshot(("frequency", "counts", "house_effects"))
+    data.loc[data.cycle.eq(2026), "actual_margin"] = 40
+    after = snapshot(("frequency", "counts", "house_effects"))
+    assert before.house_effect_adjusted_margin == after.house_effect_adjusted_margin
+    assert before.quality_adjusted_margin == after.quality_adjusted_margin
+    with pytest.raises(ValueError, match="Unknown pollster pooling"):
+        snapshot(("unrecognized",))
 
 
 def test_quality_weighting_never_learns_from_target_cycle_results():

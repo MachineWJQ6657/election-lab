@@ -1,12 +1,34 @@
 from datetime import date
 
 import pandas as pd
+import pytest
 
 from election_forecast.coverage import (
     RATING_PRIORS,
+    attach_snapshot_metadata,
     combine_forecast_coverage,
     summarize_coverage,
 )
+
+
+def test_disclosure_metadata_survives_prediction_without_changing_probability():
+    forecast = pd.DataFrame({"race_id": ["2026:house:TX-09"], "dem_win_probability": [0.24]})
+    snapshot = pd.DataFrame(
+        {
+            "race_id": ["2026:house:TX-09"],
+            "district_boundary_changed": [True],
+            "normalized_pollster_count": [1],
+            "reported_pollster_count": [1],
+        }
+    )
+    attached = attach_snapshot_metadata(forecast, snapshot)
+    assert attached.district_boundary_changed.iloc[0]
+    assert attached.normalized_pollster_count.iloc[0] == 1
+    pd.testing.assert_series_equal(attached.dem_win_probability, forecast.dem_win_probability)
+    with pytest.raises(ValueError, match="matching source snapshot"):
+        attach_snapshot_metadata(forecast, snapshot.assign(race_id="unrelated"))
+    with pytest.raises(pd.errors.MergeError):
+        attach_snapshot_metadata(forecast, pd.concat([snapshot, snapshot], ignore_index=True))
 
 
 def test_tilt_ratings_have_conservative_symmetric_priors():

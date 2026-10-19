@@ -113,6 +113,14 @@ def main() -> None:
                 "lag differ. Early-vote data remains visible with zero central probability "
                 "weight pending validated comparable history.",
             },
+            {
+                "perspective": "data_science",
+                "question": "Are pollster labels independent organizations or samples?",
+                "decision": "No. An eight-way ablation separates alias pooling of frequency "
+                "caps, counts and prior-cycle bias. The earlier-cycle-only outer policy "
+                "does not establish an improvement, so production defaults remain unchanged. "
+                "Publisher, sponsor, fieldwork and panel identities need separate provenance.",
+            },
         ],
     }
     OUTPUT.mkdir(parents=True, exist_ok=True)

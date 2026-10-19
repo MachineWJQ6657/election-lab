@@ -2,14 +2,18 @@
 
 from __future__ import annotations
 
+import hashlib
 import json
+import os
 from pathlib import Path
 
 import numpy as np
 import pandas as pd
 
 from election_forecast.backtest import BacktestResult, backtest_selection_policy
-from election_forecast.lineage import fingerprint, verify_forecast_manifest
+from election_forecast.collection import summarize_collection
+from election_forecast.lineage import fingerprint, verify_forecast_manifest, verify_table_report
+from election_forecast.pollsters import pollster_key
 from election_forecast.simulation import select_race_matchups
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -136,6 +140,8 @@ def main() -> None:
         "poll_count": "poll_count",
         "pollster_count": "pollster_count",
         "polling_nowcast_margin": "poll_margin",
+        "weighted_margin": "raw_poll_margin",
+        "mean_pollster_house_effect": "poll_house_effect",
         "predicted_margin": "model_margin",
         "model_only_dem_win_probability": "model_probability",
         "market_consensus_dem_win_probability": "market_probability",
@@ -165,6 +171,12 @@ def main() -> None:
     ]
     central_ids = set(central["race_id"].astype(str))
     evidence = evidence[evidence["race_id"].astype(str).isin(central_ids)].copy()
+    organization_counts = (
+        evidence.assign(organization_key=evidence["pollster"].map(pollster_key))
+        .groupby("race_id")["organization_key"]
+        .nunique()
+    )
+    races["normalized_pollster_count"] = races["source_race_id"].map(organization_counts)
     active_poll_count = len(evidence)
     evidence = evidence.sort_values(["race_id", "end_date"], ascending=[True, False])
     evidence = evidence.groupby("race_id", group_keys=False).head(12)
@@ -196,6 +208,17 @@ def main() -> None:
 
     control = json.loads((ARTIFACTS / "forecast_2026_control.json").read_text())
     authenticity = json.loads((ARTIFACTS / "authenticity_report.json").read_text())
+    verify_table_report(
+        authenticity,
+        PROCESSED,
+        required=("polls_latest", "race_catalog_latest", "fec_candidates_2026"),
+    )
+    collection_path = ARTIFACTS / "latest_collection_report.json"
+    collection = (
+        summarize_collection(json.loads(collection_path.read_text()), PROCESSED)
+        if collection_path.exists()
+        else None
+    )
     model_card = json.loads((ARTIFACTS / "model_card.json").read_text())
     if not model_card.get("validation_engine_key") or model_card[
         "validation_engine_key"
@@ -228,6 +251,7 @@ def main() -> None:
     house_validation = matching_research("house_control_backtest_20261019")
     research_audit = matching_research("research_audit_20261019")
     correlation = matching_research("correlation_experiment_20261019")
+    identity = matching_research("pollster_identity_experiment_20261019")
 
     payload = {
         "updated_at": str(forecast["as_of_date"].iloc[0]),
@@ -241,12 +265,14 @@ def main() -> None:
         }
         if link_audit
         else None,
+        "collection": collection,
         "early_voting": _early_vote_snapshot(manifest["as_of"]),
         "recency_experiment": decay,
         "publication_lag_experiment": lag,
         "house_control_validation": house_validation,
         "research_audit": research_audit,
         "correlation_experiment": correlation,
+        "pollster_identity_experiment": identity,
         "snapshot_verified": True,
         "control": control,
         "races": _records(races),
@@ -270,8 +296,13 @@ def main() -> None:
         },
         "model_card": model_card,
     }
+    payload["snapshot_id"] = hashlib.sha256(
+        json.dumps(payload, sort_keys=True, allow_nan=False).encode("utf-8")
+    ).hexdigest()
     OUTPUT.parent.mkdir(parents=True, exist_ok=True)
-    OUTPUT.write_text(json.dumps(payload, indent=2, allow_nan=False), encoding="utf-8")
+    temporary = OUTPUT.with_suffix(f".{os.getpid()}.tmp")
+    temporary.write_text(json.dumps(payload, indent=2, allow_nan=False), encoding="utf-8")
+    temporary.replace(OUTPUT)
     print(f"Wrote {OUTPUT} with {len(races)} central races and {len(evidence)} poll records")
 
 
