@@ -2,7 +2,8 @@
 
 import { useEffect, useMemo, useState } from "react";
 import atlas from "../lib/us-state-paths.json";
-import { bandColor, mapBands, raceBand, raceCounts, stateBand, stateRaces, type MapOffice, type MapRace } from "../lib/election-map";
+import { bandColor, mapBands, raceBand, raceCounts, stateBand, stateRaces, type MapOffice, type MapRace, type MapSeatControl } from "../lib/election-map";
+import { MapSeatSummary } from "./MapSeatSummary";
 
 const officeNames = { senate: "Senate", house: "House", governor: "Governor" };
 const pct = (p: number) => `${(p * 100).toFixed(1)}%`;
@@ -15,8 +16,9 @@ const lightText = new Set(["safe-d", "likely-d", "safe-r", "likely-r"]);
 const seatShareLabels = ["≥95% D", "80–95% D", "60–80% D", "40–60% D", "20–40% D", "5–20% D", "≤5% D"];
 const states = [...atlas.states].sort((a, b) => a.name.localeCompare(b.name));
 
-export function ElectionMap({ races, office, selectedState, selectedRaceId, filteredState, onStateSelect, onRaceSelect, onOpenRace, onClearState }: {
+export function ElectionMap({ races, control, unresolvedStates, office, selectedState, selectedRaceId, filteredState, onStateSelect, onRaceSelect, onOpenRace, onClearState }: {
   races: MapRace[]; office: MapOffice; selectedState: string; selectedRaceId: string;
+  control: MapSeatControl; unresolvedStates: string[];
   filteredState: string | null; onStateSelect: (state: string) => void;
   onRaceSelect: (id: string) => void; onOpenRace: (id: string) => void; onClearState: () => void;
 }) {
@@ -50,6 +52,7 @@ export function ElectionMap({ races, office, selectedState, selectedRaceId, filt
         <button type="button" aria-pressed={view === "tiles"} onClick={() => setView("tiles")}>State tiles</button>
       </div>
     </div>
+    <MapSeatSummary office={office} control={control} unresolvedStates={unresolvedStates} />
     <div className="map-seat-totals" aria-label="Contests by forecast category">
       <span><i style={{ background: bandColor("likely-d") }} /><b>{counts.dem}</b> D favored</span>
       <span><i style={{ background: bandColor("tossup") }} /><b>{counts.tossup}</b> Toss-up</span>

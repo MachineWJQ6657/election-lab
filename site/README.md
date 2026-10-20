@@ -36,6 +36,17 @@ state. Small screens default to alphabetical state tiles; the geographic view
 remains available. The map reads the existing forecast snapshot and never
 changes its probabilities.
 
+Above the map, a final-seat comparison uses the existing simulation median:
+Democratic versus Republican seats across all 435 House or 100 Senate seats.
+The Senate includes its 65 non-election seats (34 D-aligned, 31 R-aligned in
+this snapshot); it does not mistake 35 contests for the whole chamber. The
+comparison also shows simulation means, complementary 90% ranges and model
+control probabilities, with a threshold marker. It is not an election result
+or a count of races favored above 60%. Senate caucus proxies for unresolved
+independent/multi-candidate contests remain explicit. Governor totals cover
+only the 36 elections, not all 50 governorships. State/search filtering changes
+the map's evidence selection, never these nationwide simulation totals.
+
 Senate/governor colors represent candidate win probabilities. House state
 colors represent expected Democratic seat share, not delegation-control odds;
 individual district tiles use win probabilities. No-election states, independent

@@ -3,6 +3,7 @@
 import { useMemo, useState } from "react";
 import { EarlyVotingPanel, type EarlyVotingData } from "./EarlyVotingPanel";
 import { ElectionMap } from "./ElectionMap";
+import type { MapSeatControl } from "../lib/election-map";
 
 type Office = "senate" | "house" | "governor";
 type Race = { id: string; source_race_id: string; office: string; location: string; dem: string; rep: string; poll_count: number; pollster_count: number; normalized_pollster_count: number | null; raw_poll_margin: number | null; poll_house_effect: number | null; poll_margin: number | null; model_margin: number; model_probability: number; market_probability: number | null; dem_probability: number; market_weight: number; probability_source: string; validation_scope: string; rating: string | null; rating_source: string | null; model: string; competitiveness: number; dem_side_party: string; multi_candidate_warning: string; probability_event: string; district_boundary_changed: boolean; };
@@ -29,12 +30,11 @@ export type ForecastData = {
   correlation_experiment: { results: { office: string; method: string; independent_cycles: number; mean_count_rps: number; interval_coverage: number }[]; scope: string } | null;
   pollster_identity_experiment: { baseline: DiagnosticScore; challenger: DiagnosticScore; outer_policy: DiagnosticScore; outer_paired_comparison: { exploratory_95pct_cycle_interval: number[] }; ablation: Record<string, DiagnosticScore>; adopted: boolean; scope: string } | null;
   early_voting: EarlyVotingData | null;
-  control: {
+  control: MapSeatControl & {
     simulations: number;
     independent_caucus_sensitivity: { unresolved_states: string[]; dem_control_lower_endpoint: number; dem_control_upper_endpoint: number; interpretation: string } | null;
     house: { expected_dem_seats: number; median_dem_seats: number; p05_dem_seats: number; p95_dem_seats: number; dem_control_probability: number; };
     senate: { expected_dem_seats: number; median_dem_seats: number; p05_dem_seats: number; p95_dem_seats: number; dem_control_probability: number; };
-    governor_elections: { expected_dem_seats: number };
     prediction_market_context: { comparisons: Record<string, { market_consensus_dem_probability: number; bounded_market_context_probability: number; }>; };
   };
   races: Race[];
@@ -172,7 +172,7 @@ export function ForecastDashboard({ data }: { data: ForecastData }) {
         <label className="race-search"><span>Search races</span><input value={query} onChange={(event) => { setQuery(event.target.value); setMapState(null); }} placeholder="State, district or candidate" /></label>
       </div>
 
-      <ElectionMap races={data.races} office={office} selectedState={mapState ?? selectedRace?.location.slice(0, 2) ?? "TX"} selectedRaceId={selectedRace?.id ?? ""} filteredState={mapState}
+      <ElectionMap races={data.races} control={data.control} unresolvedStates={data.control.independent_caucus_sensitivity?.unresolved_states ?? []} office={office} selectedState={mapState ?? selectedRace?.location.slice(0, 2) ?? "TX"} selectedRaceId={selectedRace?.id ?? ""} filteredState={mapState}
         onStateSelect={(state) => {
           setMapState(state); setQuery("");
           const first = data.races.filter((r) => r.office === office && r.location.slice(0, 2) === state).sort((a, b) => a.competitiveness - b.competitiveness)[0];

@@ -43,6 +43,12 @@ test("server-renders the forecast dashboard and social metadata", async () => {
   contains(html, /OBSERVED PARTICIPATION/);
   contains(html, /not votes for a candidate/);
   const data = JSON.parse(await readFile(new URL("../lib/forecast-data.json", import.meta.url), "utf8"));
+  contains(html, /Projected final Senate seats/);
+  contains(html, new RegExp(`data-seat-summary="senate" data-total-seats="100" data-dem-seats="${data.control.senate.median_dem_seats}" data-rep-seats="${100-data.control.senate.median_dem_seats}"`));
+  contains(html, /PROJECTED FINAL SENATE SEATS/);
+  contains(html, /Expected seats/);
+  contains(html, /Model control odds/);
+  contains(html, /seats not up/);
   contains(html, new RegExp(`data-snapshot-id="${data.snapshot_id}"`));
   contains(html, new RegExp(`${data.days_to_election}(?:<!-- -->)? DAYS OUT`));
   contains(html, new RegExp(`${data.validation_horizon}(?:<!-- -->)?-day Brier`));

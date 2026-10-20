@@ -1,7 +1,7 @@
 import assert from "node:assert/strict";
 import test from "node:test";
 import { readFile } from "node:fs/promises";
-import { probabilityBand, raceBand, stateBand, stateRaces, raceCounts, bandColor } from "../lib/election-map.ts";
+import { probabilityBand, raceBand, stateBand, stateRaces, raceCounts, bandColor, seatComparison } from "../lib/election-map.ts";
 
 const data = JSON.parse(await readFile(new URL("../lib/forecast-data.json", import.meta.url), "utf8"));
 const atlas = JSON.parse(await readFile(new URL("../lib/us-state-paths.json", import.meta.url), "utf8"));
@@ -50,4 +50,41 @@ test("SVG source includes 50 states and DC with finite projected geometry", () =
     assert.ok(s.label[0] >= 0 && s.label[0] <= 975);
     assert.ok(s.label[1] >= 0 && s.label[1] <= 610);
   }
+});
+
+test("final seat comparison includes the whole chamber and complementary intervals", () => {
+  for (const [office, total] of [["house",435],["senate",100],["governor",36]]) {
+    const s = seatComparison(data.control,office);
+    assert.equal(s.total,total);
+    assert.equal(s.dem+s.rep,total);
+    assert.ok(Math.abs(s.expectedDem+s.expectedRep-total)<1e-9);
+    assert.equal(s.demLow+s.repHigh,total);
+    assert.equal(s.demHigh+s.repLow,total);
+  }
+  assert.equal(seatComparison(data.control,"house").dem,data.control.house.median_dem_seats);
+  assert.equal(seatComparison(data.control,"senate").dem,data.control.senate.median_dem_seats);
+});
+test("Senate non-election seats are included without counting them twice", () => {
+  const s=seatComparison(data.control,"senate");
+  assert.equal(s.nonUpTotal,100-data.control.coverage.senate_races);
+  assert.equal(s.nonUpDem,34);
+  assert.equal(s.nonUpRep,31);
+  assert.equal(s.threshold,51);
+  assert.equal(s.expectedDem,data.control.senate.expected_dem_seats);
+  assert.ok(Math.abs(s.expectedDem-s.nonUpDem-data.control.senate.dem_wins_among_seats_up)<1e-9);
+});
+test("simulation median is not confused with a favored-race category count", () => {
+  const senateRaces=data.races.filter((r)=>r.office==="senate");
+  assert.notEqual(seatComparison(data.control,"senate").dem,raceCounts(senateRaces).dem);
+  assert.equal(seatComparison(data.control,"governor").threshold,null);
+  assert.equal(seatComparison(data.control,"governor").controlProbability,null);
+});
+test("invalid seat summaries fail closed", () => {
+  const invalid=structuredClone(data.control);
+  invalid.senate.non_up_dem_aligned_seats=66;
+  assert.throws(()=>seatComparison(invalid,"senate"),/holdover/);
+  invalid.house.expected_dem_seats=NaN;
+  assert.throws(()=>seatComparison(invalid,"house"),/seat estimate/);
+  invalid.governor_elections.median_dem_seats=51;
+  assert.throws(()=>seatComparison(invalid,"governor"),/seat estimate/);
 });

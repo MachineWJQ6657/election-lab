@@ -1,4 +1,36 @@
 export type MapOffice = "senate" | "house" | "governor";
+export type SeatEstimate = { expected_dem_seats: number; median_dem_seats: number; p05_dem_seats: number; p95_dem_seats: number };
+export type MapSeatControl = {
+  house: SeatEstimate & { control_threshold: number; dem_control_probability: number };
+  senate: SeatEstimate & { control_threshold: number; dem_control_probability: number; non_up_dem_aligned_seats: number };
+  governor_elections: SeatEstimate;
+  coverage: { house_races: number; senate_races: number; governor_races: number };
+};
+
+export function seatComparison(control: MapSeatControl, office: MapOffice) {
+  const estimate = office === "governor" ? control.governor_elections : control[office];
+  const total = office === "house" ? 435 : office === "senate" ? 100 : control.coverage.governor_races;
+  const threshold = office === "governor" ? null : control[office].control_threshold;
+  const controlProbability = office === "governor" ? null : control[office].dem_control_probability;
+  if (!Number.isInteger(total) || total <= 0) throw new Error("Invalid seat total");
+  for (const v of [estimate.expected_dem_seats, estimate.median_dem_seats, estimate.p05_dem_seats, estimate.p95_dem_seats]) {
+    if (!Number.isFinite(v) || v < 0 || v > total) throw new Error("Invalid simulated seat estimate");
+  }
+  if (estimate.p05_dem_seats > estimate.median_dem_seats || estimate.median_dem_seats > estimate.p95_dem_seats) throw new Error("Invalid seat interval");
+  if (threshold != null && (!Number.isInteger(threshold) || threshold <= 0 || threshold > total)) throw new Error("Invalid control threshold");
+  if (controlProbability != null && (!Number.isFinite(controlProbability) || controlProbability < 0 || controlProbability > 1)) throw new Error("Invalid control probability");
+  const nonUpTotal = office === "senate" ? total - control.coverage.senate_races : 0;
+  const nonUpDem = office === "senate" ? control.senate.non_up_dem_aligned_seats : 0;
+  if (!Number.isInteger(nonUpTotal) || !Number.isInteger(nonUpDem) || nonUpTotal < 0 || nonUpDem < 0 || nonUpDem > nonUpTotal) throw new Error("Invalid Senate holdover seats");
+  return {
+    total, threshold, controlProbability,
+    dem: estimate.median_dem_seats, rep: total - estimate.median_dem_seats,
+    expectedDem: estimate.expected_dem_seats, expectedRep: total - estimate.expected_dem_seats,
+    demLow: estimate.p05_dem_seats, demHigh: estimate.p95_dem_seats,
+    repLow: total - estimate.p95_dem_seats, repHigh: total - estimate.p05_dem_seats,
+    nonUpTotal, nonUpDem, nonUpRep: nonUpTotal - nonUpDem,
+  };
+}
 export type MapRace = {
   id: string; office: string; location: string; dem: string; rep: string;
   dem_probability: number; model_probability: number; poll_count: number;
