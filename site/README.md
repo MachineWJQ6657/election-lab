@@ -52,6 +52,25 @@ The published page never requests third-party map tiles or a paid map API.
 Run `npm test` for the build, server-rendered dashboard checks, probability-bin
 boundaries, all 506 race-to-state joins, and geography integrity checks.
 
-The map is currently verified locally; its publication awaits restoration of
-the original Sites project connection, which returned `project_not_found`
-during this update. The preceding version 8 remains the last verified deployment.
+## Publication recovery and verification
+
+The original project identity is retained in `.openai/hosting.json`. Check that
+project with Sites before publishing, confirm the returned role/audience and
+original domain, then request a fresh repository credential. Pass credentials
+through the official workflow helper's hidden stdin; never commit them or place
+them in command arguments. Save the exact pushed source/archive pair and deploy
+that saved version, preserving the public audience and custom domain.
+
+`project_not_found` at project lookup does not demonstrate a build failure or
+prove that the site was deleted. Project lookup has failed intermittently while
+other attempts could access the same identity. Recheck after restoring the intended
+account/workspace connection. Do not replace the project ID, create a duplicate,
+change DNS, or reuse an expired credential as a workaround. The connector does
+not expose enough evidence to establish the underlying account/backend cause.
+
+After a successful native deployment, run `npm run verify:publication`. This
+read-only command checks the existing public HTTPS domain, exact snapshot ID,
+all 51 initial state shapes, and the availability/content types of every
+referenced JavaScript and stylesheet asset. It fails on stale snapshots, missing
+maps, duplicate state keys, cross-origin redirects and broken build assets.
+It cannot repair account permissions or replace an interactive browser check.
