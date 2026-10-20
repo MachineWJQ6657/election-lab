@@ -42,7 +42,7 @@ The Senate includes its 65 non-election seats (34 D-aligned, 31 R-aligned in
 this snapshot); it does not mistake 35 contests for the whole chamber. The
 comparison also shows simulation means, complementary 90% ranges and model
 control probabilities, with a threshold marker. It is not an election result
-or a count of races favored above 60%. Senate caucus proxies for unresolved
+or a count of races favored above 50%. Senate caucus proxies for unresolved
 independent/multi-candidate contests remain explicit. Governor totals cover
 only the 36 elections, not all 50 governorships. State/search filtering changes
 the map's evidence selection, never these nationwide simulation totals.
@@ -52,6 +52,24 @@ colors represent expected Democratic seat share, not delegation-control odds;
 individual district tiles use win probabilities. No-election states, independent
 candidates, multi-candidate limitations and unpolled rating priors remain
 explicit. These are mapped contests, not full chamber seat totals.
+
+The model's own win-probability ratings are **Solid** (also called Safe, ≥95%),
+**Likely** (80–<95%), **Lean** (60–<80%), **Tilt** (>50–<60%), and **Toss-up**
+(exactly 50/50). Thresholds refer to the favored candidate's unrounded probability,
+not a vote margin or an imported expert rating; a displayed 50.0% can still be Tilt.
+These presentation categories do not change model probabilities. A tiny numerical
+normalization at cutoffs ensures complementary probabilities receive symmetric
+ratings. Solid does not mean certain. Geographic states show only abbreviations;
+ratings appear in hover/accessibility labels, the compact legend, the segmented
+seat bar, district tiles and the selected-race panel. Independent candidates
+retain their own party label and purple color. House state colors use expected
+D seat share, with a separate share key, never a race-win rating.
+
+The segmented bar counts ratings and includes explicit hatched Senate holdovers.
+Its totals are distinct from the large simulation medians: unmodeled contests
+are not silently assigned a winner. Legend chips show category counts, while
+thresholds and uncertainty notes are in a collapsed details disclosure. The
+selected-state strip is below the map, with deeper evidence folded by default.
 
 `lib/us-state-paths.json` contains locally bundled Albers USA SVG paths converted
 from US Atlas 3.0.1 / Census 2017 state outlines. It is **not** a source of 2026
@@ -83,5 +101,5 @@ After a successful native deployment, run `npm run verify:publication`. This
 read-only command checks the existing public HTTPS domain, exact snapshot ID,
 all 51 initial state shapes, and the availability/content types of every
 referenced JavaScript and stylesheet asset. It fails on stale snapshots, missing
-maps, duplicate state keys, cross-origin redirects and broken build assets.
+maps, missing named-rating scale, duplicate state keys, cross-origin redirects and broken build assets.
 It cannot repair account permissions or replace an interactive browser check.

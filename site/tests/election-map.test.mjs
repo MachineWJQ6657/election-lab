@@ -1,29 +1,47 @@
 import assert from "node:assert/strict";
 import test from "node:test";
 import { readFile } from "node:fs/promises";
-import { probabilityBand, raceBand, stateBand, stateRaces, raceCounts, bandColor, seatComparison } from "../lib/election-map.ts";
+import { mapBands, probabilityBand, raceBand, raceRatingLabel, stateRatingLabel, stateBand, stateRaces, raceCounts, bandColor, seatComparison, seatRatingSummary } from "../lib/election-map.ts";
 
 const data = JSON.parse(await readFile(new URL("../lib/forecast-data.json", import.meta.url), "utf8"));
 const atlas = JSON.parse(await readFile(new URL("../lib/us-state-paths.json", import.meta.url), "utf8"));
 const example = { id: "senate:TX", office: "senate", location: "TX", dem_side_party: "D", probability_event: "candidate_win", dem_probability: .7 };
 
 test("probability boundaries, uncertainty and invalid values", () => {
-  const samples = [[1,"safe-d"],[.95,"safe-d"],[.949,"likely-d"],[.8,"likely-d"],[.6,"lean-d"],[.599,"tossup"],[.401,"tossup"],[.4,"lean-r"],[.2,"likely-r"],[.05,"safe-r"],[0,"safe-r"]];
+  const samples = [[1,"solid-d"],[.95,"solid-d"],[.949,"likely-d"],[.8,"likely-d"],[.799,"lean-d"],[.6,"lean-d"],[.599,"tilt-d"],[.50001,"tilt-d"],[.5,"tossup"],[.49999,"tilt-r"],[.401,"tilt-r"],[.4,"lean-r"],[.201,"lean-r"],[.2,"likely-r"],[.051,"likely-r"],[.05,"solid-r"],[0,"solid-r"]];
   for (const [p, expected] of samples) assert.equal(probabilityBand(p), expected);
   for (const p of [NaN, Infinity, -1, 1.1]) assert.throws(() => probabilityBand(p));
+});
+test("all nine model categories are named, symmetric and have unique colors", () => {
+  assert.deepEqual(mapBands.map((b) => b.label), ["Solid D","Likely D","Lean D","Tilt D","Toss-up","Tilt R","Lean R","Likely R","Solid R"]);
+  assert.equal(new Set(mapBands.map((b) => b.color)).size,9);
+  for (let i = 0; i <= 1000; i++) {
+    const p = i / 1000;
+    const mirror = probabilityBand(p).replace(/-[dr]$/, (side) => side === "-d" ? "-r" : "-d");
+    assert.equal(probabilityBand(1-p),mirror,`asymmetric category at ${p}`);
+  }
 });
 test("no election, independent and three-way contests remain distinct", () => {
   assert.equal(stateBand([], "senate"), "no-election");
   assert.equal(raceBand({ ...example, dem_side_party: "I" }), "independent");
   assert.equal(raceBand({ ...example, dem_side_party: "I", dem_probability: .5 }), "tossup");
+  assert.equal(raceBand({ ...example, dem_side_party: "I", dem_probability: .51 }), "independent");
+  assert.equal(raceRatingLabel({ ...example, dem_side_party: "I", dem_probability: .51 }), "Tilt I");
+  assert.equal(raceRatingLabel({ ...example, dem_side_party: "I", dem_probability: .49 }), "Tilt R");
+  assert.equal(raceRatingLabel({ ...example, dem_side_party: "I", dem_probability: .95 }), "Solid I");
   assert.equal(raceBand({ ...example, dem_side_party: "I", dem_probability: .1 }), "likely-r");
   assert.equal(raceBand({ ...example, probability_event: "pairwise_comparison_only" }), "unmodeled");
   assert.equal(stateBand([example, example], "senate"), "unmodeled");
   assert.equal(raceBand(data.races.find((r) => r.id === "senate:MT")), "unmodeled");
+  assert.equal(raceRatingLabel(data.races.find((r) => r.id === "senate:MT")), "Not modeled");
 });
 test("House state colors use expected seat share, never delegation win odds", () => {
   assert.equal(stateBand([{ ...example, dem_probability: .9 }, { ...example, dem_probability: .1 }], "house"), "tossup");
   assert.equal(stateBand([{ ...example, dem_side_party: "I" }], "house"), "unmodeled");
+  assert.equal(stateRatingLabel([example], "house"), "D 70%");
+  assert.equal(stateRatingLabel([example], "senate"), "Lean D");
+  assert.equal(stateRatingLabel([], "senate"), "No race");
+  assert.equal(stateRatingLabel([{ ...example, probability_event: "pairwise_comparison_only" }], "senate"), "Unmodeled");
 });
 test("all modeled contests map exactly once and counts are exhaustive", () => {
   for (const [office, expected] of [["house",435],["senate",35],["governor",36]]) {
@@ -87,4 +105,22 @@ test("invalid seat summaries fail closed", () => {
   assert.throws(()=>seatComparison(invalid,"house"),/seat estimate/);
   invalid.governor_elections.median_dem_seats=51;
   assert.throws(()=>seatComparison(invalid,"governor"),/seat estimate/);
+});
+
+test("segmented rating bar counts actual map seats and holdovers, not simulation medians", () => {
+  for (const [office,total] of [["house",435],["senate",100],["governor",36]]) {
+    const r = seatRatingSummary(data.races,data.control,office);
+    assert.equal(r.segments.reduce((sum,s)=>sum+s.count,0),total);
+    assert.equal(r.dem+r.rep+r.tossup+r.independent+r.unmodeled,total);
+    assert.equal(r.bands.length,9);
+    assert.ok(r.segments.every((s)=>s.count>0));
+  }
+  const senate=seatRatingSummary(data.races,data.control,"senate");
+  assert.equal(senate.segments.find((s)=>s.key==="holdover-d").count,34);
+  assert.equal(senate.segments.find((s)=>s.key==="holdover-r").count,31);
+  assert.equal(senate.segments.find((s)=>s.key==="unmodeled").count,1);
+  assert.notEqual(senate.rep,seatComparison(data.control,"senate").rep);
+  assert.throws(()=>seatRatingSummary(data.races.filter((r)=>r.id!=="senate:TX"),data.control,"senate"),/Incomplete/);
+  const duplicate = data.races.map((r)=>r.id==="senate:TX" ? {...r,id:"senate:ME"} : r);
+  assert.throws(()=>seatRatingSummary(duplicate,data.control,"senate"),/duplicate/);
 });

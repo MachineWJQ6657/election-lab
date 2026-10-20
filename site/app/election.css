@@ -371,25 +371,27 @@ footer > a:last-child { justify-self: end; }
 
 /* Election geography: local SVG paths, linked to the evidence explorer. */
 .election-map { margin: 0 0 28px; border: 1px solid var(--line); background: var(--surface); scroll-margin-top: 16px; }
-.map-heading { display: flex; align-items: center; justify-content: space-between; gap: 16px; padding: 20px 22px 16px; }
+.map-heading { display: flex; align-items: center; justify-content: space-between; gap: 16px; padding: 12px 20px; }
 .map-heading p, .map-detail-kicker { margin: 0 0 6px; color: var(--muted); font: 650 11px/1.4 var(--font-geist-mono), monospace; letter-spacing: .04em; }
-.map-heading h3 { margin: 0; font-size: clamp(23px, 2.5vw, 30px); letter-spacing: -.04em; line-height: 1.15; }
+.map-heading h3 { margin: 0; font-size: 21px; letter-spacing: -.035em; line-height: 1.15; }
 .map-view-switch { display: flex; flex-shrink: 0; gap: 2px; padding: 3px; border: 1px solid var(--line); background: var(--paper); }
 .map-view-switch button { padding: 8px 12px; border: 0; background: transparent; font-size: 12px; font-weight: 650; color: var(--muted); cursor: pointer; }
 .map-view-switch button[aria-pressed="true"] { background: var(--ink); color: white; }
-.map-final-seats { padding: 18px 22px 15px; border-top: 1px solid var(--subline); background: #f3f3ec; }
+.map-final-seats { padding: 12px 20px; border-top: 1px solid var(--subline); background: #f3f3ec; }
 .map-final-heading { display: flex; justify-content: space-between; align-items: center; gap: 12px; }
 .map-final-heading > span { font: 700 11px/1.4 var(--font-geist-mono), monospace; letter-spacing: .04em; }
 .map-final-heading > small { color: var(--muted); font-size: 12px; }
-.map-final-comparison { display: grid; grid-template-columns: 1fr auto 1fr; align-items: center; gap: 20px; padding: 14px 0 12px; }
+.map-final-comparison { display: grid; grid-template-columns: 1fr auto 1fr; align-items: center; gap: 20px; padding: 8px 0; }
 .map-final-comparison > div { display: flex; align-items: baseline; gap: 14px; }
 .map-final-comparison > div > span { font-size: 14px; font-weight: 650; }
-.map-final-comparison strong { font: 750 clamp(36px, 4.5vw, 55px)/1 var(--font-geist-mono), monospace; letter-spacing: -.065em; }
+.map-final-comparison strong { font: 750 36px/1 var(--font-geist-mono), monospace; letter-spacing: -.065em; }
 .map-final-dem { color: var(--blue); }
 .map-final-rep { flex-direction: row-reverse; color: #a33739; }
 .map-final-versus { font: 500 12px/1.3 var(--font-geist-mono), monospace; color: var(--muted); }
-.map-final-bar { position: relative; height: 20px; background: #ca6c62; }
-.map-final-bar-dem { display: block; height: 100%; background: #4779c5; }
+.map-final-bar { position: relative; height: 26px; display: flex; background: var(--wash); }
+.map-rating-segment { display: flex; align-items: center; justify-content: center; height: 100%; border-right: 1px solid rgb(255 255 255 / 55%); color: #211d18; font: 700 12px/1 var(--font-geist-mono), monospace; }
+.map-rating-segment[data-seat-band^="solid"], .map-rating-segment[data-seat-band^="likely"], .map-rating-segment.holdover { color: white; }
+.map-rating-segment.holdover { background-image: repeating-linear-gradient(135deg, transparent 0 4px, rgb(255 255 255 / 20%) 4px 6px); }
 .map-final-bar > i { position: absolute; top: -5px; bottom: -5px; width: 2px; background: var(--ink); }
 .map-final-caption { display: flex; justify-content: space-between; flex-wrap: wrap; gap: 4px 12px; padding-top: 9px; font-size: 11px; color: var(--muted); }
 .map-final-caption > span:first-child { font-weight: 650; color: var(--ink); }
@@ -400,19 +402,26 @@ footer > a:last-child { justify-self: end; }
 .map-final-stats i { padding: 0 5px; font-style: normal; color: var(--muted); font-weight: 400; }
 .map-final-stats em { font-style: normal; }
 .map-final-note { margin: 8px 0 0; font-size: 11px; line-height: 1.55; color: var(--muted); max-width: 1100px; }
+.map-forecast-details { margin-top: 8px; font-size: 11px; }
+.map-forecast-details > summary, .map-evidence-disclosure > summary, .map-footnote > summary { cursor: pointer; color: #53534a; }
+.map-ratings-key { margin-top: 9px; padding-top: 0 !important; border-top: 0 !important; gap: 6px 13px !important; }
+.map-ratings-key > span { font-size: 11.5px !important; }
+.map-ratings-key i { width: 9px !important; height: 9px !important; }
+.map-ratings-key b { font-variant-numeric: tabular-nums; }
+.map-holdover-key { color: var(--muted) !important; margin-left: auto; }
 .map-seat-totals { display: flex; align-items: center; flex-wrap: wrap; gap: 12px 24px; padding: 12px 22px; border-block: 1px solid var(--subline); background: var(--paper); font-size: 13px; font-variant-numeric: tabular-nums; }
 .map-seat-totals > span { display: inline-flex; align-items: center; gap: 7px; }
 .map-seat-totals b { font-size: 20px; line-height: 1; }
 .map-seat-totals i, .map-legend i { display: inline-block; width: 12px; height: 12px; flex-shrink: 0; border: 1px solid rgb(0 0 0 / 12%); }
 .map-seat-totals > small { margin-left: auto; color: var(--muted); font-size: 12px; }
-.map-layout { display: grid; grid-template-columns: minmax(0, 1fr) 300px; }
-.map-canvas { min-width: 0; padding: 16px 18px; }
+.map-layout { display: block; }
+.map-canvas { min-width: 0; padding: 12px 20px; }
 .map-selection-tools { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 8px; }
 .map-selection-tools label { display: flex; gap: 10px; align-items: center; color: var(--muted); font-size: 12px; }
 .map-selection-tools select { max-width: 220px; padding: 7px 9px; border: 1px solid var(--line); color: var(--ink); background: var(--surface); font-size: 13px; }
 .map-clear { padding: 7px 0; border: 0; color: var(--blue); background: transparent; font-size: 12px; cursor: pointer; }
 .map-svg-scroll { overflow: auto; margin: 10px 0 8px; }
-.us-election-map { display: block; width: 100%; min-width: 540px; height: auto; }
+.us-election-map { display: block; width: 100%; max-width: 960px; min-width: 540px; height: auto; margin: auto; }
 .map-state { cursor: pointer; outline: none; }
 .map-state-shape { stroke: var(--surface); stroke-width: 1.1; stroke-linejoin: round; transition: stroke-width .12s; }
 .map-state:hover .map-state-shape, .map-state:focus-visible .map-state-shape { stroke: var(--ink); stroke-width: 2.8; }
@@ -425,44 +434,59 @@ footer > a:last-child { justify-self: end; }
 .map-inset-note { fill: var(--muted); font: 14px Arial, sans-serif; }
 .map-legend { display: flex; flex-wrap: wrap; gap: 9px 13px; padding-top: 11px; border-top: 1px solid var(--subline); }
 .map-legend > span { display: flex; align-items: center; gap: 5px; font-size: 11px; white-space: nowrap; color: #51514a; }
+.map-legend-heading { margin: 14px 0 7px; font: 650 10.5px/1.4 var(--font-geist-mono), monospace; color: var(--muted); letter-spacing: .025em; }
+.map-legend b { color: var(--ink); font-size: 12px; font-weight: 650; }
+.map-legend small { display: block; margin-top: 2px; font-size: 11px; }
+.map-color-note { margin: 0; font-size: 11px; color: var(--muted); }
+.map-share-key { display: flex; align-items: center; flex-wrap: wrap; gap: 7px; font-size: 11px; color: var(--muted); }
+.map-share-key > div { display: flex; width: 130px; height: 9px; }
+.map-share-key i { width: 11.111%; }
+.map-share-key small { font-size: 11px; }
 .map-hatch-key { background: repeating-linear-gradient(135deg, #e3ded3 0 4px, #9d9484 4px 6px); }
 .map-state-tiles { display: grid; grid-template-columns: repeat(9, minmax(0, 1fr)); gap: 5px; margin: 16px 0; }
 .map-state-tiles button, .map-district-grid button { min-height: 51px; padding: 7px 4px; border: 1px solid rgb(0 0 0 / 10%); color: #211d18; cursor: pointer; font-size: 14px; line-height: 1.15; }
-.map-state-tiles small, .map-district-grid small { display: block; margin-top: 4px; font-size: 10px; font-weight: 550; }
+.map-state-tiles small, .map-district-grid small { display: block; margin-top: 4px; font-size: 11px; font-weight: 550; }
+.map-rating-badge { display: flex; align-items: center; flex-wrap: wrap; gap: 7px; margin: 0 0 10px; font-size: 13px; }
+.map-rating-badge i { width: 13px; height: 13px; border: 1px solid rgb(0 0 0 / 15%); }
+.map-rating-badge > span { font-size: 11px; color: var(--muted); }
 .map-state-tiles button.light, .map-district-grid button.light { color: white; }
 .map-state-tiles button.selected, .map-district-grid button.selected { outline: 2px solid var(--ink); outline-offset: 1px; }
 .map-state-tiles button:hover, .map-district-grid button:hover { box-shadow: inset 0 0 0 2px var(--ink); }
-.map-detail { padding: 20px; border-left: 1px solid var(--line); background: #f0f0e9; min-width: 0; }
-.map-detail h4 { margin: 0 0 18px; font-size: 28px; line-height: 1.15; letter-spacing: -.04em; }
+.map-detail { display: grid; grid-template-columns: minmax(130px,.35fr) minmax(0,1fr); gap: 20px; padding: 12px 20px; border-top: 1px solid var(--subline); background: #f0f0e9; min-width: 0; }
+.map-detail h4 { margin: 0 0 5px; font-size: 22px; line-height: 1.15; letter-spacing: -.04em; }
+.map-detail-content { display: grid; grid-template-columns: 1fr 1fr; column-gap: 20px; align-items: start; }
+.map-detail-content > .map-rating-badge, .map-detail-content > .map-detail-note { grid-column: 1 / -1; }
+.map-evidence-disclosure { font-size: 11px; margin-top: 6px; }
 .map-race-name { margin: 18px 0 10px; padding-top: 14px; border-top: 1px solid var(--line); color: var(--muted); font-size: 12px; }
 .map-candidate { display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: 7px 0; font-size: 14px; }
 .map-candidate > span { display: flex; align-items: baseline; gap: 7px; min-width: 0; overflow-wrap: anywhere; }
 .map-candidate small { font: 700 11px/1.2 var(--font-geist-mono), monospace; }
 .map-candidate strong { flex-shrink: 0; font-variant-numeric: tabular-nums; font-size: 19px; letter-spacing: -.04em; }
-.map-detail-track { margin: 8px 0 18px; height: 8px; background: #ca6c62; overflow: hidden; }
+.map-detail-track { display: none; }
 .map-detail-track span { display: block; height: 100%; }
 .map-detail-metrics { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin: 20px 0 12px; }
 .map-detail-metrics dt { color: var(--muted); font-size: 11px; }
 .map-detail-metrics dd { margin: 5px 0 0; font-size: 20px; font-variant-numeric: tabular-nums; letter-spacing: -.04em; }
 .map-detail-note, .map-boundary-note { font-size: 12px; line-height: 1.6; color: #5c5c53; }
 .map-boundary-note { padding-left: 9px; border-left: 2px solid var(--signal); }
-.map-evidence-button { width: 100%; margin-top: 12px; border: 1px solid var(--ink); background: var(--ink); color: white; padding: 12px; text-align: left; font-size: 12px; cursor: pointer; }
-.map-evidence-button:hover { background: #36362f; }
+.map-evidence-button { width: 100%; margin-top: 6px; border: 1px solid var(--line); background: transparent; color: var(--ink); padding: 7px 10px; text-align: left; font-size: 12px; cursor: pointer; }
+.map-evidence-button:hover { background: var(--wash); }
 .map-delegation strong { font-size: 19px; }
 .map-delegation p { margin: 6px 0 0; color: var(--muted); font-size: 12px; }
 .map-districts { padding: 18px 22px; border-top: 1px solid var(--line); }
 .map-districts > div:first-child { display: flex; flex-wrap: wrap; align-items: baseline; gap: 8px 16px; margin-bottom: 12px; }
 .map-districts strong { font-size: 14px; }
 .map-districts > div:first-child > span { color: var(--muted); font-size: 12px; }
-.map-district-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(72px, 1fr)); gap: 6px; }
+.map-district-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(88px, 1fr)); gap: 6px; }
 .district-legend { margin-bottom: 14px; padding-top: 0; border-top: 0; }
 .map-district-grid button { min-height: 52px; font-weight: 700; font-size: 12px; }
-.map-footnote { padding: 14px 22px; margin: 0; border-top: 1px solid var(--line); color: var(--muted); font-size: 11.5px; line-height: 1.6; }
+.map-district-grid .district-rating { font-weight: 750; font-size: 12px; }
+.map-footnote { padding: 8px 20px; margin: 0; border-top: 1px solid var(--subline); color: var(--muted); font-size: 11px; line-height: 1.6; }
 .map-footnote a { text-decoration: underline; }
 @media (min-width: 1101px) { .map-detail { align-self: stretch; } }
 @media (max-width: 1100px) {
   .map-layout { grid-template-columns: 1fr; }
-  .map-detail { display: grid; grid-template-columns: minmax(160px, .55fr) minmax(0, 1fr); gap: 24px; padding: 18px; border-left: 0; border-top: 1px solid var(--line); }
+  .map-detail { grid-template-columns: minmax(130px, .35fr) minmax(0, 1fr); }
   .map-race-name { margin-top: 0; padding-top: 0; border-top: 0; }
   .map-seat-totals { gap: 10px 16px; }
   .map-state-tiles { grid-template-columns: repeat(9, minmax(0, 1fr)); }
@@ -478,21 +502,26 @@ footer > a:last-child { justify-self: end; }
   .map-state-tiles { grid-template-columns: repeat(9, minmax(0, 1fr)); }
 }
 @media (max-width: 680px) {
-  .map-final-seats { padding: 16px; }
+  .map-final-seats { padding: 12px 14px; }
   .map-final-heading { align-items: flex-start; flex-direction: column; gap: 4px; }
   .map-final-comparison { gap: 12px; }
-  .map-final-comparison > div { align-items: flex-start; flex-direction: column; gap: 5px; }
+  .map-final-comparison > div { align-items: flex-start; flex-direction: column; gap: 3px; }
   .map-final-comparison .map-final-rep { align-items: flex-end; }
   .map-final-comparison > div > span { font-size: 12px; }
   .map-final-stats { gap: 8px; }
   .map-final-stats > div { width: 100%; justify-content: space-between; }
   .map-detail { grid-template-columns: 1fr; gap: 8px; }
-  .map-heading { align-items: flex-start; flex-direction: column; padding: 16px; }
+  .map-heading { padding: 12px 14px; gap: 8px; }
+  .map-heading h3 { font-size: 19px; }
+  .map-view-switch button { padding: 7px 8px; font-size: 11px; }
   .map-seat-totals { padding: 12px 16px; }
   .map-seat-totals > small { width: 100%; margin-left: 0; }
   .map-canvas { padding: 14px; }
-  .map-state-tiles { grid-template-columns: repeat(6, minmax(0, 1fr)); gap: 5px; }
-  .map-state-tiles button { min-height: 52px; }
+  .map-state-tiles { grid-template-columns: repeat(7, minmax(0, 1fr)); gap: 5px; }
+  .map-state-tiles button { min-height: 44px; }
+  .map-detail-content { grid-template-columns: 1fr; }
+  .map-detail-content > * { grid-column: 1; }
+  .map-holdover-key { margin-left: 0; }
   .map-districts { padding: 16px; }
   .map-footnote { padding: 12px 16px; }
 }

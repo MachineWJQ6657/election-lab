@@ -38,30 +38,44 @@ export type MapRace = {
   model_margin: number; district_boundary_changed: boolean;
 };
 export const mapBands = [
-  { key: "safe-d", label: "D ≥95%", color: "#254d9b" },
-  { key: "likely-d", label: "D 80–95%", color: "#4779c5" },
-  { key: "lean-d", label: "D 60–80%", color: "#91b5e3" },
-  { key: "tossup", label: "Toss-up", color: "#e5ce88" },
-  { key: "lean-r", label: "R 60–80%", color: "#e4a69b" },
-  { key: "likely-r", label: "R 80–95%", color: "#ca6c62" },
-  { key: "safe-r", label: "R ≥95%", color: "#a33739" },
+  { key: "solid-d", label: "Solid D", probability: "≥95%", seatShare: "≥95% D", color: "#254d9b" },
+  { key: "likely-d", label: "Likely D", probability: "80–<95%", seatShare: "80–<95% D", color: "#3e6eae" },
+  { key: "lean-d", label: "Lean D", probability: "60–<80%", seatShare: "60–<80% D", color: "#91b5e3" },
+  { key: "tilt-d", label: "Tilt D", probability: ">50–<60%", seatShare: ">50–<60% D", color: "#c9daed" },
+  { key: "tossup", label: "Toss-up", probability: "50 / 50", seatShare: "50% D", color: "#e5ce88" },
+  { key: "tilt-r", label: "Tilt R", probability: ">50–<60%", seatShare: ">40–<50% D", color: "#efd2cc" },
+  { key: "lean-r", label: "Lean R", probability: "60–<80%", seatShare: ">20–40% D", color: "#e4a69b" },
+  { key: "likely-r", label: "Likely R", probability: "80–<95%", seatShare: ">5–20% D", color: "#ad534b" },
+  { key: "solid-r", label: "Solid R", probability: "≥95%", seatShare: "≤5% D", color: "#a33739" },
 ] as const;
 export type MapBand = (typeof mapBands)[number]["key"] | "independent" | "unmodeled" | "no-election";
 export const specialColors = { independent: "#9671b5", unmodeled: "#9d9484", "no-election": "#dddcd4" };
 export function probabilityBand(p: number): (typeof mapBands)[number]["key"] {
   if (!Number.isFinite(p) || p < 0 || p > 1) throw new Error("Invalid map probability");
-  if (p >= .95) return "safe-d";
-  if (p >= .8) return "likely-d";
-  if (p >= .6) return "lean-d";
-  if (p > .4) return "tossup";
-  if (p > .2) return "lean-r";
-  if (p > .05) return "likely-r";
-  return "safe-r";
+  if (p === .5) return "tossup";
+  // Normalize machine-precision noise at complementary cutoffs, not model odds.
+  const confidence = Number(Math.max(p, 1 - p).toFixed(12));
+  const rating = confidence >= .95 ? "solid" : confidence >= .8 ? "likely" : confidence >= .6 ? "lean" : "tilt";
+  return `${rating}-${p > .5 ? "d" : "r"}`;
 }
 export function raceBand(race: MapRace): MapBand {
   if (race.probability_event === "pairwise_comparison_only") return "unmodeled";
-  if (race.dem_side_party !== "D" && race.dem_probability >= .6) return "independent";
-  return probabilityBand(race.dem_probability);
+  const band = probabilityBand(race.dem_probability);
+  if (race.dem_side_party !== "D" && race.dem_probability > .5) return "independent";
+  return band;
+}
+export function raceRatingLabel(race: MapRace): string {
+  if (race.probability_event === "pairwise_comparison_only") return "Not modeled";
+  const label = mapBands.find((b) => b.key === probabilityBand(race.dem_probability))!.label;
+  return race.dem_side_party === "D" ? label : label.replace(/D$/, race.dem_side_party);
+}
+export function stateRatingLabel(races: MapRace[], office: MapOffice): string {
+  const band = stateBand(races, office);
+  if (band === "no-election") return "No race";
+  if (band === "unmodeled") return "Unmodeled";
+  // A House state's label is a seat-share estimate, NOT a race rating.
+  if (office === "house") return `D ${Math.round(100 * races.reduce((sum, r) => sum + r.dem_probability, 0) / races.length)}%`;
+  return raceRatingLabel(races[0]);
 }
 export function bandColor(band: MapBand): string {
   return mapBands.find((item) => item.key === band)?.color ?? specialColors[band as keyof typeof specialColors];
@@ -88,4 +102,24 @@ export function raceCounts(races: MapRace[]) {
     else counts.rep++;
   }
   return counts;
+}
+
+export function seatRatingSummary(races: MapRace[], control: MapSeatControl, office: MapOffice) {
+  const seats = seatComparison(control, office);
+  const rows = races.filter((r) => r.office === office);
+  const expected = office === "house" ? 435 : office === "senate" ? control.coverage.senate_races : control.coverage.governor_races;
+  if (rows.length !== expected || new Set(rows.map((r) => r.id)).size !== expected) throw new Error("Incomplete or duplicate map races");
+  const bands = mapBands.map((b) => ({ ...b, count: rows.filter((r) => raceBand(r) === b.key).length }));
+  const counts = raceCounts(rows);
+  const segments = [
+    { key: "holdover-d", label: "D-aligned · not up", color: "#254d9b", count: seats.nonUpDem, holdover: true },
+    ...bands.slice(0,4),
+    bands[4],
+    { key: "independent", label: "Independent favored", color: specialColors.independent, count: counts.independent },
+    { key: "unmodeled", label: "Not modeled", color: specialColors.unmodeled, count: counts.unmodeled },
+    ...bands.slice(5),
+    { key: "holdover-r", label: "R-aligned · not up", color: "#a33739", count: seats.nonUpRep, holdover: true },
+  ].filter((s) => s.count > 0);
+  if (segments.reduce((sum, s) => sum + s.count, 0) !== seats.total) throw new Error("Map rating seats do not sum to total");
+  return { bands, segments, ...counts, dem: counts.dem + seats.nonUpDem, rep: counts.rep + seats.nonUpRep, total: seats.total, nonUpDem: seats.nonUpDem, nonUpRep: seats.nonUpRep };
 }

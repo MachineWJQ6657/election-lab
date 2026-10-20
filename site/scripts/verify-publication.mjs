@@ -7,6 +7,7 @@ export function inspectPublishedHtml(html, expectedSnapshot) {
   const snapshot = html.match(/data-snapshot-id="([a-f0-9]{64})"/)?.[1];
   assert.equal(snapshot, expectedSnapshot, "Published forecast snapshot differs from local snapshot");
   assert.match(html, /id="election-map"/, "Published page does not contain the election map");
+  assert.match(html, /data-map-rating-scale="solid-likely-lean-tilt"/, "Published map is missing the named rating scale");
   const states = [...html.matchAll(/data-state="([A-Z]{2})"/g)].map((m) => m[1]);
   assert.equal(states.length, 51, "Expected 50 states plus DC on the initial map");
   assert.equal(new Set(states).size, 51, "Map contains duplicate state keys");
@@ -15,6 +16,9 @@ export function inspectPublishedHtml(html, expectedSnapshot) {
   assert.ok(seats,"Missing map final seat comparison");
   assert.equal(Number(seats[1]),100,"Senate summary does not include all 100 seats");
   assert.equal(Number(seats[2])+Number(seats[3]),100,"Seat comparison does not sum to 100");
+  const ratingSeats=[...html.matchAll(/data-seat-band="[a-z-]+" data-seat-count="(\d+)"/g)];
+  assert.equal(ratingSeats.reduce((sum,m)=>sum+Number(m[1]),0),100,"Missing or incomplete segmented rating bar");
+  assert.ok(!html.includes('class="map-rating-label'),"Obsolete inline map ratings are still displayed");
   const assets = [...new Set([...html.matchAll(/(?:src|href)="(\/_next\/static\/[^"?#]+\.(?:js|css))"/g)].map((m) => m[1]))];
   assert.ok(assets.some((a) => a.endsWith(".js")), "No JavaScript build assets found");
   assert.ok(assets.some((a) => a.endsWith(".css")), "No stylesheet build assets found");
