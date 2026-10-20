@@ -28,6 +28,17 @@ test("server-renders the forecast dashboard and social metadata", async () => {
   contains(html, /House leans Democratic/);
   contains(html, /Balance of power/);
   contains(html, /RACE EXPLORER/);
+  contains(html, /id="election-map"/);
+  contains(html, /The battleground, at a glance/);
+  contains(html, /not chamber seat totals/);
+  contains(html, /no 2026 district-boundary claim/);
+  contains(html, /Jump to state/);
+  assert.equal((html.match(/data-state="[A-Z]{2}"/g) ?? []).length, 51);
+  assert.match(html, /data-state="MT" data-map-band="unmodeled"/);
+  assert.match(html, /data-state="CA" data-map-band="no-election"/);
+  // A single text child avoids SSR separator comments inside SVG title text.
+  const svgTitle = html.match(/<svg[^>]*class="us-election-map"[\s\S]*?<title>([\s\S]*?)<\/title>/);
+  assert.equal(svgTitle?.[1], "2026 Senate forecast map");
   contains(html, /Uncertainty/);
   contains(html, /OBSERVED PARTICIPATION/);
   contains(html, /not votes for a candidate/);

@@ -2,6 +2,7 @@
 
 import { useMemo, useState } from "react";
 import { EarlyVotingPanel, type EarlyVotingData } from "./EarlyVotingPanel";
+import { ElectionMap } from "./ElectionMap";
 
 type Office = "senate" | "house" | "governor";
 type Race = { id: string; source_race_id: string; office: string; location: string; dem: string; rep: string; poll_count: number; pollster_count: number; normalized_pollster_count: number | null; raw_poll_margin: number | null; poll_house_effect: number | null; poll_margin: number | null; model_margin: number; model_probability: number; market_probability: number | null; dem_probability: number; market_weight: number; probability_source: string; validation_scope: string; rating: string | null; rating_source: string | null; model: string; competitiveness: number; dem_side_party: string; multi_candidate_warning: string; probability_event: string; district_boundary_changed: boolean; };
@@ -79,6 +80,7 @@ function DistributionChart({ data, office }: { data: Distribution[]; office: "ho
 export function ForecastDashboard({ data }: { data: ForecastData }) {
   const [office, setOffice] = useState<Office>("senate");
   const [query, setQuery] = useState("");
+  const [mapState, setMapState] = useState<string | null>(null);
   const [distributionOffice, setDistributionOffice] = useState<"house" | "senate">("house");
   const defaultRace = data.races.find((race) => race.id === "senate:TX") ?? data.races.find((race) => race.office === "senate");
   const [selectedRaceId, setSelectedRaceId] = useState(defaultRace?.id ?? "");
@@ -87,9 +89,10 @@ export function ForecastDashboard({ data }: { data: ForecastData }) {
     const needle = query.trim().toLowerCase();
     return data.races
       .filter((race) => race.office === office)
+      .filter((race) => !mapState || race.location.slice(0, 2) === mapState)
       .filter((race) => !needle || [race.location, stateNames[race.location.slice(0, 2)], race.dem, race.rep, race.rating].filter(Boolean).join(" ").toLowerCase().includes(needle))
       .sort((a, b) => a.competitiveness - b.competitiveness);
-  }, [data.races, office, query]);
+  }, [data.races, office, query, mapState]);
 
   const selectedRace = races.find((race) => race.id === selectedRaceId) ?? races[0] ?? null;
   const selectedEvidence = selectedRace ? data.evidence.filter((poll) => poll.race_id === selectedRace.source_race_id).slice(0, 8) : [];
@@ -111,6 +114,7 @@ export function ForecastDashboard({ data }: { data: ForecastData }) {
     const firstRace = data.races.filter((race) => race.office === nextOffice).sort((a, b) => a.competitiveness - b.competitiveness)[0];
     setOffice(nextOffice);
     setQuery("");
+    setMapState(null);
     setSelectedRaceId(firstRace?.id ?? "");
   };
 
@@ -124,7 +128,7 @@ export function ForecastDashboard({ data }: { data: ForecastData }) {
   return <main className="forecast-shell" data-snapshot-id={data.snapshot_id}>
     <header className="desk-header" id="top">
       <a className="desk-wordmark" href="#top" aria-label="Election Forecast Lab home"><b>EF</b><span>Election Forecast Lab</span></a>
-      <nav aria-label="Primary navigation"><a href="#forecast">Forecast</a><a href="#races">Races</a><a href="#early-vote">Early vote</a><a href="#methodology">Methods</a></nav>
+      <nav aria-label="Primary navigation"><a href="#forecast">Forecast</a><a href="#election-map">Map</a><a href="#races">Races</a><a href="#early-vote">Early vote</a><a href="#methodology">Methods</a></nav>
       <div className="desk-status"><i /> Updated {updateLabel}</div>
     </header>
 
@@ -165,10 +169,24 @@ export function ForecastDashboard({ data }: { data: ForecastData }) {
         <div className="office-tabs" role="tablist" aria-label="Election office">
           {(Object.keys(officeLabels) as Office[]).map((item) => <button type="button" className={office === item ? "active" : ""} key={item} onClick={() => selectOffice(item)} role="tab" aria-selected={office === item}>{officeLabels[item]} <span>{data.races.filter((race) => race.office === item).length}</span></button>)}
         </div>
-        <label className="race-search"><span>Search races</span><input value={query} onChange={(event) => setQuery(event.target.value)} placeholder="State, district or candidate" /></label>
+        <label className="race-search"><span>Search races</span><input value={query} onChange={(event) => { setQuery(event.target.value); setMapState(null); }} placeholder="State, district or candidate" /></label>
       </div>
 
-      <div className={`race-workspace${query.trim() && races.length <= 3 ? " compact-results" : ""}`}>
+      <ElectionMap races={data.races} office={office} selectedState={mapState ?? selectedRace?.location.slice(0, 2) ?? "TX"} selectedRaceId={selectedRace?.id ?? ""} filteredState={mapState}
+        onStateSelect={(state) => {
+          setMapState(state); setQuery("");
+          const first = data.races.filter((r) => r.office === office && r.location.slice(0, 2) === state).sort((a, b) => a.competitiveness - b.competitiveness)[0];
+          setSelectedRaceId(first?.id ?? "");
+        }}
+        onRaceSelect={(id) => {
+          setQuery(""); setSelectedRaceId(id);
+          const race = data.races.find((r) => r.id === id);
+          if (race) setMapState(race.location.slice(0, 2));
+        }}
+        onOpenRace={(id) => { setSelectedRaceId(id); window.requestAnimationFrame(() => document.querySelector(".race-inspector")?.scrollIntoView({ behavior: "smooth", block: "start" })); }}
+        onClearState={() => setMapState(null)} />
+
+      <div className={`race-workspace${(query.trim() || mapState) && races.length <= 3 ? " compact-results" : ""}`}>
         <div className="race-table-wrap" key={`${office}:${query}`}>
           <table className="race-table">
             <thead><tr><th>Race</th><th>Matchup</th><th title="Weighted polling average after historical house-effect adjustment">Adj. polls</th><th>Model</th><th>Market</th><th>D win</th></tr></thead>

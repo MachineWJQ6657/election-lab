@@ -26,3 +26,32 @@ The parent GitHub repository includes this directory as ordinary source files,
 not as an inaccessible nested submodule. The local directory also retains its
 separate Sites publication repository; the two Git remotes serve different
 purposes. Pushing GitHub source alone does not deploy the public website.
+
+## Interactive election map
+
+The race explorer includes a state SVG map for Senate and governor forecasts,
+and a House delegation map that drills down into each state's district tiles.
+Map selection, search, the race table and evidence inspector share selection
+state. Small screens default to alphabetical state tiles; the geographic view
+remains available. The map reads the existing forecast snapshot and never
+changes its probabilities.
+
+Senate/governor colors represent candidate win probabilities. House state
+colors represent expected Democratic seat share, not delegation-control odds;
+individual district tiles use win probabilities. No-election states, independent
+candidates, multi-candidate limitations and unpolled rating priors remain
+explicit. These are mapped contests, not full chamber seat totals.
+
+`lib/us-state-paths.json` contains locally bundled Albers USA SVG paths converted
+from US Atlas 3.0.1 / Census 2017 state outlines. It is **not** a source of 2026
+congressional district boundaries. Source URL and SHA-256 are retained, with the
+ISC license in `public/us-atlas-LICENSE.txt`. Regenerate only when intentionally
+updating geography with `node scripts/generate-state-map.mjs` (requires network).
+The published page never requests third-party map tiles or a paid map API.
+
+Run `npm test` for the build, server-rendered dashboard checks, probability-bin
+boundaries, all 506 race-to-state joins, and geography integrity checks.
+
+The map is currently verified locally; its publication awaits restoration of
+the original Sites project connection, which returned `project_not_found`
+during this update. The preceding version 8 remains the last verified deployment.

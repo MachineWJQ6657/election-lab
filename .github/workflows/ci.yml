@@ -48,4 +48,4 @@ jobs:
       - run: npm ci
       - run: npm run build
       - run: npm run typecheck
-      - run: node --test tests/rendered-html.test.mjs
+      - run: node --test tests/rendered-html.test.mjs tests/election-map.test.mjs
