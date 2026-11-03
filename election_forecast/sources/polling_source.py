@@ -4,6 +4,7 @@ from __future__ import annotations
 
 import hashlib
 import json
+import logging
 import re
 from datetime import UTC, date, datetime
 from io import BytesIO
@@ -14,6 +15,8 @@ from bs4 import BeautifulSoup
 
 from ..http_cache import CachedHTTPClient
 from ..schemas import Office, PollRecord, Population
+
+LOGGER = logging.getLogger(__name__)
 
 LATEST_URLS = {
     Office.SENATE: "https://pollingsource.com/senate/polls",
@@ -219,8 +222,18 @@ def _sample_cell(value: object) -> tuple[int | None, Population]:
 
 def _find_poll_table(payload: bytes, default_location: str | None = None) -> pd.DataFrame:
     # pandas.read_html is more resilient to small markup changes than fixed CSS selectors.
-    tables = pd.read_html(BytesIO(payload), flavor="lxml")
     soup = BeautifulSoup(payload, "lxml")
+    # Provider navigation/status badges are not survey metadata. Do not parse
+    # blurred teaser tables or attempt to recover access-restricted poll rows.
+    for badge in soup.select(
+        ".poll-detail-link, .poll-in-average, .poll-not-in-average, .pollster-record-badge"
+    ):
+        badge.decompose()
+    for badge in soup.select(".partisan-tag"):
+        sponsor = re.fullmatch(r"([DR])-sponsored", badge.get_text(strip=True), re.IGNORECASE)
+        if sponsor:
+            badge.string = f"partisan · {sponsor[1].upper()}"
+    tables = pd.read_html(BytesIO(str(soup).encode("utf-8")), flavor="lxml", encoding="utf-8")
     for table in tables:
         normalized_columns = {str(column).strip().lower(): column for column in table.columns}
         if {"pollster", "date", "sample", "dem", "rep"}.issubset(normalized_columns):
@@ -375,7 +388,8 @@ def fetch_polling_source_governors(
         try:
             payload = client.get(url, refresh=refresh)
             table = _find_poll_table(payload, default_location=state)
-        except (httpx.HTTPError, ValueError, OSError):
+        except (httpx.HTTPError, ValueError, OSError) as exc:
+            LOGGER.warning("Governor poll page unavailable or incompatible (%s): %s", state, exc)
             continue
         fetched_at = datetime.now(UTC)
         records: list[dict[str, object]] = []

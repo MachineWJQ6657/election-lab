@@ -16,7 +16,7 @@ from election_forecast.pollsters import pollster_key
 from election_forecast.validation_cache import cache_key, cached_validation
 
 ROOT = Path(__file__).resolve().parents[1]
-OUTPUT = ROOT / "artifacts/pollster_identity_experiment_20261019"
+OUTPUT = ROOT / "artifacts/pollster_identity_experiment_latest"
 MIN_PRIOR_CYCLES = 3
 MIN_PRIOR_RACES = 100
 MIN_BRIER_GAIN = 0.002

@@ -6,6 +6,7 @@ import hashlib
 from datetime import UTC, date, datetime
 from io import BytesIO
 
+import httpx
 import pandas as pd
 
 from ..http_cache import CachedHTTPClient
@@ -46,7 +47,17 @@ def fetch_silver_generic_ballot(
 ) -> pd.DataFrame:
     """Fetch one preferred all-voter version of each published national poll."""
     client = client or CachedHTTPClient()
-    payload = client.get(SILVER_GENERIC_CSV_URL, refresh=refresh)
+    try:
+        payload = client.get(SILVER_GENERIC_CSV_URL, refresh=refresh)
+    except httpx.HTTPStatusError as exc:
+        # A cached public-Sheets redirect can expire at googleusercontent.com.
+        # Re-request the SAME public export with a fresh cache key; do not use
+        # an older CSV or retry authentication/permission failures as success.
+        host = exc.response.url.host
+        if exc.response.status_code != 400 or not host.endswith(".googleusercontent.com"):
+            raise
+        stamp = int(datetime.now(UTC).timestamp())
+        payload = client.get(f"{SILVER_GENERIC_CSV_URL}&cachebust={stamp}", refresh=True)
     frame = pd.read_csv(BytesIO(payload))
     required = {
         "subgroup",

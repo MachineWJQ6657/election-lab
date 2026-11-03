@@ -15,7 +15,7 @@ from election_forecast.diagnostics import (
 )
 
 ROOT = Path(__file__).resolve().parents[1]
-OUTPUT = ROOT / "artifacts/research_audit_20261019"
+OUTPUT = ROOT / "artifacts/research_audit_latest"
 CURRENT_OFFICES = ("house", "senate", "governor")
 
 

@@ -146,6 +146,8 @@ button:focus-visible, input:focus-visible, a:focus-visible { outline: 2px solid 
 .candidate { display: inline-grid; width: 19px; height: 19px; place-items: center; margin-right: 7px; color: white; font: 750 11px/1 var(--font-geist-mono), monospace; }
 .candidate.dem { background: var(--blue); }
 .candidate.rep { background: var(--red); }
+.candidate.independent { background: #795394; }
+.race-probability.independent span { background: #dfd3e8; }
 .race-probability { position: relative; width: 94px; height: 27px; background: var(--red-soft); overflow: hidden; }
 .race-probability span { position: absolute; inset: 0 auto 0 0; background: var(--blue-soft); }
 .race-probability b { position: relative; z-index: 1; display: block; padding: 6px 8px; font: 750 12px/1.25 var(--font-geist-mono), monospace; }
@@ -370,6 +372,23 @@ footer > a:last-child { justify-self: end; }
 }
 
 /* Election geography: local SVG paths, linked to the evidence explorer. */
+.early-scenario { margin-top: 18px; padding: 14px 18px; border: 1px solid var(--line); background: var(--surface); font-size: 13px; }
+.early-scenario > summary { cursor: pointer; font-weight: 700; }
+.early-scenario > summary > span { margin-left: 12px; font-size: 11px; font-weight: 500; color: var(--muted); }
+.early-scenario > p { max-width: 1050px; }
+.scenario-race { display: flex; flex-wrap: wrap; align-items: center; gap: 12px 24px; }
+.scenario-race label { display: flex; flex-direction: column; gap: 5px; }
+.scenario-race select { max-width: 100%; padding: 7px; background: var(--paper); border: 1px solid var(--line); font-size: 12px; }
+.scenario-race > span { font-size: 12px; color: var(--muted); }
+.scenario-controls { display: grid; grid-template-columns: repeat(2,minmax(0,1fr)); gap: 16px 30px; margin: 20px 0; }
+.scenario-controls label { display: flex; flex-direction: column; gap: 6px; color: var(--muted); font-size: 12px; }
+.scenario-controls b { font-size: 13px; color: var(--ink); }
+.scenario-controls input { width: 100%; accent-color: var(--blue); cursor: pointer; }
+.scenario-results { display: grid; grid-template-columns: repeat(3,minmax(0,1fr)); gap: 16px; padding: 14px 0; border-block: 1px solid var(--subline); }
+.scenario-results span { display: block; color: var(--muted); font-size: 11px; }
+.scenario-results strong { display: block; margin-top: 6px; font-size: 22px; letter-spacing: -.03em; }
+.early-scenario button { border: 1px solid var(--line); background: transparent; padding: 7px 12px; font-size: 12px; cursor: pointer; }
+@media (max-width:680px) { .scenario-controls, .scenario-results { grid-template-columns: 1fr; } .early-scenario > summary > span { display: block; margin: 5px 0 0; } .scenario-race label { min-width: 0; width: 100%; } }
 .election-map { margin: 0 0 28px; border: 1px solid var(--line); background: var(--surface); scroll-margin-top: 16px; }
 .map-heading { display: flex; align-items: center; justify-content: space-between; gap: 16px; padding: 12px 20px; }
 .map-heading p, .map-detail-kicker { margin: 0 0 6px; color: var(--muted); font: 650 11px/1.4 var(--font-geist-mono), monospace; letter-spacing: .04em; }

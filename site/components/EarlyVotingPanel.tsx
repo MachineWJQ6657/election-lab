@@ -1,6 +1,8 @@
 "use client";
 
 import { useState } from "react";
+import { EarlyVoteScenario } from "./EarlyVoteScenario";
+import type { MapRace } from "../lib/election-map";
 
 type EarlyState = {
   state: string; requested: number | null; returned: number | null; inperson: number | null;
@@ -8,6 +10,7 @@ type EarlyState = {
   unspecified: number; snapshot_date: string; sources: string[]; source_urls: string[];
   review_flags: { check: string; category?: string; aggregator?: number; official?: number }[];
   request_basis: string;
+  mode_snapshot_dates?: Record<string, string>;
 };
 export type EarlyVotingData = {
   as_of: string; states: EarlyState[]; reporting_states: number; issue_count: number;
@@ -15,10 +18,11 @@ export type EarlyVotingData = {
   model_gate: { accepted: boolean; probability_weight: number; reason: string };
   references: { name: string; url: string }[];
   demographics: { state: string; dimension: string; group: string; count: number }[];
+  turnout_reference_2024?: Record<string, { two_party_votes: number; source_url: string; scope: string }>;
 };
 const number = (n: number | null) => n == null ? "—" : n.toLocaleString("en-US");
 
-export function EarlyVotingPanel({ data }: { data: EarlyVotingData }) {
+export function EarlyVotingPanel({ data, races }: { data: EarlyVotingData; races: MapRace[] }) {
   const [state, setState] = useState("NC");
   const [dimension, setDimension] = useState("race");
   const selected = data.states.find((row) => row.state === state) ?? data.states[0];
@@ -48,6 +52,7 @@ export function EarlyVotingPanel({ data }: { data: EarlyVotingData }) {
         <div className="early-detail-heading"><h3>{selected.state} participation</h3><span>{selected.snapshot_date}</span></div>
         <dl><div><dt>Mail requests / issued</dt><dd>{number(selected.requested)}</dd></div><div><dt>Reported ballots</dt><dd>{number(selected.observed_ballots)}</dd></div></dl>
         <p className="early-caption">{selected.request_basis}. A dash means unavailable, not zero.</p>
+        {selected.mode_snapshot_dates && <p className="early-caption">Reported dates: mail {selected.mode_snapshot_dates.returned ?? "unavailable"} · in person {selected.mode_snapshot_dates.inperson ?? "unavailable"}. Each source can lag independently.</p>}
         <h4>Registered party of reported voters</h4>
         {partyTotal > 0 && selected.unspecified < partyTotal ? <>
           <div className="early-party-bar" aria-label="Registered party composition">
@@ -62,10 +67,11 @@ export function EarlyVotingPanel({ data }: { data: EarlyVotingData }) {
           <p className="early-caption">{selected.state === "NC" ? "North Carolina official aggregate grid" : "civicAPI aggregate reporting"}; race and ethnicity are separate dimensions. Unreported buckets include missing records or voting modes; shares use all observed ballots. No candidate preference is inferred.</p>
         </div>}
         {summaryFlags.map((flag, index) => <p className="early-flag" key={index}>{flag.check === "provider_official_difference" ? `Source difference (${flag.category}): aggregator ${number(flag.aggregator ?? null)}, official ${number(flag.official ?? null)}. Official statewide total is used.` : flag.check === "demographic_partial_coverage" ? "Some demographic records are unreported; they remain in the unknown bucket." : flag.check === "demographic_total_mismatch" ? "A demographic denominator did not reconcile; that breakdown is withheld." : flag.check === "capabilities_cache_fallback" ? "Provider discovery was unavailable; a verified older capability map was used to find separately fetched reports. The capability map supplies no ballot counts." : "Demographic detail is unavailable for part of this snapshot; reported ballot totals are retained."}</p>)}
-        <div className="early-links">{selected.source_urls.map((url) => <a key={url} href={url} target="_blank" rel="noreferrer">{selected.sources.includes("ncsbe") || selected.sources.includes("florida_dos") ? "Official source" : "civicAPI data"} ↗</a>)}</div>
+        <div className="early-links">{selected.source_urls.map((url) => <a key={url} href={url} target="_blank" rel="noreferrer">{url.includes("scvotes.gov/") ? "SC Election Commission" : url.includes("ncsbe.gov/") || url.includes("floridados.gov/") ? "Official source" : "civicAPI data"} ↗</a>)}</div>
       </aside>}
     </div>
-    <details className="early-method"><summary>How early voting affects this forecast · weight {data.model_gate.probability_weight * 100}%</summary>
+    {selected && <EarlyVoteScenario key={selected.state} state={selected.state} ballots={selected.observed_ballots} reference={data.turnout_reference_2024?.[selected.state]} races={races} />}
+    <details className="early-method"><summary>Official forecast · early-vote probability weight {data.model_gate.probability_weight * 100}%</summary>
       <p>{data.model_gate.reason}</p>
       <p>{data.historical_snapshots_available} historical state snapshots were retrieved at matching days before Election Day. Mode definitions and publication history are insufficient for a validated turnout correction. The forecast continues to update from new polling and its historical calibration.</p>
       <p>{data.references.map((reference) => <a href={reference.url} key={reference.url} target="_blank" rel="noreferrer">{reference.name} ↗ </a>)}</p>

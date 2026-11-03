@@ -119,7 +119,12 @@ test("segmented rating bar counts actual map seats and holdovers, not simulation
   assert.equal(senate.segments.find((s)=>s.key==="holdover-d").count,34);
   assert.equal(senate.segments.find((s)=>s.key==="holdover-r").count,31);
   assert.equal(senate.segments.find((s)=>s.key==="unmodeled").count,1);
-  assert.notEqual(senate.rep,seatComparison(data.control,"senate").rep);
+  const differentMedian = structuredClone(data.control);
+  differentMedian.senate.median_dem_seats = senate.dem === 50 ? 51 : 50;
+  differentMedian.senate.p05_dem_seats = 0;
+  differentMedian.senate.p95_dem_seats = 100;
+  assert.deepEqual(seatRatingSummary(data.races,differentMedian,"senate"),senate);
+  assert.notEqual(senate.rep,seatComparison(differentMedian,"senate").rep);
   assert.throws(()=>seatRatingSummary(data.races.filter((r)=>r.id!=="senate:TX"),data.control,"senate"),/Incomplete/);
   const duplicate = data.races.map((r)=>r.id==="senate:TX" ? {...r,id:"senate:ME"} : r);
   assert.throws(()=>seatRatingSummary(duplicate,data.control,"senate"),/duplicate/);

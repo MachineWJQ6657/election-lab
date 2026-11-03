@@ -13,6 +13,8 @@ import httpx
 import pandas as pd
 from bs4 import BeautifulSoup
 
+from election_forecast.lineage import fingerprint
+
 ROOT = Path(__file__).resolve().parents[1]
 AGGREGATORS = {
     "pollingsource.com",
@@ -70,6 +72,9 @@ def main() -> None:
         checks = list(pool.map(inspect, sample.to_dict("records")))
     report = {
         "generated_at": datetime.now(UTC).isoformat(),
+        "dataset_sha256": {
+            "polls_latest": fingerprint(ROOT / "data/processed/polls_latest.parquet")
+        },
         "sample_size": len(checks),
         "reachable": sum(row["reachable"] for row in checks),
         "checks": checks,
@@ -77,7 +82,7 @@ def main() -> None:
         "does not verify interviews, methodology or transcription. A failed request "
         "may reflect blocking or a changed URL, not fabricated polling.",
     }
-    path = ROOT / "artifacts/source_link_availability_20261019.json"
+    path = ROOT / "artifacts/source_link_availability_latest.json"
     path.write_text(json.dumps(report, indent=2, ensure_ascii=False), encoding="utf-8")
     print(f"Original-source availability: {report['reachable']}/{len(checks)} reachable -> {path}")
 

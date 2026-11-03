@@ -1,6 +1,8 @@
 from datetime import UTC, date, datetime
 
+import httpx
 import pandas as pd
+import pytest
 
 from election_forecast.cli import _exclude_non_model_polls
 from election_forecast.schemas import Office
@@ -14,6 +16,7 @@ from election_forecast.sources.polling_source import (
     _party_candidate,
     _sample_cell,
     fetch_polling_source,
+    fetch_polling_source_governors,
 )
 from election_forecast.sources.reference_results import (
     _house_2024_major_party_margin,
@@ -28,7 +31,8 @@ def test_polling_source_table_parser():
     html = b"""
     <html><head><title>fixture</title></head><body>
       <table>
-        <thead><tr><th>State</th><th>Pollster</th><th>Date</th><th>Sample</th><th>Dem</th><th>Rep</th></tr></thead>
+        <thead><tr><th>State</th><th>Pollster</th><th>Date</th><th>Sample</th>
+        <th>Dem</th><th>Rep</th></tr></thead>
         <tbody><tr><td>PA</td><td>Example</td><td>2026-08-01</td><td>800 LV</td>
         <td>Jane Doe 49.0%</td><td>John Roe 47.0%</td></tr></tbody>
       </table>
@@ -65,6 +69,34 @@ def test_adapter_keeps_independent_firms_with_identical_scores_and_third_candida
         .iloc[0]
         .startswith("https://pollingsource.com")
     )
+
+
+def test_provider_badges_do_not_corrupt_dates_names_or_sponsor_disclosures():
+    html = b"""<table><thead><tr><th>Pollster</th><th>Date</th><th>Sample</th>
+    <th>Dem</th><th>Rep</th></tr></thead><tbody><tr>
+    <td><a href="/pollsters/example">Example Strategies</a>
+    <a class="pollster-record-badge">missed 2024 by 4.3 pts</a>
+    <span class="partisan-tag">D-sponsored</span>
+    <span class="poll-not-in-average">Not in average</span></td>
+    <td><a href="https://pollster.example/october">2026-10-21</a>
+    <a class="poll-detail-link" href="/poll-detail.php?id=42">this poll</a></td>
+    <td>969 LV</td><td>Jane Doe 48%</td><td>John Roe 51%</td></tr></tbody></table>
+    <table class="poll-teaser-blur"><tbody><tr><td>hidden</td></tr></tbody></table>"""
+
+    class Client:
+        def get(self, url, **kwargs):
+            return html
+
+    table = _find_poll_table(html, default_location="TX")
+    assert table.iloc[0].end_date == "2026-10-21"
+    assert "Not in average" not in table.iloc[0].pollster
+    assert "missed" not in table.iloc[0].pollster
+    result = fetch_polling_source_governors(states=("TX",), client=Client())
+    assert len(result) == 1
+    assert result.iloc[0].partisan == "D"
+    assert result.iloc[0].end_date == "2026-10-21"
+    assert result.iloc[0].source_url == "https://pollster.example/october"
+    assert result.iloc[0].sample_size == 969
 
 
 def test_decision_labs_source_url_normalizes_malformed_provider_links():
@@ -290,6 +322,36 @@ def test_silver_generic_prefers_likely_voter_version():
     assert result.iloc[0]["population"] == "lv"
     assert result.iloc[0]["partisan"] == "D"
     assert result.iloc[0]["dem_pct"] == 49.0
+
+
+@pytest.mark.parametrize("status", [400, 403])
+def test_silver_retries_expired_public_redirect_but_not_permission_errors(status):
+    calls = []
+    csv_payload = (
+        b"subgroup,pollster,sponsors,enddate,samplesize,population,dem,rep,url,"
+        b"partisan,poll_id,question_id\n"
+        b"All polls,Example,,10/26/2026,800,LV,49,42,https://example.test/poll,,10,101\n"
+    )
+
+    class Client:
+        def get(self, url, **kwargs):
+            calls.append(url)
+            if len(calls) == 1:
+                response = httpx.Response(
+                    status,
+                    request=httpx.Request("GET", "https://doc-example.googleusercontent.com/pub"),
+                )
+                response.raise_for_status()
+            return csv_payload
+
+    if status == 403:
+        with pytest.raises(httpx.HTTPStatusError):
+            fetch_silver_generic_ballot(client=Client())
+        assert len(calls) == 1
+    else:
+        result = fetch_silver_generic_ballot(client=Client())
+        assert len(result) == 1
+        assert calls[1].startswith(calls[0] + "&cachebust=")
 
 
 def test_straw_poll_is_retained_only_in_exclusion_audit():

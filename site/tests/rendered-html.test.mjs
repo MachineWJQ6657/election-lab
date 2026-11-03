@@ -1,6 +1,7 @@
 import assert from "node:assert/strict";
 import test from "node:test";
 import { readFile } from "node:fs/promises";
+import { raceBand, raceRatingLabel } from "../lib/election-map.ts";
 
 function contains(text, pattern) {
   assert.ok(pattern.test(text), `Rendered HTML is missing ${pattern}`);
@@ -24,8 +25,10 @@ test("server-renders the forecast dashboard and social metadata", async () => {
   assert.match(response.headers.get("content-type") ?? "", /^text\/html\b/i);
 
   const html = await response.text();
+  const data = JSON.parse(await readFile(new URL("../lib/forecast-data.json", import.meta.url), "utf8"));
   contains(html, /Election Forecast Lab/);
-  contains(html, /House leans Democratic/);
+  const houseOdds = data.control.prediction_market_context.comparisons.house.bounded_market_context_probability;
+  contains(html, houseOdds >= .6 ? /House leans Democratic/ : houseOdds <= .4 ? /House leans Republican/ : /House remains a toss-up/);
   contains(html, /Balance of power/);
   contains(html, /RACE EXPLORER/);
   contains(html, /id="election-map"/);
@@ -37,12 +40,14 @@ test("server-renders the forecast dashboard and social metadata", async () => {
   assert.match(html, /data-state="MT" data-map-band="unmodeled"/);
   assert.match(html, /data-state="CA" data-map-band="no-election"/);
   contains(html, /data-map-rating-scale="solid-likely-lean-tilt"/);
-  contains(html, /data-state="TX" data-map-band="lean-d"/);
-  contains(html, /data-state="ME" data-map-band="tilt-d"/);
+  for (const state of ["TX","ME"]) {
+    const race = data.races.find((r)=>r.id===`senate:${state}`);
+    contains(html,new RegExp(`data-state="${state}" data-map-band="${raceBand(race)}"`));
+  }
   assert.ok(!html.includes('class="map-rating-label'));
   assert.equal((html.match(/class="map-label(?: light)?"/g) ?? []).length,51);
   for (const rating of ["Solid D","Likely D","Lean D","Tilt D","Toss-up","Tilt R","Lean R","Likely R","Solid R"]) contains(html,new RegExp(`title="${rating}:`));
-  contains(html, /data-race-rating="Lean D"/);
+  contains(html,new RegExp(`data-race-rating="${raceRatingLabel(data.races.find((r)=>r.id==="senate:TX"))}"`));
   contains(html, /Solid is not a guarantee/);
   contains(html, /<details class="map-forecast-details">/);
   contains(html, /<details class="map-footnote">/);
@@ -56,7 +61,12 @@ test("server-renders the forecast dashboard and social metadata", async () => {
   contains(html, /Uncertainty/);
   contains(html, /OBSERVED PARTICIPATION/);
   contains(html, /not votes for a candidate/);
-  const data = JSON.parse(await readFile(new URL("../lib/forecast-data.json", import.meta.url), "utf8"));
+  contains(html, /data-early-vote-scenario="conditional-ballot-accounting"/);
+  contains(html, /data-scenario-sensitivity="margin-not-probability"/);
+  contains(html, /unchanged by this lab/);
+  contains(html, /Each source can lag independently/);
+  assert.equal(data.early_voting.model_gate.probability_weight, 0);
+  assert.ok(data.early_voting.turnout_reference_2024.NC.two_party_votes > 0);
   contains(html, /Projected final Senate seats/);
   contains(html, new RegExp(`data-seat-summary="senate" data-total-seats="100" data-dem-seats="${data.control.senate.median_dem_seats}" data-rep-seats="${100-data.control.senate.median_dem_seats}"`));
   contains(html, /PROJECTED FINAL SENATE SEATS/);
@@ -64,11 +74,20 @@ test("server-renders the forecast dashboard and social metadata", async () => {
   contains(html, /Model control odds/);
   contains(html, /seats not up/);
   contains(html, new RegExp(`data-snapshot-id="${data.snapshot_id}"`));
+  if (data.final_release) {
+    contains(html,/data-final-forecast="locked"/);
+    contains(html,/nearest available 7-day historical calibration/);
+    assert.equal(data.final_release.as_of,data.updated_at);
+    assert.equal(data.final_release.release_kind,'final_pre_result_forecast');
+  }
   contains(html, new RegExp(`${data.days_to_election}(?:<!-- -->)? DAYS OUT`));
   contains(html, new RegExp(`${data.validation_horizon}(?:<!-- -->)?-day Brier`));
   const races = data.races.filter((race) => ["senate", "house", "governor"].includes(race.office));
   contains(html, new RegExp(`${races.length}(?:<!-- -->)? races covered`));
   assert.equal(new Set(races.map((race) => race.id)).size, races.length);
+  for (const race of data.races.filter((r)=>r.office==='senate' && r.dem_side_party!=='D' && r.probability_event!=='pairwise_comparison_only')) {
+    assert.ok(html.includes(`aria-label="${race.dem} win probability ${(100*race.dem_probability).toFixed(1)}%"`));
+  }
   if (data.pollster_identity_experiment) {
     for (const race of data.races.filter((row) => row.poll_count > 0)) {
       assert.ok(race.normalized_pollster_count > 0);
@@ -84,6 +103,8 @@ test("server-renders the forecast dashboard and social metadata", async () => {
     assert.equal(data.races.find((race) => race.id === "house:TX-09").district_boundary_changed, true);
   }
   if (data.research_audit) {
+    assert.equal(data.research_audit.target_horizon,data.days_to_election);
+    assert.ok(data.research_audit.evaluated_horizons.includes(data.validation_horizon));
     const expected = (100 * data.research_audit.subsets.current_offices.winner_accuracy).toFixed(1);
     contains(html.replace(/<!--.*?-->/g, ""), new RegExp(`Winner accuracy</span><strong>${expected}%`));
     contains(html, /competitive races and shared election errors/);
@@ -93,6 +114,7 @@ test("server-renders the forecast dashboard and social metadata", async () => {
     contains(html, /not an automatically streaming feed/);
   }
   if (data.pollster_identity_experiment) {
+    assert.equal(data.pollster_identity_experiment.target_horizon,data.days_to_election);
     contains(html, /eight-way ablation, no production switch/);
     assert.equal(Object.keys(data.pollster_identity_experiment.ablation).length, 8);
     assert.equal(data.pollster_identity_experiment.adopted, false);

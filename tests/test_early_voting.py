@@ -6,11 +6,13 @@ import pandas as pd
 import pytest
 
 from election_forecast.sources.early_voting import (
+    discover_sc_turnout,
     election_day,
     observation_day,
     parse_civic,
     parse_florida,
     parse_nc_counts,
+    parse_sc_turnout,
     read_capabilities,
     reconcile_demographics,
 )
@@ -117,3 +119,64 @@ def test_demographic_gaps_stay_unknown_instead_of_renormalizing_known_groups():
     assert values["Not reported / reporting gap"] == 10
     with pytest.raises(ValueError):
         reconcile_demographics({"Group A": 101}, 101, 100)
+
+
+def _sc_report():
+    return "\n".join(
+        [
+            "Election Date,Report Date,,,",
+            "11/03/2026,10/23/2026,,,",
+            "Jurisdiction,Election Name,Poll Place,10/26/2026,Total",
+            "South Carolina,,,46,46",
+            *[f"County {i},Statewide General Election,,1,1" for i in range(46)],
+            ",,Precinct subtotal must not be added,999,999",
+            ",,,,",
+            ",,,294226,",
+        ]
+    ).encode()
+
+
+def test_sc_uses_reconciled_county_level_and_actual_daily_column_date():
+    rows = parse_sc_turnout(
+        _sc_report(), as_of=date(2026, 10, 27), url="https://scvotes.gov/test.csv"
+    )
+    assert len(rows) == 1 and rows[0]["count"] == 46
+    assert rows[0]["snapshot_date"] == "2026-10-26"
+    assert rows[0]["party"] == "Unspecified"
+    assert "2026-10-23" in rows[0]["date_basis"]
+
+
+def test_sc_accepts_only_empty_trailing_spreadsheet_columns():
+    padded = b"\n".join(line + b",, " for line in _sc_report().splitlines())
+    rows = parse_sc_turnout(padded, as_of=date(2026, 10, 27), url="https://scvotes.gov/test.csv")
+    assert rows[0]["count"] == 46
+
+
+@pytest.mark.parametrize(
+    "before,after",
+    [
+        (b"11/03/2026", b"06/09/2026"),
+        (b"10/26/2026", b"10/28/2026"),
+        (b"South Carolina,,,46,46", b"South Carolina,,,47,47"),
+        (b"County 45,", b"County 44,"),
+    ],
+)
+def test_sc_rejects_wrong_election_future_dates_and_nonreconciling_counties(before, after):
+    with pytest.raises(ValueError):
+        parse_sc_turnout(
+            _sc_report().replace(before, after),
+            as_of=date(2026, 10, 27),
+            url="https://scvotes.gov/test.csv",
+        )
+
+
+def test_sc_discovers_only_the_unambiguous_official_csv_link():
+    page = b'<a href="/uploads/ev.csv">Early Voting Turnout Report</a>'
+    assert discover_sc_turnout(page) == "https://scvotes.gov/uploads/ev.csv"
+    for changed in [
+        page.replace(b"/uploads/ev.csv", b"https://other.test/ev.csv"),
+        page + page.replace(b"ev.csv", b"other.csv"),
+        b"",
+    ]:
+        with pytest.raises(ValueError):
+            discover_sc_turnout(changed)

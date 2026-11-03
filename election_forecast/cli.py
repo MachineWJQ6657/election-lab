@@ -71,6 +71,7 @@ from .sources import (
 )
 from .sources.early_voting import fetch_early_voting
 from .sources.merge import merge_current_polls
+from .sources.primary_reconciliation import reconcile_primary_releases
 from .validation_cache import cache_key, cached_validation
 from .warehouse import Warehouse
 
@@ -264,6 +265,10 @@ def fetch_latest(
                 selected_offices = [office.value for office in requested]
                 frames.append(primary[primary["office"].isin(selected_offices)])
     raw_frame = pd.concat(frames, ignore_index=True).drop_duplicates(["source", "source_id"])
+    raw_frame, primary_reviews = reconcile_primary_releases(
+        raw_frame, client=client,
+        rules_path=settings.project_root / "config" / "verified_release_corrections.json",
+    )
     raw_path = Warehouse().write("polls_latest_raw_sources", raw_frame)
     frame, excluded = _exclude_non_model_polls(merge_current_polls(raw_frame))
     excluded_path = settings.artifact_dir / "latest_excluded_polls.csv"
@@ -282,6 +287,7 @@ def fetch_latest(
             [row["status"] for row in client.request_log], dtype="object"
         ).value_counts().to_dict(),
         "raw_rows_by_source": raw_frame.groupby("source").size().to_dict(),
+        "primary_release_reviews": primary_reviews,
         "requests": client.request_log,
         "dataset_sha256": {
             "polls_latest": fingerprint(path),

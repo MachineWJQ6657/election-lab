@@ -22,6 +22,16 @@ python ../scripts/export_site_data.py
 The site does not use a database. Every deployed version is an immutable model
 snapshot and links poll rows back to their original published sources.
 
+The local final pre-result snapshot is locked at **2026-11-03 01:49:43 EST**.
+Current polling, early-vote and market observations were acquired during this
+refresh window, excluding the explicitly flagged archived primary-release review.
+No election-night results are inputs. The nearest historical calibration is
+7 days, not a claimed election-day backtest. Any input/output change invalidates
+the exported final-release badge until explicitly resealed.
+Original Sites lookup/credential
+requests currently return `project_not_found`; this update is not deployed.
+The last confirmed public release is v11 (2026-10-20, Oct 19 model data).
+
 The parent GitHub repository includes this directory as ordinary source files,
 not as an inaccessible nested submodule. The local directory also retains its
 separate Sites publication repository; the two Git remotes serve different
@@ -80,6 +90,25 @@ The published page never requests third-party map tiles or a paid map API.
 
 Run `npm test` for the build, server-rendered dashboard checks, probability-bin
 boundaries, all 506 race-to-state joins, and geography integrity checks.
+
+## Experimental early-vote scenarios
+
+The observed-participation section has a collapsed scenario lab for compatible
+statewide Senate/governor contests. Its inputs are reported ballots, assumed
+final two-side turnout, included-ballot exposure, and assumed early/remaining
+Democratic vote shares. The early weight is included ballots / assumed turnout;
+the total share is a weighted average of the two explicit preference assumptions.
+The calculator displays conditional margin, remaining share needed for 50%,
+and sensitivity. It does not estimate winner probabilities or change the map,
+official race odds, chamber simulations, or the formal early-vote weight of 0%.
+
+The turnout scale is sourced 2024 Democratic + Republican presidential votes.
+Its default 75% factor is illustrative, not estimated. Shares start at the
+selected race's model-margin baseline, not party registration or demographic
+inference. Third-party votes and rejection rates are not estimated. Impossible
+turnout assumptions produce an alert, not silent ballot clipping. Switching
+states resets assumptions. Unit tests cover weight, endpoints, bounds,
+zero exposure, and analytical sensitivity; browser QA checks real controls.
 
 ## Publication recovery and verification
 

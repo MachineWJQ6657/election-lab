@@ -2,11 +2,13 @@
 
 from __future__ import annotations
 
+import csv
 import hashlib
 import json
 from concurrent.futures import ThreadPoolExecutor
 from datetime import date, datetime, timedelta
 from io import BytesIO, StringIO
+from urllib.parse import urljoin, urlsplit
 from zoneinfo import ZoneInfo
 
 import httpx
@@ -22,6 +24,97 @@ NC_COUNTS = (
 NC_REFERENCE = "https://www.ncsbe.gov/results-data/absentee-and-provisional-data"
 CATEGORIES = ("requested", "returned", "inperson")
 FL_STATS = "https://countyfilesvbm-ev.floridados.gov/VoteByMailEarlyVotingReports/PublicStats"
+SC_PARTICIPATION = "https://scvotes.gov/elections-statistics/voter-participation/"
+
+
+def discover_sc_turnout(payload: bytes) -> str:
+    """Follow the official general-election report, not a guessed daily filename."""
+    soup = BeautifulSoup(payload, "html.parser")
+    matches = {
+        urljoin(SC_PARTICIPATION, link.get("href", ""))
+        for link in soup.find_all("a")
+        if link.get_text(" ", strip=True) == "Early Voting Turnout Report"
+    }
+    if len(matches) != 1:
+        raise ValueError("South Carolina general-election turnout report is ambiguous")
+    url = matches.pop()
+    parsed = urlsplit(url)
+    if (
+        parsed.scheme != "https"
+        or parsed.hostname != "scvotes.gov"
+        or not parsed.path.endswith(".csv")
+    ):
+        raise ValueError("Unexpected South Carolina official turnout URL")
+    return url
+
+
+def parse_sc_turnout(payload: bytes, *, as_of: date, url: str) -> list[dict]:
+    # The export contains county subtotals AND precinct rows, plus many blank
+    # spreadsheet rows. Keep only nonempty records and never add both levels.
+    records = []
+    for row in csv.reader(StringIO(payload.decode("utf-8-sig"), newline="")):
+        cells = [cell.strip() for cell in row]
+        # Official CSV exports may append empty spreadsheet columns after Total.
+        while cells and not cells[-1]:
+            cells.pop()
+        if cells:
+            records.append(cells)
+    if len(records) < 4 or records[0][:2] != ["Election Date", "Report Date"]:
+        raise ValueError("Unexpected South Carolina turnout metadata")
+    election = pd.to_datetime(records[1][0]).date()
+    printed_date = pd.to_datetime(records[1][1]).date()
+    if election != date(2026, 11, 3) or printed_date > as_of:
+        raise ValueError("South Carolina turnout is for another election or a future report")
+    headers = records[2]
+    if headers[:3] != ["Jurisdiction", "Election Name", "Poll Place"] or headers[-1] != "Total":
+        raise ValueError("Unexpected South Carolina turnout columns")
+    days = [pd.to_datetime(label).date() for label in headers[3:-1]]
+    if (
+        not days
+        or len(days) != len(set(days))
+        or any(day.year != 2026 or day > as_of for day in days)
+    ):
+        raise ValueError("South Carolina daily voting columns are invalid or future-dated")
+    statewide = [row for row in records[3:] if row[0] == "South Carolina"]
+    counties = [
+        row
+        for row in records[3:]
+        if len(row) == len(headers)
+        and row[0]
+        and row[1] == "Statewide General Election"
+        and not row[2]
+    ]
+    if (
+        len(statewide) != 1
+        or len(statewide[0]) != len(headers)
+        or len(counties) != 46
+        or len({row[0] for row in counties}) != 46
+    ):
+        raise ValueError("South Carolina report must contain 46 unique county subtotals")
+    counts = [
+        [_count(value.replace(",", "")) for value in row[3:]] for row in [statewide[0], *counties]
+    ]
+    if any(sum(row[:-1]) != row[-1] for row in counts) or any(
+        sum(row[column] for row in counts[1:]) != counts[0][column]
+        for column in range(len(days) + 1)
+    ):
+        raise ValueError("South Carolina county/daily counts do not reconcile")
+    return [
+        {
+            "state": "SC",
+            "category": "inperson",
+            "party": "Unspecified",
+            "count": counts[0][-1],
+            "snapshot_date": max(days).isoformat(),
+            "source": "sc_election_commission",
+            "source_url": url,
+            "source_sha256": hashlib.sha256(payload).hexdigest(),
+            "date_basis": (
+                f"Latest included voting-day column; printed report-date cell {printed_date}; "
+                "publication filename is not the observation date"
+            ),
+        }
+    ]
 
 
 def observation_day(timestamp: str) -> date:
@@ -273,6 +366,36 @@ def fetch_early_voting(
     except (httpx.HTTPError, OSError, ValueError, KeyError) as exc:
         issues.append({"state": "FL", "check": "official_source_unavailable", "detail": str(exc)})
 
+    try:
+        sc_url = discover_sc_turnout(client.get(SC_PARTICIPATION, refresh=refresh))
+        sc_payload = client.get(sc_url, refresh=refresh)
+        _, sc_metadata = client._paths(sc_url)
+        if observation_day(json.loads(sc_metadata.read_text())["fetched_at"]) > as_of:
+            raise ValueError("Live South Carolina response cannot be used for a past forecast")
+        official_sc = pd.DataFrame(parse_sc_turnout(sc_payload, as_of=as_of, url=sc_url))
+        selected = frame.state.eq("SC") & frame.category.eq("inperson")
+        aggregator, direct = (
+            int(frame.loc[selected, "count"].sum()),
+            int(official_sc["count"].sum()),
+        )
+        if abs(aggregator - direct) > max(100, 0.01 * direct):
+            issues.append(
+                {
+                    "state": "SC",
+                    "check": "provider_official_difference",
+                    "category": "inperson",
+                    "aggregator": aggregator,
+                    "official": direct,
+                    "resolution": (
+                        "Use reconciled official county total; "
+                        "retain actual latest voting-day column date."
+                    ),
+                }
+            )
+        frame = pd.concat([frame[~selected], official_sc], ignore_index=True)
+    except (httpx.HTTPError, OSError, ValueError, KeyError, IndexError) as exc:
+        issues.append({"state": "SC", "check": "official_source_unavailable", "detail": str(exc)})
+
     # Same days-to-election, never the same calendar date. Historical providers
     # sometimes change what "returned" includes; preserve their label and refuse
     # to infer a mail/in-person split from a historical combined total.
@@ -455,6 +578,7 @@ def fetch_early_voting(
             {"name": "civicAPI early vote", "url": "https://civicapi.org/early-vote"},
             {"name": "North Carolina State Board of Elections", "url": NC_REFERENCE},
             {"name": "Florida Division of Elections", "url": FL_STATS},
+            {"name": "South Carolina Election Commission", "url": SC_PARTICIPATION},
             {
                 "name": "UF Election Lab (independent comparison)",
                 "url": "https://election.lab.ufl.edu/early-vote/2026-early-voting/",

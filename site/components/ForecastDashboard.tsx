@@ -14,6 +14,7 @@ type NestedResult = { office: string; races: number; accuracy: number; mae: numb
 type DiagnosticScore = { races: number; cycles: number; winner_accuracy: number; brier: number; margin_mae: number; mean_confidence: number; ece_10_bins: number };
 
 export type ForecastData = {
+  final_release?: { frozen_at: string; refresh_started_at: string; source_observations: number; archived_primary_review_urls: string[]; scope: string } | null;
   snapshot_id: string;
   updated_at: string;
   days_to_election: number;
@@ -56,13 +57,13 @@ const stateNames: Record<string, string> = {
 const pct = (value: number | null, digits = 1) => value == null ? "—" : `${(100 * value).toFixed(digits)}%`;
 const counted = (count: number, label: string) => `${count} ${label}${count === 1 ? "" : "s"}`;
 const observationTime = (value: string | null) => value == null ? "unavailable" : `${new Intl.DateTimeFormat("en-US", { dateStyle: "medium", timeStyle: "short", timeZone: "America/New_York" }).format(new Date(value))} ET`;
-const margin = (value: number | null) => value == null ? "—" : `${value >= 0 ? "D" : "R"} +${Math.abs(value).toFixed(1)}`;
+const margin = (value: number | null, firstParty = "D") => value == null ? "—" : `${value >= 0 ? firstParty : "R"} +${Math.abs(value).toFixed(1)}`;
 const controlRead = (office: "House" | "Senate", value: number) => value >= 0.6 ? `${office} leans Democratic.` : value <= 0.4 ? `${office} leans Republican.` : `${office} remains a toss-up.`;
 const modelLabel = (value: string) => value.replace("candidate_evidence_ml_blend", "Evidence-adaptive Ridge blend").replace("robust_poll_ml_blend", "Ridge + poll/fundamentals").replace("conditional_candidate_blend", "Candidate-aware fundamentals").replace("environment_adjusted_blend", "National environment blend").replace("house_effect_poll", "House-effect poll average").replaceAll("_", " ");
 const compactModelLabel = (value: string) => value.replace("candidate_evidence_ml_blend", "Evidence-adaptive blend").replace("robust_poll_ml_blend", "Ridge blend").replace("conditional_candidate_blend", "Candidate blend").replace("environment_adjusted_blend", "Environment blend").replace("house_effect_poll", "Poll average").replaceAll("_", " ");
 
-function ProbabilityLine({ value }: { value: number }) {
-  return <div className="race-probability" aria-label={`Democratic probability ${pct(value)}`}><span style={{ width: `${100 * value}%` }} /><b>{pct(value, 0)}</b></div>;
+function ProbabilityLine({ value, candidate, party }: { value: number; candidate: string; party: string }) {
+  return <div className={`race-probability${party !== "D" ? " independent" : ""}`} aria-label={`${candidate} win probability ${pct(value)}`}><span style={{ width: `${100 * value}%` }} /><b>{pct(value, 0)}</b></div>;
 }
 
 function DistributionChart({ data, office }: { data: Distribution[]; office: "house" | "senate" }) {
@@ -131,6 +132,7 @@ export function ForecastDashboard({ data }: { data: ForecastData }) {
       <nav aria-label="Primary navigation"><a href="#forecast">Forecast</a><a href="#election-map">Map</a><a href="#races">Races</a><a href="#early-vote">Early vote</a><a href="#methodology">Methods</a></nav>
       <div className="desk-status"><i /> Updated {updateLabel}</div>
     </header>
+    {data.final_release && <aside className="early-caution" data-final-forecast="locked"><strong>FINAL PRE-RESULT FORECAST · LOCKED {observationTime(data.final_release.frozen_at)}</strong><br />Fresh retrieval began {observationTime(data.final_release.refresh_started_at)}; {data.final_release.source_observations} source observations passed the refresh-window check. {data.final_release.archived_primary_review_urls.length > 0 && `${data.final_release.archived_primary_review_urls.length} older primary-release verification used a flagged archive, not a new live response. `}{data.final_release.scope}</aside>}
 
     <section className="desk-intro">
       <div className="desk-intro-copy">
@@ -189,14 +191,14 @@ export function ForecastDashboard({ data }: { data: ForecastData }) {
       <div className={`race-workspace${(query.trim() || mapState) && races.length <= 3 ? " compact-results" : ""}`}>
         <div className="race-table-wrap" key={`${office}:${query}`}>
           <table className="race-table">
-            <thead><tr><th>Race</th><th>Matchup</th><th title="Weighted polling average after historical house-effect adjustment">Adj. polls</th><th>Model</th><th>Market</th><th>D win</th></tr></thead>
+            <thead><tr><th>Race</th><th>Matchup</th><th title="Weighted polling average after historical house-effect adjustment">Adj. polls</th><th>Model</th><th>Market</th><th title="Win probability for the Democratic or independent candidate shown first">D / I win</th></tr></thead>
             <tbody>{races.map((race) => <tr key={race.id} className={selectedRace?.id === race.id ? "selected" : ""}>
               <td><button type="button" onClick={() => selectRace(race.id)} aria-label={`Open ${race.location} forecast`}>{race.location}<small>{race.rating ?? "Polled race"}</small></button></td>
-              <td><span className="candidate dem">{race.dem_side_party}</span>{race.dem}<br /><span className="candidate rep">R</span>{race.rep}</td>
-              <td>{margin(race.poll_margin)}<small>{counted(race.poll_count, "poll")}</small></td>
-              <td>{margin(race.model_margin)}<small>{compactModelLabel(race.model)}</small></td>
+              <td><span className={`candidate ${race.dem_side_party === "D" ? "dem" : "independent"}`}>{race.dem_side_party}</span>{race.dem}<br /><span className="candidate rep">R</span>{race.rep}</td>
+              <td>{margin(race.poll_margin,race.dem_side_party)}<small>{counted(race.poll_count, "poll")}</small></td>
+              <td>{margin(race.model_margin,race.dem_side_party)}<small>{compactModelLabel(race.model)}</small></td>
               <td>{pct(race.market_probability, 0)}<small>{race.market_probability == null ? "No market" : `Weight ${pct(race.market_weight, 0)}`}</small></td>
-              <td>{race.probability_event === "pairwise_comparison_only" ? <small>3-way: not modeled</small> : <><ProbabilityLine value={race.dem_probability} />{race.dem_side_party !== "D" && <small>{race.dem_side_party} candidate win</small>}</>}</td>
+              <td>{race.probability_event === "pairwise_comparison_only" ? <small>3-way: not modeled</small> : <><ProbabilityLine value={race.dem_probability} candidate={race.dem} party={race.dem_side_party} />{race.dem_side_party !== "D" && <small>{race.dem_side_party} candidate win</small>}</>}</td>
             </tr>)}</tbody>
           </table>
           {!races.length && <p className="empty-races">No races match that search.</p>}
@@ -207,16 +209,16 @@ export function ForecastDashboard({ data }: { data: ForecastData }) {
             <div className="inspector-head"><div><p>SELECTED · {selectedRace.office.toUpperCase()}</p><h3>{selectedRace.location}</h3></div><div><strong>{selectedRace.probability_event === "pairwise_comparison_only" ? "—" : pct(selectedRace.dem_probability)}</strong><span>{selectedRace.dem_side_party} win</span></div></div>
             <p className="inspector-matchup"><b>{selectedRace.dem}</b><span>vs.</span><b>{selectedRace.rep}</b></p>
             <dl className="inspector-metrics">
-              <div><dt>Raw poll average</dt><dd>{margin(selectedRace.raw_poll_margin)}</dd></div>
-              <div><dt>House-effect adjusted</dt><dd>{margin(selectedRace.poll_margin)}</dd></div>
-              <div><dt>Model margin</dt><dd>{margin(selectedRace.model_margin)}</dd></div>
+              <div><dt>Raw poll average</dt><dd>{margin(selectedRace.raw_poll_margin,selectedRace.dem_side_party)}</dd></div>
+              <div><dt>House-effect adjusted</dt><dd>{margin(selectedRace.poll_margin,selectedRace.dem_side_party)}</dd></div>
+              <div><dt>Model margin</dt><dd>{margin(selectedRace.model_margin,selectedRace.dem_side_party)}</dd></div>
               <div><dt>Market</dt><dd>{pct(selectedRace.market_probability)}</dd></div>
             </dl>
             <p className="inspector-note">{selectedRace.poll_count ? `${counted(selectedRace.poll_count, "poll")} with ${counted(selectedRace.pollster_count, "reported label")}${selectedRace.normalized_pollster_count != null ? ` and ${counted(selectedRace.normalized_pollster_count, "conservative organization key")}` : ""} feed this matchup. Neither labels nor keys establish independent surveys or panels.` : `No qualifying direct poll snapshot. This race currently uses a provisional ${selectedRace.rating} rating prior.`}</p>
             {selectedRace.poll_house_effect != null && <p className="inspector-note">The adjusted average subtracts an estimated prior-cycle pollster house effect of {selectedRace.poll_house_effect >= 0 ? "+" : ""}{selectedRace.poll_house_effect.toFixed(2)} points from the raw average. This is a model correction, not additional poll evidence.</p>}
             {selectedRace.multi_candidate_warning && <p className="early-flag">{selectedRace.multi_candidate_warning}</p>}
             {selectedRace.district_boundary_changed && <p className="early-flag">Verified boundary change: the old district result is excluded from this forecast. A comparable reconstructed district baseline is not yet available.</p>}
-            <div className="poll-ledger"><div className="ledger-head"><span>RECENT POLLS</span><span>Margin · weight</span></div>{selectedEvidence.length ? selectedEvidence.map((poll, index) => <a className="poll-row" href={poll.source_url} target="_blank" rel="noreferrer" key={`${poll.pollster}-${poll.end_date}-${poll.margin}-${index}`}><div><strong>{poll.pollster}</strong><span>{poll.end_date} · {poll.sample_size?.toLocaleString() ?? "?"} {poll.population.toUpperCase()}</span></div><b className={poll.margin >= 0 ? "dem-text" : "rep-text"}>{margin(poll.margin)}</b><em>{pct(poll.normalized_race_weight)}</em></a>) : <p className="no-evidence">No direct poll ledger for this rating-prior race.</p>}</div>
+            <div className="poll-ledger"><div className="ledger-head"><span>RECENT POLLS</span><span>Margin · weight</span></div>{selectedEvidence.length ? selectedEvidence.map((poll, index) => <a className="poll-row" href={poll.source_url} target="_blank" rel="noreferrer" key={`${poll.pollster}-${poll.end_date}-${poll.margin}-${index}`}><div><strong>{poll.pollster}</strong><span>{poll.end_date} · {poll.sample_size?.toLocaleString() ?? "?"} {poll.population.toUpperCase()}</span></div><b className={poll.margin >= 0 ? "dem-text" : "rep-text"}>{margin(poll.margin,selectedRace.dem_side_party)}</b><em>{pct(poll.normalized_race_weight)}</em></a>) : <p className="no-evidence">No direct poll ledger for this rating-prior race.</p>}</div>
           </> : <p className="no-evidence">Select a race or clear the search to inspect its forecast.</p>}
         </aside>
       </div>
@@ -230,7 +232,7 @@ export function ForecastDashboard({ data }: { data: ForecastData }) {
       </div>
     </section>
 
-    {data.early_voting && <EarlyVotingPanel data={data.early_voting} />}
+    {data.early_voting && <EarlyVotingPanel data={data.early_voting} races={data.races} />}
     {data.control.independent_caucus_sensitivity && <aside className="section-shell"><p className="early-flag">Senate control depends on unresolved independent contests in {data.control.independent_caucus_sensitivity.unresolved_states.join(", ")}. The central forecast uses two-side caucus proxies. Assigning all unresolved seats zero or one Democratic-aligned seat gives stress endpoints of {pct(data.control.independent_caucus_sensitivity.dem_control_lower_endpoint)}–{pct(data.control.independent_caucus_sensitivity.dem_control_upper_endpoint)}. These endpoints are not a confidence interval.</p></aside>}
 
     <section className="method-section" id="methodology">

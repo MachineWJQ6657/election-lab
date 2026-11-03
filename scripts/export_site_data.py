@@ -27,6 +27,48 @@ def _records(frame: pd.DataFrame) -> list[dict[str, object]]:
     return clean.to_dict(orient="records")
 
 
+def _load_source_link_audit() -> dict | None:
+    path = ARTIFACTS / "source_link_availability_latest.json"
+    if not path.exists():
+        return None
+    report = json.loads(path.read_text(encoding="utf-8"))
+    verify_table_report(report, PROCESSED, required=("polls_latest",))
+    return report
+
+
+def _final_release_snapshot(forecast: dict) -> dict | None:
+    path = ARTIFACTS / "final_release.json"
+    if not path.exists():
+        return None
+    release = json.loads(path.read_text(encoding="utf-8"))
+    if (
+        release["as_of"] != forecast["as_of"]
+        or release["engine_sha256"] != forecast["engine_sha256"]
+    ):
+        raise ValueError("Final release differs from the forecast; explicitly seal a new release")
+    for name, digest in release["input_table_sha256"].items():
+        if fingerprint(PROCESSED / f"{name}.parquet") != digest:
+            raise ValueError("Final release input changed after sealing")
+    for name, digest in release["forecast_output_sha256"].items():
+        if fingerprint(ARTIFACTS / name) != digest:
+            raise ValueError("Final release prediction changed after sealing")
+    return release
+
+
+def _matching_research(
+    directory: str, engine_key: str, *, horizon: int | None = None
+) -> dict | None:
+    path = ARTIFACTS / directory / "report.json"
+    report = json.loads(path.read_text()) if path.exists() else None
+    if report and (
+        report.get("engine_key") != engine_key
+        or (horizon is not None and report.get("target_horizon") != horizon)
+    ):
+        print(f"Omitting stale research report: {directory}")
+        return None
+    return report
+
+
 def _early_vote_snapshot(as_of: str) -> dict | None:
     path = PROCESSED / "early_voting_latest.parquet"
     if not path.exists():
@@ -59,6 +101,7 @@ def _early_vote_snapshot(as_of: str) -> dict | None:
                     parties.drop(["Democratic", "Republican", "Unspecified"], errors="ignore").sum()
                 ),
                 "snapshot_date": str(sources["snapshot_date"].max()),
+                "mode_snapshot_dates": cast.groupby("category")["snapshot_date"].max().to_dict(),
                 "sources": sorted(sources["source"].unique()),
                 "source_urls": sorted(sources["source_url"].unique()),
                 "review_flags": [
@@ -105,6 +148,23 @@ def _early_vote_snapshot(as_of: str) -> dict | None:
                 .groupby(["state", "dimension", "group"], as_index=False)["count"]
                 .sum()
             )
+    reference = pd.read_parquet(PROCESSED / "mit_results_2024.parquet")
+    reference = reference[
+        reference.office.eq("president") & reference.location.isin([s["state"] for s in states])
+    ]
+    if reference.location.duplicated().any():
+        raise ValueError("Ambiguous 2024 turnout reference")
+    turnout_reference = {
+        row.location: {
+            "two_party_votes": int(row.dem_votes + row.rep_votes),
+            "source_url": row.source_url,
+            "scope": (
+                "2024 presidential Democratic + Republican votes; "
+                "reference scale only, not a 2026 turnout prediction"
+            ),
+        }
+        for row in reference.itertuples()
+    }
     return {
         "as_of": report["as_of"],
         "states": states,
@@ -113,6 +173,7 @@ def _early_vote_snapshot(as_of: str) -> dict | None:
         "references": report["references"],
         "issue_count": len(report["issues"]),
         "reporting_states": report["reporting_states"],
+        "turnout_reference_2024": turnout_reference,
         "historical_snapshots_available": sum(
             "total" in row for row in report["historical_context"]
         ),
@@ -199,8 +260,7 @@ def main() -> None:
         ]
         + optional_provenance
     ]
-    link_path = ARTIFACTS / "source_link_availability_20261019.json"
-    link_audit = json.loads(link_path.read_text(encoding="utf-8")) if link_path.exists() else None
+    link_audit = _load_source_link_audit()
     link_status = (
         {row["url"]: row["reachable"] for row in link_audit["checks"]} if link_audit else {}
     )
@@ -211,7 +271,7 @@ def main() -> None:
     verify_table_report(
         authenticity,
         PROCESSED,
-        required=("polls_latest", "race_catalog_latest", "fec_candidates_2026"),
+        required=("polls_latest", "race_catalog_latest", "fec_candidates_2026", "mit_results_2024"),
     )
     collection_path = ARTIFACTS / "latest_collection_report.json"
     collection = (
@@ -238,22 +298,19 @@ def main() -> None:
     market = pd.read_csv(ARTIFACTS / "prediction_market_consensus.csv")
     chamber_market = market[market["market_scope"] == "chamber_control"]
 
-    def matching_research(directory: str) -> dict | None:
-        path = ARTIFACTS / directory / "report.json"
-        report = json.loads(path.read_text()) if path.exists() else None
-        if report and report.get("engine_key") != model_card["validation_engine_key"]:
-            print(f"Omitting stale research report: {directory}")
-            return None
-        return report
-
-    decay = matching_research("decay_experiment_20261019")
-    lag = matching_research("publication_lag_experiment_20261019")
-    house_validation = matching_research("house_control_backtest_20261019")
-    research_audit = matching_research("research_audit_20261019")
-    correlation = matching_research("correlation_experiment_20261019")
-    identity = matching_research("pollster_identity_experiment_20261019")
+    engine_key = model_card["validation_engine_key"]
+    horizon = int(forecast["horizon"].iloc[0])
+    decay = _matching_research("decay_experiment_20261019", engine_key)
+    lag = _matching_research("publication_lag_experiment_20261019", engine_key)
+    house_validation = _matching_research("house_control_backtest_20261019", engine_key)
+    research_audit = _matching_research("research_audit_latest", engine_key, horizon=horizon)
+    correlation = _matching_research("correlation_experiment_20261019", engine_key)
+    identity = _matching_research(
+        "pollster_identity_experiment_latest", engine_key, horizon=horizon
+    )
 
     payload = {
+        "final_release": _final_release_snapshot(manifest),
         "updated_at": str(forecast["as_of_date"].iloc[0]),
         "days_to_election": int(forecast["horizon"].iloc[0]),
         "heldout_forecasts": model_card["independent_heldout_forecasts"],

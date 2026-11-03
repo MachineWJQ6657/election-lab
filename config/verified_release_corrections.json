@@ -1,0 +1,30 @@
+{
+  "reviewed_as_of": "2026-10-27",
+  "scope": "Primary-document transcription corrections, not model probability adjustments. One survey version per office and release. Raw upstream values remain in the audit report.",
+  "releases": [
+    {
+      "url": "https://emersoncollegepolling.com/texas-2026-poll-toss-up/",
+      "required_patterns": ["survey was conducted October 17[–-]19, 2026", "n=1,000", "Talarico’s support increases to 49%, Paxton to 48%"],
+      "location": "TX", "start_date": "2026-10-17", "end_date": "2026-10-19", "publication_date": "2026-10-22",
+      "sample_size": 1000, "population": "lv", "pollster": "Emerson College Polling/Nexstar Media",
+      "sample_size_basis": "Published statewide likely-voter sample; one version including leaners",
+      "offices": {"senate": {"dem_pct": 49.0, "rep_pct": 48.0}, "governor": {"dem_pct": 47.0, "rep_pct": 51.0}}
+    },
+    {
+      "url": "https://cdn.votehub.com/pdfs/VoteHub_Verasight_Oct_2026_Texas_Report_D8A925D0.pdf",
+      "sha256": "2165754827df054bd2cf9dd930370d0273bf4d3dd2add7ebbbafff76d643b769",
+      "location": "TX", "start_date": "2026-10-01", "end_date": "2026-10-20",
+      "sample_size": 601, "population": "lv", "pollster": "VoteHub/Verasight",
+      "sample_size_basis": "601 registered respondents in the published likely-voter model; effective LV n=509; page 1 toplines with leaners",
+      "offices": {"senate": {"dem_pct": 47.6, "rep_pct": 45.2}, "governor": {"dem_pct": 46.4, "rep_pct": 47.7}}
+    },
+    {
+      "url": "https://www.univision.com/noticias/politica/poll-univision-texas-latinos",
+      "required_patterns": ["conducted October 13[–-]21, 2026, among 1,000 registered Texas voters", "Talarico leads Republican Ken Paxton 50% to 45%", "Abbott leads Democrat Gina Hinojosa, 48% to 46%"],
+      "location": "TX", "start_date": "2026-10-13", "end_date": "2026-10-21", "publication_date": "2026-10-27",
+      "sample_size": 1000, "population": "rv", "pollster": "N+ Univision/YouGov",
+      "sample_size_basis": "1,000 statewide registered voters, NOT the separately reported 980 Latino-voter sample",
+      "offices": {"senate": {"dem_pct": 50.0, "rep_pct": 45.0}, "governor": {"dem_pct": 46.0, "rep_pct": 48.0}}
+    }
+  ]
+}
