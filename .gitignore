@@ -9,7 +9,11 @@ __pycache__/
 data/raw/
 data/processed/
 data/cache/
-artifacts/
+# Retrieved third-party result pages stay local; manifests (URLs + SHA-256) are tracked.
+data/results/*/raw/
+data/results/*/*/raw/
+artifacts/*
+!artifacts/results_2026_20261111_final/
 *.duckdb
 *.duckdb.wal
 *.tar.gz

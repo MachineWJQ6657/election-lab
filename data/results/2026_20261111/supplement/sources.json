@@ -1,0 +1,17 @@
+{
+  "schema_version": 1,
+  "sources": [
+    {
+      "id": "fec_state_directory",
+      "provider": "Federal Election Commission",
+      "kind": "official",
+      "adapter": "state_directory",
+      "url": "https://www.fec.gov/introduction-campaign-finance/how-to-research-public-records/state-election-offices/",
+      "retrieved_at": "2026-11-11T05:37:30.512986+00:00",
+      "http_status": 200,
+      "final_url": "https://www.fec.gov/introduction-campaign-finance/how-to-research-public-records/state-election-offices/",
+      "path": "raw/fec_state_directory.html",
+      "sha256": "7a812c705c11e314319e05d97615911bc87f757827d4a7605818976760af29ec"
+    }
+  ]
+}

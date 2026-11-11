@@ -1,36 +1,47 @@
 # Election Forecast Lab
 
 Interactive publication layer for the U.S. election forecasting model in the
-parent project. The checked-in snapshot covers the 2026 Senate, House, and
-gubernatorial contests with race-level probabilities, recent poll evidence,
-correlated chamber simulations, prediction-market context, validation metrics,
-and provenance checks.
+parent project. The 2026 midterms are over, so the page now opens with a
+post-election review (frozen forecast vs. called results) and keeps the sealed
+pre-election forecast below it, unchanged: race-level probabilities, poll
+evidence, correlated chamber simulations, prediction-market context, validation
+metrics and provenance checks.
 
 ## Local development
 
 ```bash
-npm install
+npm ci
 npm run dev
 ```
 
-Refresh `lib/forecast-data.json` from the parent project with:
+Refresh the data files from the parent project root with:
 
 ```bash
-python ../scripts/export_site_data.py
+uv run python scripts/export_site_data.py        # lib/forecast-data.json (sealed forecast)
+uv run python -m scripts.export_site_results     # lib/results-data.json (post-election review)
 ```
 
 The site does not use a database. Every deployed version is an immutable model
 snapshot and links poll rows back to their original published sources.
 
-The local final pre-result snapshot is locked at **2026-11-03 01:49:43 EST**.
-Current polling, early-vote and market observations were acquired during this
-refresh window, excluding the explicitly flagged archived primary-release review.
-No election-night results are inputs. The nearest historical calibration is
-7 days, not a claimed election-day backtest. Any input/output change invalidates
-the exported final-release badge until explicitly resealed.
-Original Sites lookup/credential
-requests currently return `project_not_found`; this update is not deployed.
-The last confirmed public release is v11 (2026-10-20, Oct 19 model data).
+## Post-election review
+
+`components/ResultsReview.tsx` renders `lib/results-data.json`: chamber seat
+results against the forecast median and 90% range, the national House vote,
+race-level scores on called contests, every wrong call, races still counting,
+and the main lessons. Chamber tallies are media projections compiled on
+2026-11-11, not certified results; race-level scores come from the parent
+project's results scorer. The review never edits `lib/forecast-data.json`, and
+the tests check that its forecast numbers match the sealed snapshot.
+
+The sealed pre-result snapshot is locked at **2026-11-03 01:49:43 EST**. No
+election-night results were inputs. Any input/output change invalidates the
+exported final-release badge until explicitly resealed.
+
+Publication status (2026-11-11): the public domain still serves v11
+(2026-10-20, Oct 19 model data). Sites returned `project_not_found` on Nov 3, so
+the sealed forecast was never deployed. The post-election build passes all tests
+and is committed to the local Sites repository, ready to deploy.
 
 The parent GitHub repository includes this directory as ordinary source files,
 not as an inaccessible nested submodule. The local directory also retains its

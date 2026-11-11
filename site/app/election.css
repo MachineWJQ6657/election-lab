@@ -553,3 +553,56 @@ footer > a:last-child { justify-self: end; }
   html { scroll-behavior: auto; }
   .map-state-shape { transition: none; }
 }
+
+/* Post-election review: frozen forecast vs. called results. */
+.desk-status i.closed { background: var(--ink); box-shadow: 0 0 0 3px rgb(23 23 20 / 12%); }
+.results-section { padding-bottom: 20px; }
+.result-chambers { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); border-top: 1px solid var(--ink); border-left: 1px solid var(--line); }
+.result-chambers article { min-width: 0; display: grid; align-content: start; gap: 12px; padding: 16px; border-right: 1px solid var(--line); border-bottom: 1px solid var(--line); background: var(--surface); }
+.result-chambers header { display: flex; justify-content: space-between; align-items: center; gap: 8px; font: 700 11.5px/1.2 var(--font-geist-mono), monospace; letter-spacing: .03em; }
+.result-control { padding: 3px 6px; background: var(--blue-soft); color: var(--blue); font-weight: 700; }
+.result-numbers { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+.result-numbers div { display: grid; gap: 4px; }
+.result-numbers small { color: var(--muted); font-size: 12px; }
+.result-numbers strong { font: 720 clamp(26px, 2.6vw, 36px)/1 var(--font-geist-mono), monospace; letter-spacing: -.05em; }
+.result-scale { position: relative; height: 34px; margin: 4px 0 6px; border-bottom: 1px solid var(--line); }
+.result-scale > * { position: absolute; }
+.result-band { top: 8px; height: 12px; background: var(--wash); border: 1px solid var(--line); }
+.result-median { top: 4px; width: 2px; height: 20px; background: var(--ink); transform: translateX(-1px); }
+.result-majority { top: 0; height: 28px; border-left: 1px dashed var(--muted); }
+.result-actual { top: 10px; height: 8px; min-width: 6px; background: var(--blue); border-radius: 4px; }
+.result-actual.above { box-shadow: 0 0 0 2px var(--signal); }
+.result-scale small { bottom: -17px; color: var(--muted); font: 600 10.5px/1 var(--font-geist-mono), monospace; transform: translateX(-50%); }
+.result-verdict { margin: 10px 0 0; font: 700 12px/1.3 var(--font-geist-mono), monospace; text-transform: uppercase; }
+.result-verdict.inside { color: #1d7a50; }
+.result-verdict.above, .result-verdict.partly_outside { color: var(--signal); }
+.result-summary { margin: 0; color: var(--muted); font-size: 13px; line-height: 1.5; }
+.result-legend { display: flex; flex-wrap: wrap; align-items: center; gap: 6px 14px; margin: 12px 0 0; color: var(--muted); font-size: 12px; }
+.result-legend .key { display: inline-block; width: 14px; height: 10px; margin-right: -8px; vertical-align: middle; }
+.result-legend .key.band { background: var(--wash); border: 1px solid var(--line); }
+.result-legend .key.median { width: 2px; height: 14px; background: var(--ink); }
+.result-legend .key.majority { width: 0; height: 14px; border-left: 1px dashed var(--muted); }
+.result-legend .key.actual { height: 8px; border-radius: 4px; background: var(--blue); }
+.result-grid { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 36px; margin-top: 34px; }
+.result-grid h3 { margin: 0 0 12px; padding-bottom: 8px; border-bottom: 1px solid var(--ink); font-size: 18px; letter-spacing: -.02em; }
+.result-table { background: var(--surface); }
+.result-table td:first-child { text-align: left; }
+.result-races { display: grid; gap: 0; margin: 0; padding: 0; list-style: none; }
+.result-races li { display: grid; grid-template-columns: 150px minmax(0, 1fr); gap: 12px; padding: 10px 0; border-bottom: 1px solid var(--subline); font-size: 13.5px; }
+.result-races li > div { display: grid; gap: 2px; }
+.result-races li span { color: var(--muted); font-size: 12px; }
+.result-races p { margin: 0; line-height: 1.45; }
+.result-races p span { display: block; margin-top: 3px; }
+.result-notes { margin: 12px 0 0; padding-left: 18px; color: var(--muted); font-size: 13px; line-height: 1.6; }
+.result-lessons { margin: 0; padding-left: 20px; font-size: 14px; line-height: 1.55; }
+.result-lessons li { margin-bottom: 10px; }
+.result-lessons b { font-weight: 680; }
+.results-section .early-caption a { color: var(--blue); font-weight: 650; }
+.results-section .early-method a { display: inline-block; margin: 0 14px 6px 0; color: var(--blue); }
+.final-lock { padding-top: 8px; padding-bottom: 20px; }
+@media (max-width: 1100px) { .result-chambers { grid-template-columns: 1fr 1fr; } }
+@media (max-width: 800px) { .result-grid { grid-template-columns: 1fr; gap: 26px; } }
+@media (max-width: 560px) {
+  .result-chambers { grid-template-columns: 1fr; }
+  .result-races li { grid-template-columns: 1fr; gap: 4px; }
+}

@@ -1,0 +1,322 @@
+{
+  "schema_version": 1,
+  "compiled_at": "2026-11-11",
+  "frozen_release": "final_2026_20261103T064943Z",
+  "frozen_at": "2026-11-03T06:49:43.496741+00:00",
+  "scores_as_of": "2026-11-11T23:59:59+00:00",
+  "status_counts": {
+    "unresolved": 408,
+    "called": 57,
+    "preliminary": 42
+  },
+  "chambers": [
+    {
+      "office": "House",
+      "seats": 435,
+      "majority": 218,
+      "forecast": {
+        "median": 230,
+        "mean": 229.5,
+        "p05": 205,
+        "p95": 253,
+        "dem_control_probability": 0.7939
+      },
+      "result": {
+        "control": "D",
+        "dem_low": 258,
+        "dem_high": 259,
+        "summary": "D 253-255 called, 13-19 uncalled; projected ~258-259",
+        "within_90": "above"
+      }
+    },
+    {
+      "office": "Senate",
+      "seats": 100,
+      "majority": 51,
+      "forecast": {
+        "median": 53,
+        "mean": 52.8,
+        "p05": 47,
+        "p95": 58,
+        "dem_control_probability": 0.7654
+      },
+      "result": {
+        "control": "D",
+        "dem_low": 54,
+        "dem_high": 56,
+        "summary": "D 54 - R 44; AK, MS uncalled (D leading)",
+        "within_90": "inside"
+      }
+    },
+    {
+      "office": "Governors",
+      "seats": 36,
+      "majority": null,
+      "forecast": {
+        "median": 22,
+        "mean": 21.9,
+        "p05": 16,
+        "p95": 27,
+        "dem_control_probability": null
+      },
+      "result": {
+        "control": null,
+        "dem_low": 22,
+        "dem_high": 24,
+        "summary": "D 22 - R 12 of 36; KS, AK uncalled",
+        "within_90": "inside"
+      }
+    }
+  ],
+  "national_vote": {
+    "forecast_dem_margin": 7.2,
+    "observed_dem_margin": 13.2,
+    "observed_range": [
+      12.0,
+      13.2
+    ],
+    "basis": "Popular Vote Analytics tracker, 434 of 435 districts, Nov 9 (Cook Political Report showed D+12.8 earlier). Uncontested seats and counting differences make this provisional."
+  },
+  "flips": {
+    "senate_to_dem": [
+      "NC",
+      "SC",
+      "OH",
+      "TX",
+      "KS",
+      "IA",
+      "ME"
+    ],
+    "governor_to_dem": [
+      "GA",
+      "IA",
+      "NV",
+      "OH",
+      "TX"
+    ]
+  },
+  "race_scores": {
+    "overall": {
+      "races": 53,
+      "winner_accuracy": 0.8491,
+      "brier": 0.1038
+    },
+    "poll_model": {
+      "races": 36,
+      "winner_accuracy": 0.8889,
+      "brier": 0.0631
+    },
+    "rating_prior": {
+      "races": 17,
+      "winner_accuracy": 0.7647,
+      "brier": 0.1902
+    },
+    "by_office": {
+      "senate": {
+        "races": 31,
+        "winner_accuracy": 0.9355,
+        "brier": 0.047
+      },
+      "governor": {
+        "races": 13,
+        "winner_accuracy": 0.8462,
+        "brier": 0.0629
+      },
+      "house": {
+        "races": 9,
+        "winner_accuracy": 0.5556,
+        "brier": 0.3586
+      }
+    }
+  },
+  "misses": [
+    {
+      "race": "NC-06",
+      "office": "house",
+      "dem": "Cyril Jefferson",
+      "rep": "Addison McDowell",
+      "dem_side_party": "D",
+      "forecast_dem_probability": 0.0229,
+      "winner": "Cyril Jefferson",
+      "forecast_source": "Rating prior"
+    },
+    {
+      "race": "NC-14",
+      "office": "house",
+      "dem": "LaKesha Womack",
+      "rep": "Tim Moore",
+      "dem_side_party": "D",
+      "forecast_dem_probability": 0.0229,
+      "winner": "LaKesha Womack",
+      "forecast_source": "Rating prior"
+    },
+    {
+      "race": "NC-13",
+      "office": "house",
+      "dem": "Paul Barringer",
+      "rep": "Brad Knott",
+      "dem_side_party": "D",
+      "forecast_dem_probability": 0.1326,
+      "winner": "Paul Barringer",
+      "forecast_source": "Rating prior"
+    },
+    {
+      "race": "NC-09",
+      "office": "house",
+      "dem": "Richard N. Ojeda",
+      "rep": "Richard Hudson",
+      "dem_side_party": "D",
+      "forecast_dem_probability": 0.2759,
+      "winner": "Richard Ojeda",
+      "forecast_source": "Rating prior"
+    },
+    {
+      "race": "SC Senate",
+      "office": "senate",
+      "dem": "Annie Andrews",
+      "rep": "Darline Graham",
+      "dem_side_party": "D",
+      "forecast_dem_probability": 0.3425,
+      "winner": "Annie Andrews",
+      "forecast_source": "Poll model"
+    },
+    {
+      "race": "TX Governor",
+      "office": "governor",
+      "dem": "Hinojosa",
+      "rep": "Abbott",
+      "dem_side_party": "D",
+      "forecast_dem_probability": 0.3648,
+      "winner": "Gina Hinojosa",
+      "forecast_source": "Poll model"
+    },
+    {
+      "race": "IA Senate",
+      "office": "senate",
+      "dem": "Turek",
+      "rep": "Hinson",
+      "dem_side_party": "D",
+      "forecast_dem_probability": 0.485,
+      "winner": "Josh Turek",
+      "forecast_source": "Poll model"
+    },
+    {
+      "race": "GA Governor",
+      "office": "governor",
+      "dem": "Bottoms",
+      "rep": "Jackson",
+      "dem_side_party": "D",
+      "forecast_dem_probability": 0.4994,
+      "winner": "Keisha Lance Bottoms",
+      "forecast_source": "Poll model"
+    }
+  ],
+  "pending": [
+    {
+      "race": "AK Senate",
+      "office": "senate",
+      "dem": "Peltola",
+      "rep": "Dan S. Sullivan",
+      "dem_side_party": "D",
+      "forecast_dem_probability": 0.9778,
+      "winner": null,
+      "forecast_source": "Poll model",
+      "status": "Peltola led Sen. Dan Sullivan by about 2,500 first-choice votes on Nov 9; ranked-choice tabulation pending.",
+      "leader": "Mary Peltola (D)"
+    },
+    {
+      "race": "MS Senate",
+      "office": "senate",
+      "dem": "Scott Colom",
+      "rep": "Cindy Hyde-Smith",
+      "dem_side_party": "D",
+      "forecast_dem_probability": 0.1963,
+      "winner": null,
+      "forecast_source": "Poll model",
+      "status": "Colom led Sen. Cindy Hyde-Smith by roughly 3,000 votes with about 98% counted on Nov 10; county certification deadline that week.",
+      "leader": "Scott Colom (D)"
+    },
+    {
+      "race": "AK Governor",
+      "office": "governor",
+      "dem": "Kreiss-Tomkins",
+      "rep": "Bronson",
+      "dem_side_party": "D",
+      "forecast_dem_probability": 0.99,
+      "winner": null,
+      "forecast_source": "Poll model",
+      "status": "Counting and ranked-choice tabulation pending.",
+      "leader": "Democratic-side candidate"
+    },
+    {
+      "race": "KS Governor",
+      "office": "governor",
+      "dem": "Cindy Holscher",
+      "rep": "Masterson",
+      "dem_side_party": "D",
+      "forecast_dem_probability": 0.4453,
+      "winner": null,
+      "forecast_source": "Poll model",
+      "status": "Holscher led Ty Masterson by about 5,500 votes on Nov 4; close-race audit ordered; not called as of Nov 6.",
+      "leader": "Cindy Holscher (D)"
+    }
+  ],
+  "pending_notes": [
+    "AK and MS Senate calls",
+    "KS and AK governor calls",
+    "13-19 House seats, including two Louisiana runoffs on 2026-12-12",
+    "State canvass and certification (late November to December); FEC compilation afterwards"
+  ],
+  "turnout_note": "University of Florida Election Lab estimate while counting continued; above the 2018 midterm record of about 119 million.",
+  "sources": [
+    {
+      "name": "AP: Calling control of Congress in the 2026 midterm elections (Nov 5)",
+      "url": "https://www.ap.org/the-definitive-source/behind-the-news/calling-control-of-congress-in-the-2026-midterm-elections/"
+    },
+    {
+      "name": "Alaska Beacon (Nov 9)",
+      "url": "https://alaskabeacon.com/2026/11/09/peltola-extends-lead-over-sullivan-in-alaskas-u-s-senate-race-as-ballot-counting-continues/"
+    },
+    {
+      "name": "Mississippi Today (Nov 10)",
+      "url": "https://mississippitoday.org/2026/11/10/colom-hyde-smith-mississippi-senate-hinds-county/"
+    },
+    {
+      "name": "NBC News: House districts that remain uncalled (D 254, R 168, 13 uncalled)",
+      "url": "https://www.nbcnews.com/politics/2026-election/house-districts-remain-uncalled-2026-midterms-rcna608426"
+    },
+    {
+      "name": "The Hill / Decision Desk HQ (D 255, R 164, 16 outstanding)",
+      "url": "https://thehill.com/homenews/campaign/6209113-unprojected-house-midterm-results/"
+    },
+    {
+      "name": "270toWin: one week later (19 uncalled incl. 2 Louisiana runoffs, Nov 10)",
+      "url": "https://www.270towin.com/news/2026/11/10/uncalled-races-one-week-after-midterm-election_1848.html"
+    },
+    {
+      "name": "CNN analysis: House majority trending toward historic (Nov 5)",
+      "url": "https://www.cnn.com/2026/11/05/politics/democrats-house-majority-historic-midterms"
+    },
+    {
+      "name": "NBC News: Democrats clinch a majority of governorships",
+      "url": "https://www.nbcnews.com/politics/2026-election/democrats-flip-governorships-extending-party-inroads-red-states-rcna607010"
+    },
+    {
+      "name": "Stateline (Nov 4)",
+      "url": "https://stateline.org/2026/11/04/democrats-set-to-win-majority-of-governorships-for-the-first-time-in-16-years/"
+    },
+    {
+      "name": "KCTV5: Kansas governor's race remains uncalled (Nov 6)",
+      "url": "https://www.kctv5.com/2026/11/06/mail-in-ballots-set-arrive-kansas-governors-race-remains-uncalled/"
+    },
+    {
+      "name": "Popular Vote Analytics House popular vote tracker",
+      "url": "https://popularvoteanalytics.org/"
+    },
+    {
+      "name": "Cox Media Group: Democrats capture both chambers of Congress",
+      "url": "https://www.wsoctv.com/news/trending/election-2026-democrats-capture-both-houses-congress/5ILOWTVABVDPZFYP7VBBCX4EWE/"
+    }
+  ],
+  "scope": "Chamber-level tallies and national vote reported by news organizations between 2026-11-04 and 2026-11-10. Compiled manually from public pages; source bytes were not archived, so these figures are context for the post-election review, not inputs to race-level scoring and not certified results. Outlets use different call rules and update times, so ranges are shown where they disagree."
+}

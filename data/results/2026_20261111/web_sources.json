@@ -1,0 +1,17 @@
+{
+  "schema_version": 1,
+  "sources": [
+    {
+      "id": "ap_senate_web",
+      "provider": "Associated Press",
+      "kind": "media",
+      "adapter": "ap_senate",
+      "url": "https://www.ap.org/the-definitive-source/behind-the-news/calling-control-of-congress-in-the-2026-midterm-elections/",
+      "retrieved_at": "2026-11-11T05:34:47+00:00",
+      "path": "raw/ap_senate_web.txt",
+      "transport": "web_tool_text_extraction",
+      "note": "Public web tool extraction; direct HTTP download returned 403. This is extracted text, not raw HTML.",
+      "sha256": "0d2037d91859fa38671ebde2a3deced8f2fc8d595566010ed7e6c5bf695e634a"
+    }
+  ]
+}

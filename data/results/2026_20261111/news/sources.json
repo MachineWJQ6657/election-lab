@@ -1,0 +1,53 @@
+{
+  "schema_version": 1,
+  "sources": [
+    {
+      "id": "ap_governors_overview",
+      "provider": "Associated Press via WNEM",
+      "kind": "media",
+      "adapter": "reviewed_calls",
+      "url": "https://www.wnem.com/2026/11/04/democrats-press-win-majority-governors-offices-midterms-after-power-struggles-with-trump/",
+      "retrieved_at": "2026-11-11T05:37:53.090941+00:00",
+      "http_status": 200,
+      "final_url": "https://www.wnem.com/2026/11/04/democrats-press-win-majority-governors-offices-midterms-after-power-struggles-with-trump/",
+      "path": "raw/ap_governors_overview.html",
+      "sha256": "4c7e35502d3ba7eb8123f63dfde5f028b9826d309e2a6e3e6829440e0b15d0af"
+    },
+    {
+      "id": "cbs_tx_33",
+      "provider": "CBS News",
+      "kind": "media",
+      "adapter": "reviewed_calls",
+      "url": "https://www.cbsnews.com/texas/news/texas-district-33-election-results-2026/",
+      "retrieved_at": "2026-11-11T05:37:53.151088+00:00",
+      "http_status": 200,
+      "final_url": "https://www.cbsnews.com/texas/news/texas-district-33-election-results-2026/",
+      "path": "raw/cbs_tx_33.html",
+      "sha256": "ee1abba32d1b5dda472448b53ef5f07053b94705aed8c74d4611a40823e24291"
+    },
+    {
+      "id": "cbs_tx_15",
+      "provider": "CBS News",
+      "kind": "media",
+      "adapter": "reviewed_calls",
+      "url": "https://www.cbsnews.com/news/texas-15-district-pulido-de-la-cruz/",
+      "retrieved_at": "2026-11-11T05:37:53.166429+00:00",
+      "http_status": 200,
+      "final_url": "https://www.cbsnews.com/news/texas-15-district-pulido-de-la-cruz/",
+      "path": "raw/cbs_tx_15.html",
+      "sha256": "282f792dd8c6bdee83e2176fc91b15ca07180d3ea8fae3ae3b5458abf43946ab"
+    },
+    {
+      "id": "wral_nc_house",
+      "provider": "WRAL",
+      "kind": "media",
+      "adapter": "reviewed_calls",
+      "url": "https://www.wral.com/news/nccapitol/north-carolina-democrats-flip-republican-us-house-nc-midterm-november-2026/",
+      "retrieved_at": "2026-11-11T05:37:53.299208+00:00",
+      "http_status": 200,
+      "final_url": "https://www.wral.com/news/nccapitol/north-carolina-democrats-flip-republican-us-house-nc-midterm-november-2026/",
+      "path": "raw/wral_nc_house.html",
+      "sha256": "ed5eaff41d95c83891d07ee6dec142e8ba830eb8f9ce410cb51dfa660b39c1b8"
+    }
+  ]
+}

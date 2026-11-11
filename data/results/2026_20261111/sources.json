@@ -1,0 +1,149 @@
+{
+  "schema_version": 1,
+  "sources": [
+    {
+      "id": "texas",
+      "provider": "Texas Secretary of State",
+      "kind": "official",
+      "adapter": "texas",
+      "url": "https://electionresults.sos.state.tx.us/results.html",
+      "retrieved_at": "2026-11-11T05:34:00.607313+00:00",
+      "http_status": 200,
+      "final_url": "https://electionresults.sos.state.tx.us/results.html",
+      "path": "raw/texas.html",
+      "sha256": "cd64456104c1ed720f66e0321f1695a1c311e76ad8501bc7ba3f3ac9e310b9f2"
+    },
+    {
+      "id": "north_carolina",
+      "provider": "North Carolina State Board of Elections",
+      "kind": "official",
+      "adapter": "north_carolina",
+      "extension": ".zip",
+      "url": "https://s3.amazonaws.com/dl.ncsbe.gov/ENRS/2026_11_03/results_pct_20261103.zip",
+      "retrieved_at": "2026-11-11T05:34:00.744044+00:00",
+      "http_status": 200,
+      "final_url": "https://s3.amazonaws.com/dl.ncsbe.gov/ENRS/2026_11_03/results_pct_20261103.zip",
+      "path": "raw/north_carolina.zip",
+      "sha256": "52c3c325d0221d217983b33a503c52f2d2bfa0487d01912ac8b020b7d893fa01"
+    },
+    {
+      "id": "minnesota_senate",
+      "provider": "Minnesota Secretary of State",
+      "kind": "official",
+      "adapter": "minnesota",
+      "office": "senate",
+      "url": "https://electionresults.sos.mn.gov/Results/Index?ErsElectionId=201&electionDate=11/03/2026+00:00:00&officeInElectionIdList=-1&officeInElectionIdList=38485&scenario=USSenate",
+      "retrieved_at": "2026-11-11T05:34:01.106725+00:00",
+      "http_status": 200,
+      "final_url": "https://electionresults.sos.mn.gov/Results/Index?ErsElectionId=201&electionDate=11/03/2026+00:00:00&officeInElectionIdList=-1&officeInElectionIdList=38485&scenario=USSenate",
+      "path": "raw/minnesota_senate.html",
+      "sha256": "fbaf597063e2db10f2555d13700bc91660dd95fb220230b2c4cf39f1c0adfeb8"
+    },
+    {
+      "id": "minnesota_governor",
+      "provider": "Minnesota Secretary of State",
+      "kind": "official",
+      "adapter": "minnesota",
+      "office": "governor",
+      "url": "https://electionresults.sos.mn.gov/Results/Index?ersElectionId=201&officeInElectionId=38695&scenario=Governor",
+      "retrieved_at": "2026-11-11T05:34:01.255623+00:00",
+      "http_status": 200,
+      "final_url": "https://validate.perfdrive.com/?ssa=52f1e3d3-5531-467b-b83b-b901c5cca810&ssb=03974207541&ssc=https%3A%2F%2Felectionresults.sos.mn.gov%2FResults%2FIndex%3FersElectionId%3D201%26officeInElectionId%3D38695%26scenario%3DGovernor&ssi=60a757f7-cxg2-4148-8138-0f9fe51618a2&ssk=botmanager_support@radware.com&ssm=96715194891193972131229633103917&ssn=cf10031e4912ac3695440d29ebc2b8758c6c35debcd6-5a87-4cbd-af100c&sso=b2968124-eca594e6bf0259446ac17ac023c8558dc98cf30df11094fa&ssp=56352996481794336317179434529487859&ssq=34994427524162675465475240516650752462378&ssr=MTM2LjU2LjExOC4yNA==&sst=python-httpx/0.28.1&ssu=&ssv=&ssw=&ssx=eyJ1em14IjoiN2ZjMDAwYzk5NWFjNDktM2YyYS00MjJhLTkyMjEtYjdlYzRmOWQ5NzM4MS0xNzk0Mzc1MjQwOTg5MjExLTAwZGU1OGFmMDg4Njc1YzM2OGMxMyIsIl9fdXptZiI6IjdmOTAwMDM1ZGViY2Q2LTVhODctNGNiZC1hMTI0LWVjYTU5NGU2YmYwMjEtMTc5NDM3NTI0MDk4OTIxMS0wMDU3YmIzZjllZTQ3MGI5MDQ4MTMiLCJyZCI6Im1uLmdvdiJ9",
+      "path": "raw/minnesota_governor.html",
+      "sha256": "8dc533ed6198d57058a1da20196a4169306600f83a522a1bf5d78f241278ac35"
+    },
+    {
+      "id": "minnesota_house",
+      "provider": "Minnesota Secretary of State",
+      "kind": "official",
+      "adapter": "minnesota",
+      "office": "house",
+      "url": "https://electionresults.sos.mn.gov/Results/Index?ersElectionId=201&scenario=USRepresentative",
+      "retrieved_at": "2026-11-11T05:34:01.374041+00:00",
+      "http_status": 200,
+      "final_url": "https://validate.perfdrive.com/?ssa=e169818a-bc90-4e7b-8622-714acbbcc48e&ssb=03974207541&ssc=https%3A%2F%2Felectionresults.sos.mn.gov%2FResults%2FIndex%3FersElectionId%3D201%26scenario%3DUSRepresentative&ssi=7f6d392d-cxg2-4522-91cc-f836d209a7ea&ssk=botmanager_support@radware.com&ssm=96715194891193972161229633103917&ssn=cf10031e65600e7677430e1f8befb8758c6c35debcd6-5a87-4cbd-af100c&sso=b2968124-eca594e6bf0259446ac1e9da906f84982b0a76bcf11094fa&ssp=56352996481794336317179434529487859&ssq=34994427524162675465475240516650752462378&ssr=MTM2LjU2LjExOC4yNA==&sst=python-httpx/0.28.1&ssu=&ssv=&ssw=&ssx=eyJ1em14IjoiN2ZjMDAwYzk5NWFjNDktM2YyYS00MjJhLTkyMjEtYjdlYzRmOWQ5NzM4MS0xNzk0Mzc1MjQwOTg5MzU4LTAwZGY0NGM0Yjk3YmZlMjM5MDYxNiIsIl9fdXptZiI6IjdmOTAwMDM1ZGViY2Q2LTVhODctNGNiZC1hMTI0LWVjYTU5NGU2YmYwMjEtMTc5NDM3NTI0MDk4OTM1OS0wMDU2NDM5Yzc5MzMxOWI5MjJlMTYiLCJyZCI6Im1uLmdvdiJ9",
+      "path": "raw/minnesota_house.html",
+      "sha256": "8d4f9360cd6b928b9d910426ae5f88b8ddbe1b84a106d456d7ab6e5086876685"
+    },
+    {
+      "id": "ap_senate_calls",
+      "provider": "Associated Press",
+      "kind": "media",
+      "adapter": "ap_senate",
+      "url": "https://www.ap.org/the-definitive-source/behind-the-news/calling-control-of-congress-in-the-2026-midterm-elections/",
+      "retrieved_at": "2026-11-11T05:34:01.611072+00:00",
+      "http_status": 403,
+      "final_url": "https://www.ap.org/the-definitive-source/behind-the-news/calling-control-of-congress-in-the-2026-midterm-elections/",
+      "error": "Client error '403 Forbidden' for url 'https://www.ap.org/the-definitive-source/behind-the-news/calling-control-of-congress-in-the-2026-midterm-elections/'\nFor more information check: https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/403"
+    },
+    {
+      "id": "ap_texas",
+      "provider": "Associated Press",
+      "kind": "media",
+      "adapter": "reviewed_calls",
+      "url": "https://apnews.com/article/6e285484736b5116629a3b6e37e1dda5",
+      "retrieved_at": "2026-11-11T05:34:01.691036+00:00",
+      "http_status": 403,
+      "final_url": "https://apnews.com/article/6e285484736b5116629a3b6e37e1dda5",
+      "error": "Client error '403 Forbidden' for url 'https://apnews.com/article/6e285484736b5116629a3b6e37e1dda5'\nFor more information check: https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/403"
+    },
+    {
+      "id": "ap_minnesota_governor",
+      "provider": "Associated Press via WNEM",
+      "kind": "media",
+      "adapter": "reviewed_calls",
+      "url": "https://www.wnem.com/2026/11/04/democrat-amy-klobuchar-wins-election-governor-minnesota/",
+      "retrieved_at": "2026-11-11T05:34:02.660067+00:00",
+      "http_status": 200,
+      "final_url": "https://www.wnem.com/2026/11/04/democrat-amy-klobuchar-wins-election-governor-minnesota/",
+      "path": "raw/ap_minnesota_governor.html",
+      "sha256": "a4fae9bfb172acc37a5f3e82e477141e6829a0e799763ad1fdac2ec28da51c94"
+    },
+    {
+      "id": "ap_nh_governor",
+      "provider": "Associated Press",
+      "kind": "media",
+      "adapter": "reviewed_calls",
+      "url": "https://apnews.com/article/9661abe26ba84eaba966abd0c9ad10b8",
+      "retrieved_at": "2026-11-11T05:34:02.699185+00:00",
+      "http_status": 403,
+      "final_url": "https://apnews.com/article/9661abe26ba84eaba966abd0c9ad10b8",
+      "error": "Client error '403 Forbidden' for url 'https://apnews.com/article/9661abe26ba84eaba966abd0c9ad10b8'\nFor more information check: https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/403"
+    },
+    {
+      "id": "ap_california_house_07",
+      "provider": "Associated Press",
+      "kind": "media",
+      "adapter": "reviewed_calls",
+      "url": "https://apnews.com/article/9306dd0fd0604c4295cf9325e8cbfa9a",
+      "retrieved_at": "2026-11-11T05:34:02.746283+00:00",
+      "http_status": 403,
+      "final_url": "https://apnews.com/article/9306dd0fd0604c4295cf9325e8cbfa9a",
+      "error": "Client error '403 Forbidden' for url 'https://apnews.com/article/9306dd0fd0604c4295cf9325e8cbfa9a'\nFor more information check: https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/403"
+    },
+    {
+      "id": "eac_status_policy",
+      "provider": "U.S. Election Assistance Commission",
+      "kind": "official",
+      "adapter": "reference",
+      "url": "https://www.eac.gov/election-officials/election-results-canvass-and-certification",
+      "retrieved_at": "2026-11-11T05:34:02.835216+00:00",
+      "http_status": 200,
+      "final_url": "https://www.eac.gov/election-officials/election-results-canvass-and-certification",
+      "path": "raw/eac_status_policy.html",
+      "sha256": "703218e15ea143e26edd1a3104d35386505cb893fd18b2ab113d56ce63226192"
+    },
+    {
+      "id": "fec_election_offices",
+      "provider": "Federal Election Commission",
+      "kind": "official",
+      "adapter": "reference",
+      "url": "https://www.fec.gov/introduction-campaign-finance/election-results-and-voting-information/",
+      "retrieved_at": "2026-11-11T05:34:02.891704+00:00",
+      "http_status": 200,
+      "final_url": "https://www.fec.gov/introduction-campaign-finance/election-results-and-voting-information/",
+      "path": "raw/fec_election_offices.html",
+      "sha256": "903c15c739cef735fae99917039766b005977f4b5edcd8167d1504a528b4429d"
+    }
+  ]
+}

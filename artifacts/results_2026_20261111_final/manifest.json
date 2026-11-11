@@ -1,0 +1,304 @@
+{
+  "schema_version": 1,
+  "as_of": "2026-11-11T23:59:59+00:00",
+  "frozen_release": "final_2026_20261103T064943Z",
+  "frozen_file_sha256": {
+    "authenticity_report.json": "55e4f46baa675c4013b1c5a46b720898bb9bfe62f15ac216b51349bcca1ef8c3",
+    "early_voting_demographics.parquet": "b982484a5271706520c7886a858a4b9a59fbd16dbdd86219a80c9309f2b5b02c",
+    "early_voting_latest.parquet": "bfef0f0c98703b44278a9a4ccd58d363bcb67b086eee129fe0d6474514d63c65",
+    "early_voting_report.json": "814e15a455d9737514999a9762022c7601c6448eec343970e143322e2e7525d3",
+    "fec_candidates_2026.parquet": "d22b8c9da48c01fc39655307d2625e9a90df8709895d32b597322b0e487b8399",
+    "forecast_2026_control.json": "09f8c9eca0da6ce247519fadc47b8186a062d6e98b2e25316635f0f4730b3595",
+    "forecast_2026_seat_distributions.csv": "69ece1c705cf495286c06a0d17908fecd6a67f7ebae91859713a14f7a0c1ff22",
+    "forecast_manifest.json": "abd113fdd17c0f2acf8856377c72f8328a801c85e612322207e748cf11675afc",
+    "house_national_history.parquet": "9d2b882fe6416fb6c394bda1dda177015a310ac6d22f2db293541f4dc989142d",
+    "latest_collection_report.json": "5ef9851945dc0ad591121d81e0453f592d80b78c84cb8c3f4660c916ba85793f",
+    "latest_forecast.csv": "565cf21290567598f512f22e0bc85a351caa9d4fc73e3c0c41c829f6313543ff",
+    "latest_model_selection.csv": "b9b60fddfc2e648b64be40b0dc12d6044197bc05e050527c1443fa49e2996821",
+    "latest_poll_evidence.csv": "c1137b130d92d8207bf939301d90fb5ca18a8cc28dccb829c863b3f1f63b3517",
+    "mit_results_2024.parquet": "302c9c6a74eaf6520a50980f7c45950b0eb8525ad5f23cc660d1fe7e1c9347ce",
+    "model_card.json": "1982a711a0476b4ffec42902b5420af0d9157dbf8c84706741ba6dac8f3f05f7",
+    "polls_archive.parquet": "e5dbab82fd821d3b79be599498525deff30d8a697f99e357e45e8a60c06f0a20",
+    "polls_history.parquet": "6047207a058103af2a36726cc7096813684f28f9324eb58cac92a0280093dc2c",
+    "polls_latest.parquet": "9c2f1c73c7689bb21e7b3055343e9b5e32d9b34509ca932e5cfc0fd290b6b8e9",
+    "polls_latest_raw_sources.parquet": "9999a2980028a72757a3691138d615bd7ab3061bce415d3ad62e60c840d8d960",
+    "prediction_market_consensus.csv": "8307bf641bcf2f91b3053af9fd35efd7ba72579afa594389236824396f4b64df",
+    "prediction_markets_latest.parquet": "b7b4d804127d6bd44256aad8eabed289e5f774f7dcf7617a34dcd686401afaec",
+    "race_catalog_latest.parquet": "de975589712a20b733f86314a757cb130fbaf660b289cd5044f8c9455f1e1d7d",
+    "release.json": "b282f4d66cc053ec44c4b169b91e331a7a585a7d9a721bca1882ef7bede10613"
+  },
+  "input_manifest_sha256": {
+    "D:\\Projects\\interestingaf\\data\\results\\2026_20261111\\sources.json": "eb0131ec523f71e2acf4e1ef3c298aa5352f0cd56d2e468d049222658a89a557",
+    "D:\\Projects\\interestingaf\\data\\results\\2026_20261111\\web_sources.json": "94ad22e05a426b0982af445e2889977dca25e4dde696064d4c0977714042e9dd",
+    "D:\\Projects\\interestingaf\\data\\results\\2026_20261111\\supplement\\sources.json": "3aa956ac44af2db2f8ae2140925db2005d0b0f7d4ba010ad984ff71ca084e1f5",
+    "D:\\Projects\\interestingaf\\data\\results\\2026_20261111\\news\\sources.json": "a52042408e0b2263579d372174b57a7845f8eae4b5703a11b1187a4b89da0cdb"
+  },
+  "reviewed_calls_sha256": "82fcfe04aa25881e154b8551458363963a7fafae06263a53d41c333ede5a5137",
+  "scoring_code_sha256": {
+    "scripts\\score_results_2026.py": "e8c68f49fcf520df67d798efe919dc88bb91b1c4bcd50c1fef42855a0b7aaa1f",
+    "election_forecast\\results.py": "e1d9f2fcafb122554027b117c25a40219ff4aac05c3620a2a5da6def43f28593",
+    "election_forecast\\sources\\results_2026.py": "7bf258f2fda2cee616da0f7a0e6dcd3bbe1d900a3f803ed1ffcae058b284d30c",
+    "election_forecast\\names.py": "4f56faad5d60eee7c4e856534ca072c832514d8d23ccb69f6483c0b2d251fa43",
+    "election_forecast\\simulation.py": "6275790e232ee83c9a97ef24c81de656964c456aa7771b3e4fe7852cf9fd922a"
+  },
+  "sources": [
+    {
+      "id": "texas",
+      "provider": "Texas Secretary of State",
+      "kind": "official",
+      "adapter": "texas",
+      "url": "https://electionresults.sos.state.tx.us/results.html",
+      "retrieved_at": "2026-11-11T05:34:00.607313+00:00",
+      "http_status": 200,
+      "final_url": "https://electionresults.sos.state.tx.us/results.html",
+      "path": "raw/texas.html",
+      "sha256": "cd64456104c1ed720f66e0321f1695a1c311e76ad8501bc7ba3f3ac9e310b9f2"
+    },
+    {
+      "id": "north_carolina",
+      "provider": "North Carolina State Board of Elections",
+      "kind": "official",
+      "adapter": "north_carolina",
+      "extension": ".zip",
+      "url": "https://s3.amazonaws.com/dl.ncsbe.gov/ENRS/2026_11_03/results_pct_20261103.zip",
+      "retrieved_at": "2026-11-11T05:34:00.744044+00:00",
+      "http_status": 200,
+      "final_url": "https://s3.amazonaws.com/dl.ncsbe.gov/ENRS/2026_11_03/results_pct_20261103.zip",
+      "path": "raw/north_carolina.zip",
+      "sha256": "52c3c325d0221d217983b33a503c52f2d2bfa0487d01912ac8b020b7d893fa01"
+    },
+    {
+      "id": "minnesota_senate",
+      "provider": "Minnesota Secretary of State",
+      "kind": "official",
+      "adapter": "minnesota",
+      "office": "senate",
+      "url": "https://electionresults.sos.mn.gov/Results/Index?ErsElectionId=201&electionDate=11/03/2026+00:00:00&officeInElectionIdList=-1&officeInElectionIdList=38485&scenario=USSenate",
+      "retrieved_at": "2026-11-11T05:34:01.106725+00:00",
+      "http_status": 200,
+      "final_url": "https://electionresults.sos.mn.gov/Results/Index?ErsElectionId=201&electionDate=11/03/2026+00:00:00&officeInElectionIdList=-1&officeInElectionIdList=38485&scenario=USSenate",
+      "path": "raw/minnesota_senate.html",
+      "sha256": "fbaf597063e2db10f2555d13700bc91660dd95fb220230b2c4cf39f1c0adfeb8"
+    },
+    {
+      "id": "minnesota_governor",
+      "provider": "Minnesota Secretary of State",
+      "kind": "official",
+      "adapter": "minnesota",
+      "office": "governor",
+      "url": "https://electionresults.sos.mn.gov/Results/Index?ersElectionId=201&officeInElectionId=38695&scenario=Governor",
+      "retrieved_at": "2026-11-11T05:34:01.255623+00:00",
+      "http_status": 200,
+      "final_url": "https://validate.perfdrive.com/?ssa=52f1e3d3-5531-467b-b83b-b901c5cca810&ssb=03974207541&ssc=https%3A%2F%2Felectionresults.sos.mn.gov%2FResults%2FIndex%3FersElectionId%3D201%26officeInElectionId%3D38695%26scenario%3DGovernor&ssi=60a757f7-cxg2-4148-8138-0f9fe51618a2&ssk=botmanager_support@radware.com&ssm=96715194891193972131229633103917&ssn=cf10031e4912ac3695440d29ebc2b8758c6c35debcd6-5a87-4cbd-af100c&sso=b2968124-eca594e6bf0259446ac17ac023c8558dc98cf30df11094fa&ssp=56352996481794336317179434529487859&ssq=34994427524162675465475240516650752462378&ssr=MTM2LjU2LjExOC4yNA==&sst=python-httpx/0.28.1&ssu=&ssv=&ssw=&ssx=eyJ1em14IjoiN2ZjMDAwYzk5NWFjNDktM2YyYS00MjJhLTkyMjEtYjdlYzRmOWQ5NzM4MS0xNzk0Mzc1MjQwOTg5MjExLTAwZGU1OGFmMDg4Njc1YzM2OGMxMyIsIl9fdXptZiI6IjdmOTAwMDM1ZGViY2Q2LTVhODctNGNiZC1hMTI0LWVjYTU5NGU2YmYwMjEtMTc5NDM3NTI0MDk4OTIxMS0wMDU3YmIzZjllZTQ3MGI5MDQ4MTMiLCJyZCI6Im1uLmdvdiJ9",
+      "path": "raw/minnesota_governor.html",
+      "sha256": "8dc533ed6198d57058a1da20196a4169306600f83a522a1bf5d78f241278ac35"
+    },
+    {
+      "id": "minnesota_house",
+      "provider": "Minnesota Secretary of State",
+      "kind": "official",
+      "adapter": "minnesota",
+      "office": "house",
+      "url": "https://electionresults.sos.mn.gov/Results/Index?ersElectionId=201&scenario=USRepresentative",
+      "retrieved_at": "2026-11-11T05:34:01.374041+00:00",
+      "http_status": 200,
+      "final_url": "https://validate.perfdrive.com/?ssa=e169818a-bc90-4e7b-8622-714acbbcc48e&ssb=03974207541&ssc=https%3A%2F%2Felectionresults.sos.mn.gov%2FResults%2FIndex%3FersElectionId%3D201%26scenario%3DUSRepresentative&ssi=7f6d392d-cxg2-4522-91cc-f836d209a7ea&ssk=botmanager_support@radware.com&ssm=96715194891193972161229633103917&ssn=cf10031e65600e7677430e1f8befb8758c6c35debcd6-5a87-4cbd-af100c&sso=b2968124-eca594e6bf0259446ac1e9da906f84982b0a76bcf11094fa&ssp=56352996481794336317179434529487859&ssq=34994427524162675465475240516650752462378&ssr=MTM2LjU2LjExOC4yNA==&sst=python-httpx/0.28.1&ssu=&ssv=&ssw=&ssx=eyJ1em14IjoiN2ZjMDAwYzk5NWFjNDktM2YyYS00MjJhLTkyMjEtYjdlYzRmOWQ5NzM4MS0xNzk0Mzc1MjQwOTg5MzU4LTAwZGY0NGM0Yjk3YmZlMjM5MDYxNiIsIl9fdXptZiI6IjdmOTAwMDM1ZGViY2Q2LTVhODctNGNiZC1hMTI0LWVjYTU5NGU2YmYwMjEtMTc5NDM3NTI0MDk4OTM1OS0wMDU2NDM5Yzc5MzMxOWI5MjJlMTYiLCJyZCI6Im1uLmdvdiJ9",
+      "path": "raw/minnesota_house.html",
+      "sha256": "8d4f9360cd6b928b9d910426ae5f88b8ddbe1b84a106d456d7ab6e5086876685"
+    },
+    {
+      "id": "ap_senate_calls",
+      "provider": "Associated Press",
+      "kind": "media",
+      "adapter": "ap_senate",
+      "url": "https://www.ap.org/the-definitive-source/behind-the-news/calling-control-of-congress-in-the-2026-midterm-elections/",
+      "retrieved_at": "2026-11-11T05:34:01.611072+00:00",
+      "http_status": 403,
+      "final_url": "https://www.ap.org/the-definitive-source/behind-the-news/calling-control-of-congress-in-the-2026-midterm-elections/",
+      "error": "Client error '403 Forbidden' for url 'https://www.ap.org/the-definitive-source/behind-the-news/calling-control-of-congress-in-the-2026-midterm-elections/'\nFor more information check: https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/403"
+    },
+    {
+      "id": "ap_texas",
+      "provider": "Associated Press",
+      "kind": "media",
+      "adapter": "reviewed_calls",
+      "url": "https://apnews.com/article/6e285484736b5116629a3b6e37e1dda5",
+      "retrieved_at": "2026-11-11T05:34:01.691036+00:00",
+      "http_status": 403,
+      "final_url": "https://apnews.com/article/6e285484736b5116629a3b6e37e1dda5",
+      "error": "Client error '403 Forbidden' for url 'https://apnews.com/article/6e285484736b5116629a3b6e37e1dda5'\nFor more information check: https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/403"
+    },
+    {
+      "id": "ap_minnesota_governor",
+      "provider": "Associated Press via WNEM",
+      "kind": "media",
+      "adapter": "reviewed_calls",
+      "url": "https://www.wnem.com/2026/11/04/democrat-amy-klobuchar-wins-election-governor-minnesota/",
+      "retrieved_at": "2026-11-11T05:34:02.660067+00:00",
+      "http_status": 200,
+      "final_url": "https://www.wnem.com/2026/11/04/democrat-amy-klobuchar-wins-election-governor-minnesota/",
+      "path": "raw/ap_minnesota_governor.html",
+      "sha256": "a4fae9bfb172acc37a5f3e82e477141e6829a0e799763ad1fdac2ec28da51c94"
+    },
+    {
+      "id": "ap_nh_governor",
+      "provider": "Associated Press",
+      "kind": "media",
+      "adapter": "reviewed_calls",
+      "url": "https://apnews.com/article/9661abe26ba84eaba966abd0c9ad10b8",
+      "retrieved_at": "2026-11-11T05:34:02.699185+00:00",
+      "http_status": 403,
+      "final_url": "https://apnews.com/article/9661abe26ba84eaba966abd0c9ad10b8",
+      "error": "Client error '403 Forbidden' for url 'https://apnews.com/article/9661abe26ba84eaba966abd0c9ad10b8'\nFor more information check: https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/403"
+    },
+    {
+      "id": "ap_california_house_07",
+      "provider": "Associated Press",
+      "kind": "media",
+      "adapter": "reviewed_calls",
+      "url": "https://apnews.com/article/9306dd0fd0604c4295cf9325e8cbfa9a",
+      "retrieved_at": "2026-11-11T05:34:02.746283+00:00",
+      "http_status": 403,
+      "final_url": "https://apnews.com/article/9306dd0fd0604c4295cf9325e8cbfa9a",
+      "error": "Client error '403 Forbidden' for url 'https://apnews.com/article/9306dd0fd0604c4295cf9325e8cbfa9a'\nFor more information check: https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/403"
+    },
+    {
+      "id": "eac_status_policy",
+      "provider": "U.S. Election Assistance Commission",
+      "kind": "official",
+      "adapter": "reference",
+      "url": "https://www.eac.gov/election-officials/election-results-canvass-and-certification",
+      "retrieved_at": "2026-11-11T05:34:02.835216+00:00",
+      "http_status": 200,
+      "final_url": "https://www.eac.gov/election-officials/election-results-canvass-and-certification",
+      "path": "raw/eac_status_policy.html",
+      "sha256": "703218e15ea143e26edd1a3104d35386505cb893fd18b2ab113d56ce63226192"
+    },
+    {
+      "id": "fec_election_offices",
+      "provider": "Federal Election Commission",
+      "kind": "official",
+      "adapter": "reference",
+      "url": "https://www.fec.gov/introduction-campaign-finance/election-results-and-voting-information/",
+      "retrieved_at": "2026-11-11T05:34:02.891704+00:00",
+      "http_status": 200,
+      "final_url": "https://www.fec.gov/introduction-campaign-finance/election-results-and-voting-information/",
+      "path": "raw/fec_election_offices.html",
+      "sha256": "903c15c739cef735fae99917039766b005977f4b5edcd8167d1504a528b4429d"
+    },
+    {
+      "id": "ap_senate_web",
+      "provider": "Associated Press",
+      "kind": "media",
+      "adapter": "ap_senate",
+      "url": "https://www.ap.org/the-definitive-source/behind-the-news/calling-control-of-congress-in-the-2026-midterm-elections/",
+      "retrieved_at": "2026-11-11T05:34:47+00:00",
+      "path": "raw/ap_senate_web.txt",
+      "transport": "web_tool_text_extraction",
+      "note": "Public web tool extraction; direct HTTP download returned 403. This is extracted text, not raw HTML.",
+      "sha256": "0d2037d91859fa38671ebde2a3deced8f2fc8d595566010ed7e6c5bf695e634a"
+    },
+    {
+      "id": "fec_state_directory",
+      "provider": "Federal Election Commission",
+      "kind": "official",
+      "adapter": "state_directory",
+      "url": "https://www.fec.gov/introduction-campaign-finance/how-to-research-public-records/state-election-offices/",
+      "retrieved_at": "2026-11-11T05:37:30.512986+00:00",
+      "http_status": 200,
+      "final_url": "https://www.fec.gov/introduction-campaign-finance/how-to-research-public-records/state-election-offices/",
+      "path": "raw/fec_state_directory.html",
+      "sha256": "7a812c705c11e314319e05d97615911bc87f757827d4a7605818976760af29ec"
+    },
+    {
+      "id": "ap_governors_overview",
+      "provider": "Associated Press via WNEM",
+      "kind": "media",
+      "adapter": "reviewed_calls",
+      "url": "https://www.wnem.com/2026/11/04/democrats-press-win-majority-governors-offices-midterms-after-power-struggles-with-trump/",
+      "retrieved_at": "2026-11-11T05:37:53.090941+00:00",
+      "http_status": 200,
+      "final_url": "https://www.wnem.com/2026/11/04/democrats-press-win-majority-governors-offices-midterms-after-power-struggles-with-trump/",
+      "path": "raw/ap_governors_overview.html",
+      "sha256": "4c7e35502d3ba7eb8123f63dfde5f028b9826d309e2a6e3e6829440e0b15d0af"
+    },
+    {
+      "id": "cbs_tx_33",
+      "provider": "CBS News",
+      "kind": "media",
+      "adapter": "reviewed_calls",
+      "url": "https://www.cbsnews.com/texas/news/texas-district-33-election-results-2026/",
+      "retrieved_at": "2026-11-11T05:37:53.151088+00:00",
+      "http_status": 200,
+      "final_url": "https://www.cbsnews.com/texas/news/texas-district-33-election-results-2026/",
+      "path": "raw/cbs_tx_33.html",
+      "sha256": "ee1abba32d1b5dda472448b53ef5f07053b94705aed8c74d4611a40823e24291"
+    },
+    {
+      "id": "cbs_tx_15",
+      "provider": "CBS News",
+      "kind": "media",
+      "adapter": "reviewed_calls",
+      "url": "https://www.cbsnews.com/news/texas-15-district-pulido-de-la-cruz/",
+      "retrieved_at": "2026-11-11T05:37:53.166429+00:00",
+      "http_status": 200,
+      "final_url": "https://www.cbsnews.com/news/texas-15-district-pulido-de-la-cruz/",
+      "path": "raw/cbs_tx_15.html",
+      "sha256": "282f792dd8c6bdee83e2176fc91b15ca07180d3ea8fae3ae3b5458abf43946ab"
+    },
+    {
+      "id": "wral_nc_house",
+      "provider": "WRAL",
+      "kind": "media",
+      "adapter": "reviewed_calls",
+      "url": "https://www.wral.com/news/nccapitol/north-carolina-democrats-flip-republican-us-house-nc-midterm-november-2026/",
+      "retrieved_at": "2026-11-11T05:37:53.299208+00:00",
+      "http_status": 200,
+      "final_url": "https://www.wral.com/news/nccapitol/north-carolina-democrats-flip-republican-us-house-nc-midterm-november-2026/",
+      "path": "raw/wral_nc_house.html",
+      "sha256": "ed5eaff41d95c83891d07ee6dec142e8ba830eb8f9ce410cb51dfa660b39c1b8"
+    }
+  ],
+  "failures": [
+    {
+      "source_id": "minnesota_governor",
+      "error": "Minnesota response is not 2026 unofficial returns (may be CAPTCHA)"
+    },
+    {
+      "source_id": "minnesota_house",
+      "error": "Minnesota response is not 2026 unofficial returns (may be CAPTCHA)"
+    },
+    {
+      "source_id": "ap_senate_calls",
+      "error": "Client error '403 Forbidden' for url 'https://www.ap.org/the-definitive-source/behind-the-news/calling-control-of-congress-in-the-2026-midterm-elections/'\nFor more information check: https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/403"
+    },
+    {
+      "source_id": "ap_texas",
+      "error": "Client error '403 Forbidden' for url 'https://apnews.com/article/6e285484736b5116629a3b6e37e1dda5'\nFor more information check: https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/403"
+    },
+    {
+      "source_id": "ap_nh_governor",
+      "error": "Client error '403 Forbidden' for url 'https://apnews.com/article/9661abe26ba84eaba966abd0c9ad10b8'\nFor more information check: https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/403"
+    },
+    {
+      "source_id": "ap_california_house_07",
+      "error": "Client error '403 Forbidden' for url 'https://apnews.com/article/9306dd0fd0604c4295cf9325e8cbfa9a'\nFor more information check: https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/403"
+    }
+  ],
+  "forecast_rows": 509,
+  "central_rows": 507,
+  "status_counts": {
+    "unresolved": 408,
+    "called": 57,
+    "preliminary": 42
+  },
+  "observation_rows": 113,
+  "output_sha256": {
+    "aggregate_scores.csv": "85f56c5257c74576de999a64c48863ff5e6c1a53a25365e6d62ea13ffbe8eaa6",
+    "authoritative_sources.json": "3afb00ab295ee61feb1521dec7000ff062ae9b61e438fad9c0a48c4837c21158",
+    "excluded_alternative_matchups.csv": "1cc91603a8c97f9e694ff35a19116306b84fba28822c6ad7f0c4c4a4efc9c835",
+    "observations.json": "ef843bb882cc88b6255c331b2270a4a0893b3869bba7316ff128149a04dfd1aa",
+    "race_scores.csv": "6cae9a68997cf17fa6de5f049c6039ce3aef3f41b679bb4fb34bd4603aa30a58",
+    "report.md": "79bfb0bd985559da9aa5b7789d3fa3803e2a18bf7b376b53bd12d154da40800a"
+  }
+}

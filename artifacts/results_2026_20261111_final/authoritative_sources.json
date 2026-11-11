@@ -1,0 +1,702 @@
+[
+  {
+    "state": "AL",
+    "state_name": "Alabama",
+    "authority": "Elections Division, Office of the Secretary of State, Montgomery, AL",
+    "authority_url": "https://www.sos.alabama.gov/alabama-votes",
+    "offices": [
+      "senate",
+      "house",
+      "governor"
+    ],
+    "directory_source_url": "https://www.fec.gov/introduction-campaign-finance/how-to-research-public-records/state-election-offices/",
+    "retrieved_at": "2026-11-11T05:37:30.512986+00:00",
+    "certification_policy": "Obtain the state canvass/certification document for the specific contest. This directory is not evidence of certification."
+  },
+  {
+    "state": "AK",
+    "state_name": "Alaska",
+    "authority": "Division of Elections, Office of the Lieutenant Governor, Juneau, AK",
+    "authority_url": "https://www.elections.alaska.gov/",
+    "offices": [
+      "senate",
+      "house",
+      "governor"
+    ],
+    "directory_source_url": "https://www.fec.gov/introduction-campaign-finance/how-to-research-public-records/state-election-offices/",
+    "retrieved_at": "2026-11-11T05:37:30.512986+00:00",
+    "certification_policy": "Obtain the state canvass/certification document for the specific contest. This directory is not evidence of certification."
+  },
+  {
+    "state": "AZ",
+    "state_name": "Arizona",
+    "authority": "Elections Division, Office of the Secretary of State, Phoenix, AZ",
+    "authority_url": "https://azsos.gov/elections",
+    "offices": [
+      "senate",
+      "house",
+      "governor"
+    ],
+    "directory_source_url": "https://www.fec.gov/introduction-campaign-finance/how-to-research-public-records/state-election-offices/",
+    "retrieved_at": "2026-11-11T05:37:30.512986+00:00",
+    "certification_policy": "Obtain the state canvass/certification document for the specific contest. This directory is not evidence of certification."
+  },
+  {
+    "state": "AR",
+    "state_name": "Arkansas",
+    "authority": "Elections Division, Office of the Secretary of State, Little Rock, AR",
+    "authority_url": "https://www.sos.arkansas.gov/elections",
+    "offices": [
+      "senate",
+      "house",
+      "governor"
+    ],
+    "directory_source_url": "https://www.fec.gov/introduction-campaign-finance/how-to-research-public-records/state-election-offices/",
+    "retrieved_at": "2026-11-11T05:37:30.512986+00:00",
+    "certification_policy": "Obtain the state canvass/certification document for the specific contest. This directory is not evidence of certification."
+  },
+  {
+    "state": "CA",
+    "state_name": "California",
+    "authority": "Elections Division, Office of the Secretary of State, Sacramento, CA",
+    "authority_url": "https://www.sos.ca.gov/elections",
+    "offices": [
+      "senate",
+      "house",
+      "governor"
+    ],
+    "directory_source_url": "https://www.fec.gov/introduction-campaign-finance/how-to-research-public-records/state-election-offices/",
+    "retrieved_at": "2026-11-11T05:37:30.512986+00:00",
+    "certification_policy": "Obtain the state canvass/certification document for the specific contest. This directory is not evidence of certification."
+  },
+  {
+    "state": "CO",
+    "state_name": "Colorado",
+    "authority": "Elections Division, Office of the Secretary of State, Denver, CO",
+    "authority_url": "https://www.sos.state.co.us/pubs/elections/main.html",
+    "offices": [
+      "senate",
+      "house",
+      "governor"
+    ],
+    "directory_source_url": "https://www.fec.gov/introduction-campaign-finance/how-to-research-public-records/state-election-offices/",
+    "retrieved_at": "2026-11-11T05:37:30.512986+00:00",
+    "certification_policy": "Obtain the state canvass/certification document for the specific contest. This directory is not evidence of certification."
+  },
+  {
+    "state": "CT",
+    "state_name": "Connecticut",
+    "authority": "Legislation and Election Administration Division, Office of the Secretary of the State, Hartford, CT",
+    "authority_url": "https://portal.ct.gov/en/SOTS/Common-Elements/V5-Template---Redesign/Elections--Voting--Home-Page",
+    "offices": [
+      "senate",
+      "house",
+      "governor"
+    ],
+    "directory_source_url": "https://www.fec.gov/introduction-campaign-finance/how-to-research-public-records/state-election-offices/",
+    "retrieved_at": "2026-11-11T05:37:30.512986+00:00",
+    "certification_policy": "Obtain the state canvass/certification document for the specific contest. This directory is not evidence of certification."
+  },
+  {
+    "state": "DE",
+    "state_name": "Delaware",
+    "authority": "Office of the State Election Commissioner, Dover, DE",
+    "authority_url": "https://elections.delaware.gov/",
+    "offices": [
+      "senate",
+      "house",
+      "governor"
+    ],
+    "directory_source_url": "https://www.fec.gov/introduction-campaign-finance/how-to-research-public-records/state-election-offices/",
+    "retrieved_at": "2026-11-11T05:37:30.512986+00:00",
+    "certification_policy": "Obtain the state canvass/certification document for the specific contest. This directory is not evidence of certification."
+  },
+  {
+    "state": "FL",
+    "state_name": "Florida",
+    "authority": "Division of Elections, Office of the Secretary of State, Tallahassee, FL",
+    "authority_url": "https://dos.myflorida.com/elections/",
+    "offices": [
+      "senate",
+      "house",
+      "governor"
+    ],
+    "directory_source_url": "https://www.fec.gov/introduction-campaign-finance/how-to-research-public-records/state-election-offices/",
+    "retrieved_at": "2026-11-11T05:37:30.512986+00:00",
+    "certification_policy": "Obtain the state canvass/certification document for the specific contest. This directory is not evidence of certification."
+  },
+  {
+    "state": "GA",
+    "state_name": "Georgia",
+    "authority": "Elections Division, Office of the Secretary of State, Atlanta, GA",
+    "authority_url": "https://sos.ga.gov/index.php/elections",
+    "offices": [
+      "senate",
+      "house",
+      "governor"
+    ],
+    "directory_source_url": "https://www.fec.gov/introduction-campaign-finance/how-to-research-public-records/state-election-offices/",
+    "retrieved_at": "2026-11-11T05:37:30.512986+00:00",
+    "certification_policy": "Obtain the state canvass/certification document for the specific contest. This directory is not evidence of certification."
+  },
+  {
+    "state": "HI",
+    "state_name": "Hawaii",
+    "authority": "Office of Elections, Honolulu, HI",
+    "authority_url": "https://elections.hawaii.gov/",
+    "offices": [
+      "senate",
+      "house",
+      "governor"
+    ],
+    "directory_source_url": "https://www.fec.gov/introduction-campaign-finance/how-to-research-public-records/state-election-offices/",
+    "retrieved_at": "2026-11-11T05:37:30.512986+00:00",
+    "certification_policy": "Obtain the state canvass/certification document for the specific contest. This directory is not evidence of certification."
+  },
+  {
+    "state": "ID",
+    "state_name": "Idaho",
+    "authority": "Elections Division, Office of the Secretary of State, Boise, ID",
+    "authority_url": "https://sos.idaho.gov/elections-division/",
+    "offices": [
+      "senate",
+      "house",
+      "governor"
+    ],
+    "directory_source_url": "https://www.fec.gov/introduction-campaign-finance/how-to-research-public-records/state-election-offices/",
+    "retrieved_at": "2026-11-11T05:37:30.512986+00:00",
+    "certification_policy": "Obtain the state canvass/certification document for the specific contest. This directory is not evidence of certification."
+  },
+  {
+    "state": "IL",
+    "state_name": "Illinois",
+    "authority": "Illinois State Board of Elections, Springfield, IL",
+    "authority_url": "https://www.elections.il.gov/",
+    "offices": [
+      "senate",
+      "house",
+      "governor"
+    ],
+    "directory_source_url": "https://www.fec.gov/introduction-campaign-finance/how-to-research-public-records/state-election-offices/",
+    "retrieved_at": "2026-11-11T05:37:30.512986+00:00",
+    "certification_policy": "Obtain the state canvass/certification document for the specific contest. This directory is not evidence of certification."
+  },
+  {
+    "state": "IN",
+    "state_name": "Indiana",
+    "authority": "Indiana Election Division, Office of the Secretary of State, Indianapolis, IN",
+    "authority_url": "https://www.in.gov/sos/elections/",
+    "offices": [
+      "senate",
+      "house",
+      "governor"
+    ],
+    "directory_source_url": "https://www.fec.gov/introduction-campaign-finance/how-to-research-public-records/state-election-offices/",
+    "retrieved_at": "2026-11-11T05:37:30.512986+00:00",
+    "certification_policy": "Obtain the state canvass/certification document for the specific contest. This directory is not evidence of certification."
+  },
+  {
+    "state": "IA",
+    "state_name": "Iowa",
+    "authority": "Office of the Secretary of State, Des Moines, IA",
+    "authority_url": "https://sos.iowa.gov/",
+    "offices": [
+      "senate",
+      "house",
+      "governor"
+    ],
+    "directory_source_url": "https://www.fec.gov/introduction-campaign-finance/how-to-research-public-records/state-election-offices/",
+    "retrieved_at": "2026-11-11T05:37:30.512986+00:00",
+    "certification_policy": "Obtain the state canvass/certification document for the specific contest. This directory is not evidence of certification."
+  },
+  {
+    "state": "KS",
+    "state_name": "Kansas",
+    "authority": "Elections Division, Office of the Secretary of State, Topeka, KS",
+    "authority_url": "https://www.sos.ks.gov/",
+    "offices": [
+      "senate",
+      "house",
+      "governor"
+    ],
+    "directory_source_url": "https://www.fec.gov/introduction-campaign-finance/how-to-research-public-records/state-election-offices/",
+    "retrieved_at": "2026-11-11T05:37:30.512986+00:00",
+    "certification_policy": "Obtain the state canvass/certification document for the specific contest. This directory is not evidence of certification."
+  },
+  {
+    "state": "KY",
+    "state_name": "Kentucky",
+    "authority": "State Board of Elections, Frankfort, KY",
+    "authority_url": "https://elect.ky.gov/Pages/default.aspx",
+    "offices": [
+      "senate",
+      "house",
+      "governor"
+    ],
+    "directory_source_url": "https://www.fec.gov/introduction-campaign-finance/how-to-research-public-records/state-election-offices/",
+    "retrieved_at": "2026-11-11T05:37:30.512986+00:00",
+    "certification_policy": "Obtain the state canvass/certification document for the specific contest. This directory is not evidence of certification."
+  },
+  {
+    "state": "LA",
+    "state_name": "Louisiana",
+    "authority": "Elections Division, Office of the Secretary of State, Baton Rouge, LA",
+    "authority_url": "https://www.sos.la.gov/ElectionsAndVoting/Pages/default.aspx",
+    "offices": [
+      "senate",
+      "house",
+      "governor"
+    ],
+    "directory_source_url": "https://www.fec.gov/introduction-campaign-finance/how-to-research-public-records/state-election-offices/",
+    "retrieved_at": "2026-11-11T05:37:30.512986+00:00",
+    "certification_policy": "Obtain the state canvass/certification document for the specific contest. This directory is not evidence of certification."
+  },
+  {
+    "state": "ME",
+    "state_name": "Maine",
+    "authority": "Bureau of Corporations, Elections and Commissions, Office of the Secretary of State, Augusta, ME",
+    "authority_url": "https://www.maine.gov/sos/cec/elec/index.html",
+    "offices": [
+      "senate",
+      "house",
+      "governor"
+    ],
+    "directory_source_url": "https://www.fec.gov/introduction-campaign-finance/how-to-research-public-records/state-election-offices/",
+    "retrieved_at": "2026-11-11T05:37:30.512986+00:00",
+    "certification_policy": "Obtain the state canvass/certification document for the specific contest. This directory is not evidence of certification."
+  },
+  {
+    "state": "MD",
+    "state_name": "Maryland",
+    "authority": "State Board of Elections, Annapolis, MD",
+    "authority_url": "https://www.elections.maryland.gov/",
+    "offices": [
+      "senate",
+      "house",
+      "governor"
+    ],
+    "directory_source_url": "https://www.fec.gov/introduction-campaign-finance/how-to-research-public-records/state-election-offices/",
+    "retrieved_at": "2026-11-11T05:37:30.512986+00:00",
+    "certification_policy": "Obtain the state canvass/certification document for the specific contest. This directory is not evidence of certification."
+  },
+  {
+    "state": "MA",
+    "state_name": "Massachusetts",
+    "authority": "Elections Division, Office of the Secretary of the Commonwealth, Boston, MA",
+    "authority_url": "https://www.sec.state.ma.us/ele/eleidx.htm",
+    "offices": [
+      "senate",
+      "house",
+      "governor"
+    ],
+    "directory_source_url": "https://www.fec.gov/introduction-campaign-finance/how-to-research-public-records/state-election-offices/",
+    "retrieved_at": "2026-11-11T05:37:30.512986+00:00",
+    "certification_policy": "Obtain the state canvass/certification document for the specific contest. This directory is not evidence of certification."
+  },
+  {
+    "state": "MI",
+    "state_name": "Michigan",
+    "authority": "Elections Bureau, Office of the Secretary of State, Lansing, MI",
+    "authority_url": "https://www.michigan.gov/sos/0,4670,7-127-1633---,00.html",
+    "offices": [
+      "senate",
+      "house",
+      "governor"
+    ],
+    "directory_source_url": "https://www.fec.gov/introduction-campaign-finance/how-to-research-public-records/state-election-offices/",
+    "retrieved_at": "2026-11-11T05:37:30.512986+00:00",
+    "certification_policy": "Obtain the state canvass/certification document for the specific contest. This directory is not evidence of certification."
+  },
+  {
+    "state": "MN",
+    "state_name": "Minnesota",
+    "authority": "Elections Division, Office of the Secretary of State, St. Paul, MN",
+    "authority_url": "https://www.sos.state.mn.us/elections-voting/",
+    "offices": [
+      "senate",
+      "house",
+      "governor"
+    ],
+    "directory_source_url": "https://www.fec.gov/introduction-campaign-finance/how-to-research-public-records/state-election-offices/",
+    "retrieved_at": "2026-11-11T05:37:30.512986+00:00",
+    "certification_policy": "Obtain the state canvass/certification document for the specific contest. This directory is not evidence of certification."
+  },
+  {
+    "state": "MS",
+    "state_name": "Mississippi",
+    "authority": "Elections Division, Office of the Secretary of State, Jackson, MS",
+    "authority_url": "https://www.sos.ms.gov/index.php/elections-voting",
+    "offices": [
+      "senate",
+      "house",
+      "governor"
+    ],
+    "directory_source_url": "https://www.fec.gov/introduction-campaign-finance/how-to-research-public-records/state-election-offices/",
+    "retrieved_at": "2026-11-11T05:37:30.512986+00:00",
+    "certification_policy": "Obtain the state canvass/certification document for the specific contest. This directory is not evidence of certification."
+  },
+  {
+    "state": "MO",
+    "state_name": "Missouri",
+    "authority": "Office of the Secretary of State, Jefferson City, MO",
+    "authority_url": "https://www.sos.mo.gov/elections/",
+    "offices": [
+      "senate",
+      "house",
+      "governor"
+    ],
+    "directory_source_url": "https://www.fec.gov/introduction-campaign-finance/how-to-research-public-records/state-election-offices/",
+    "retrieved_at": "2026-11-11T05:37:30.512986+00:00",
+    "certification_policy": "Obtain the state canvass/certification document for the specific contest. This directory is not evidence of certification."
+  },
+  {
+    "state": "MT",
+    "state_name": "Montana",
+    "authority": "Office of the Secretary of State, Helena, MT",
+    "authority_url": "https://sosmt.gov/elections/",
+    "offices": [
+      "senate",
+      "house",
+      "governor"
+    ],
+    "directory_source_url": "https://www.fec.gov/introduction-campaign-finance/how-to-research-public-records/state-election-offices/",
+    "retrieved_at": "2026-11-11T05:37:30.512986+00:00",
+    "certification_policy": "Obtain the state canvass/certification document for the specific contest. This directory is not evidence of certification."
+  },
+  {
+    "state": "NE",
+    "state_name": "Nebraska",
+    "authority": "Office of the Secretary of State, Lincoln, NE",
+    "authority_url": "https://sos.nebraska.gov/index",
+    "offices": [
+      "senate",
+      "house",
+      "governor"
+    ],
+    "directory_source_url": "https://www.fec.gov/introduction-campaign-finance/how-to-research-public-records/state-election-offices/",
+    "retrieved_at": "2026-11-11T05:37:30.512986+00:00",
+    "certification_policy": "Obtain the state canvass/certification document for the specific contest. This directory is not evidence of certification."
+  },
+  {
+    "state": "NV",
+    "state_name": "Nevada",
+    "authority": "Office of the Secretary of State, Carson City, NV",
+    "authority_url": "https://www.nvsos.gov/sos/elections",
+    "offices": [
+      "senate",
+      "house",
+      "governor"
+    ],
+    "directory_source_url": "https://www.fec.gov/introduction-campaign-finance/how-to-research-public-records/state-election-offices/",
+    "retrieved_at": "2026-11-11T05:37:30.512986+00:00",
+    "certification_policy": "Obtain the state canvass/certification document for the specific contest. This directory is not evidence of certification."
+  },
+  {
+    "state": "NH",
+    "state_name": "New Hampshire",
+    "authority": "Office of the Secretary of State, Concord, NH",
+    "authority_url": "https://sos.nh.gov/",
+    "offices": [
+      "senate",
+      "house",
+      "governor"
+    ],
+    "directory_source_url": "https://www.fec.gov/introduction-campaign-finance/how-to-research-public-records/state-election-offices/",
+    "retrieved_at": "2026-11-11T05:37:30.512986+00:00",
+    "certification_policy": "Obtain the state canvass/certification document for the specific contest. This directory is not evidence of certification."
+  },
+  {
+    "state": "NJ",
+    "state_name": "New Jersey",
+    "authority": "Division of Elections, Office of the Secretary of State, Trenton, NJ",
+    "authority_url": "https://www.state.nj.us/state/elections/index.shtml",
+    "offices": [
+      "senate",
+      "house",
+      "governor"
+    ],
+    "directory_source_url": "https://www.fec.gov/introduction-campaign-finance/how-to-research-public-records/state-election-offices/",
+    "retrieved_at": "2026-11-11T05:37:30.512986+00:00",
+    "certification_policy": "Obtain the state canvass/certification document for the specific contest. This directory is not evidence of certification."
+  },
+  {
+    "state": "NM",
+    "state_name": "New Mexico",
+    "authority": "Office of the Secretary of State, Santa Fe, NM",
+    "authority_url": "https://www.sos.state.nm.us/",
+    "offices": [
+      "senate",
+      "house",
+      "governor"
+    ],
+    "directory_source_url": "https://www.fec.gov/introduction-campaign-finance/how-to-research-public-records/state-election-offices/",
+    "retrieved_at": "2026-11-11T05:37:30.512986+00:00",
+    "certification_policy": "Obtain the state canvass/certification document for the specific contest. This directory is not evidence of certification."
+  },
+  {
+    "state": "NY",
+    "state_name": "New York",
+    "authority": "State Board of Elections, Albany, NY",
+    "authority_url": "https://www.elections.ny.gov/",
+    "offices": [
+      "senate",
+      "house",
+      "governor"
+    ],
+    "directory_source_url": "https://www.fec.gov/introduction-campaign-finance/how-to-research-public-records/state-election-offices/",
+    "retrieved_at": "2026-11-11T05:37:30.512986+00:00",
+    "certification_policy": "Obtain the state canvass/certification document for the specific contest. This directory is not evidence of certification."
+  },
+  {
+    "state": "NC",
+    "state_name": "North Carolina",
+    "authority": "State Board of Elections & Ethics Enforcement, Raleigh, NC",
+    "authority_url": "https://www.ncsbe.gov/",
+    "offices": [
+      "senate",
+      "house",
+      "governor"
+    ],
+    "directory_source_url": "https://www.fec.gov/introduction-campaign-finance/how-to-research-public-records/state-election-offices/",
+    "retrieved_at": "2026-11-11T05:37:30.512986+00:00",
+    "certification_policy": "Obtain the state canvass/certification document for the specific contest. This directory is not evidence of certification."
+  },
+  {
+    "state": "ND",
+    "state_name": "North Dakota",
+    "authority": "Office of the Secretary of State, Bismarck, ND",
+    "authority_url": "http://sos.nd.gov/elections",
+    "offices": [
+      "senate",
+      "house",
+      "governor"
+    ],
+    "directory_source_url": "https://www.fec.gov/introduction-campaign-finance/how-to-research-public-records/state-election-offices/",
+    "retrieved_at": "2026-11-11T05:37:30.512986+00:00",
+    "certification_policy": "Obtain the state canvass/certification document for the specific contest. This directory is not evidence of certification."
+  },
+  {
+    "state": "OH",
+    "state_name": "Ohio",
+    "authority": "Elections Division, Office of the Secretary of State, Columbus, OH",
+    "authority_url": "https://www.sos.state.oh.us/elections/",
+    "offices": [
+      "senate",
+      "house",
+      "governor"
+    ],
+    "directory_source_url": "https://www.fec.gov/introduction-campaign-finance/how-to-research-public-records/state-election-offices/",
+    "retrieved_at": "2026-11-11T05:37:30.512986+00:00",
+    "certification_policy": "Obtain the state canvass/certification document for the specific contest. This directory is not evidence of certification."
+  },
+  {
+    "state": "OK",
+    "state_name": "Oklahoma",
+    "authority": "State Election Board, Oklahoma City, OK",
+    "authority_url": "https://oklahoma.gov/elections.html",
+    "offices": [
+      "senate",
+      "house",
+      "governor"
+    ],
+    "directory_source_url": "https://www.fec.gov/introduction-campaign-finance/how-to-research-public-records/state-election-offices/",
+    "retrieved_at": "2026-11-11T05:37:30.512986+00:00",
+    "certification_policy": "Obtain the state canvass/certification document for the specific contest. This directory is not evidence of certification."
+  },
+  {
+    "state": "OR",
+    "state_name": "Oregon",
+    "authority": "Elections Division, Office of the Secretary of State, Salem, OR",
+    "authority_url": "https://sos.oregon.gov/voting-elections/Pages/default.aspx",
+    "offices": [
+      "senate",
+      "house",
+      "governor"
+    ],
+    "directory_source_url": "https://www.fec.gov/introduction-campaign-finance/how-to-research-public-records/state-election-offices/",
+    "retrieved_at": "2026-11-11T05:37:30.512986+00:00",
+    "certification_policy": "Obtain the state canvass/certification document for the specific contest. This directory is not evidence of certification."
+  },
+  {
+    "state": "PA",
+    "state_name": "Pennsylvania",
+    "authority": "Bureau of Commissions, Elections and Legislation, Department of State, Harrisburg, PA",
+    "authority_url": "https://www.dos.pa.gov/VotingElections/Pages/default.aspx",
+    "offices": [
+      "senate",
+      "house",
+      "governor"
+    ],
+    "directory_source_url": "https://www.fec.gov/introduction-campaign-finance/how-to-research-public-records/state-election-offices/",
+    "retrieved_at": "2026-11-11T05:37:30.512986+00:00",
+    "certification_policy": "Obtain the state canvass/certification document for the specific contest. This directory is not evidence of certification."
+  },
+  {
+    "state": "RI",
+    "state_name": "Rhode Island",
+    "authority": "State Board of Elections, Providence, RI",
+    "authority_url": "https://elections.ri.gov/",
+    "offices": [
+      "senate",
+      "house",
+      "governor"
+    ],
+    "directory_source_url": "https://www.fec.gov/introduction-campaign-finance/how-to-research-public-records/state-election-offices/",
+    "retrieved_at": "2026-11-11T05:37:30.512986+00:00",
+    "certification_policy": "Obtain the state canvass/certification document for the specific contest. This directory is not evidence of certification."
+  },
+  {
+    "state": "SC",
+    "state_name": "South Carolina",
+    "authority": "State Election Commission, Columbia, SC",
+    "authority_url": "https://www.scvotes.gov/",
+    "offices": [
+      "senate",
+      "house",
+      "governor"
+    ],
+    "directory_source_url": "https://www.fec.gov/introduction-campaign-finance/how-to-research-public-records/state-election-offices/",
+    "retrieved_at": "2026-11-11T05:37:30.512986+00:00",
+    "certification_policy": "Obtain the state canvass/certification document for the specific contest. This directory is not evidence of certification."
+  },
+  {
+    "state": "SD",
+    "state_name": "South Dakota",
+    "authority": "Office of the Secretary of State, Pierre, SD",
+    "authority_url": "https://sdsos.gov/elections-voting/default.aspx",
+    "offices": [
+      "senate",
+      "house",
+      "governor"
+    ],
+    "directory_source_url": "https://www.fec.gov/introduction-campaign-finance/how-to-research-public-records/state-election-offices/",
+    "retrieved_at": "2026-11-11T05:37:30.512986+00:00",
+    "certification_policy": "Obtain the state canvass/certification document for the specific contest. This directory is not evidence of certification."
+  },
+  {
+    "state": "TN",
+    "state_name": "Tennessee",
+    "authority": "Elections Division, Office of the Secretary of State, Nashville, TN",
+    "authority_url": "https://sos.tn.gov/elections",
+    "offices": [
+      "senate",
+      "house",
+      "governor"
+    ],
+    "directory_source_url": "https://www.fec.gov/introduction-campaign-finance/how-to-research-public-records/state-election-offices/",
+    "retrieved_at": "2026-11-11T05:37:30.512986+00:00",
+    "certification_policy": "Obtain the state canvass/certification document for the specific contest. This directory is not evidence of certification."
+  },
+  {
+    "state": "TX",
+    "state_name": "Texas",
+    "authority": "Elections Division, Office of the Secretary of State, Austin, TX",
+    "authority_url": "https://www.sos.state.tx.us/elections/index.shtml",
+    "offices": [
+      "senate",
+      "house",
+      "governor"
+    ],
+    "directory_source_url": "https://www.fec.gov/introduction-campaign-finance/how-to-research-public-records/state-election-offices/",
+    "retrieved_at": "2026-11-11T05:37:30.512986+00:00",
+    "certification_policy": "Obtain the state canvass/certification document for the specific contest. This directory is not evidence of certification."
+  },
+  {
+    "state": "UT",
+    "state_name": "Utah",
+    "authority": "Elections Office, Office of the Lieutenant Governor, Salt Lake City, UT",
+    "authority_url": "https://vote.utah.gov/",
+    "offices": [
+      "senate",
+      "house",
+      "governor"
+    ],
+    "directory_source_url": "https://www.fec.gov/introduction-campaign-finance/how-to-research-public-records/state-election-offices/",
+    "retrieved_at": "2026-11-11T05:37:30.512986+00:00",
+    "certification_policy": "Obtain the state canvass/certification document for the specific contest. This directory is not evidence of certification."
+  },
+  {
+    "state": "VT",
+    "state_name": "Vermont",
+    "authority": "Office of the Secretary of State, Montpelier, VT",
+    "authority_url": "https://sos.vermont.gov/elections/",
+    "offices": [
+      "senate",
+      "house",
+      "governor"
+    ],
+    "directory_source_url": "https://www.fec.gov/introduction-campaign-finance/how-to-research-public-records/state-election-offices/",
+    "retrieved_at": "2026-11-11T05:37:30.512986+00:00",
+    "certification_policy": "Obtain the state canvass/certification document for the specific contest. This directory is not evidence of certification."
+  },
+  {
+    "state": "VA",
+    "state_name": "Virginia",
+    "authority": "State Board of Elections, Richmond, VA",
+    "authority_url": "https://www.elections.virginia.gov/",
+    "offices": [
+      "senate",
+      "house",
+      "governor"
+    ],
+    "directory_source_url": "https://www.fec.gov/introduction-campaign-finance/how-to-research-public-records/state-election-offices/",
+    "retrieved_at": "2026-11-11T05:37:30.512986+00:00",
+    "certification_policy": "Obtain the state canvass/certification document for the specific contest. This directory is not evidence of certification."
+  },
+  {
+    "state": "WA",
+    "state_name": "Washington",
+    "authority": "Elections Division, Office of the Secretary of State, Olympia, WA",
+    "authority_url": "https://www.sos.wa.gov/elections/",
+    "offices": [
+      "senate",
+      "house",
+      "governor"
+    ],
+    "directory_source_url": "https://www.fec.gov/introduction-campaign-finance/how-to-research-public-records/state-election-offices/",
+    "retrieved_at": "2026-11-11T05:37:30.512986+00:00",
+    "certification_policy": "Obtain the state canvass/certification document for the specific contest. This directory is not evidence of certification."
+  },
+  {
+    "state": "WV",
+    "state_name": "West Virginia",
+    "authority": "Office of the Secretary of State, Charleston, WV",
+    "authority_url": "https://sos.wv.gov/elections/Pages/default.aspx",
+    "offices": [
+      "senate",
+      "house",
+      "governor"
+    ],
+    "directory_source_url": "https://www.fec.gov/introduction-campaign-finance/how-to-research-public-records/state-election-offices/",
+    "retrieved_at": "2026-11-11T05:37:30.512986+00:00",
+    "certification_policy": "Obtain the state canvass/certification document for the specific contest. This directory is not evidence of certification."
+  },
+  {
+    "state": "WI",
+    "state_name": "Wisconsin",
+    "authority": "Wisconsin Elections Commission, Madison, WI",
+    "authority_url": "https://elections.wi.gov/",
+    "offices": [
+      "senate",
+      "house",
+      "governor"
+    ],
+    "directory_source_url": "https://www.fec.gov/introduction-campaign-finance/how-to-research-public-records/state-election-offices/",
+    "retrieved_at": "2026-11-11T05:37:30.512986+00:00",
+    "certification_policy": "Obtain the state canvass/certification document for the specific contest. This directory is not evidence of certification."
+  },
+  {
+    "state": "WY",
+    "state_name": "Wyoming",
+    "authority": "Office of the Secretary of State, Cheyenne, WY",
+    "authority_url": "https://sos.wyo.gov/Elections/Default.aspx",
+    "offices": [
+      "senate",
+      "house",
+      "governor"
+    ],
+    "directory_source_url": "https://www.fec.gov/introduction-campaign-finance/how-to-research-public-records/state-election-offices/",
+    "retrieved_at": "2026-11-11T05:37:30.512986+00:00",
+    "certification_policy": "Obtain the state canvass/certification document for the specific contest. This directory is not evidence of certification."
+  }
+]

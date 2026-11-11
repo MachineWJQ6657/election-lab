@@ -1,0 +1,21 @@
+{
+  "feeds": [
+    {"id": "texas", "provider": "Texas Secretary of State", "kind": "official", "adapter": "texas", "url": "https://electionresults.sos.state.tx.us/results.html"},
+    {"id": "north_carolina", "provider": "North Carolina State Board of Elections", "kind": "official", "adapter": "north_carolina", "extension": ".zip", "url": "https://s3.amazonaws.com/dl.ncsbe.gov/ENRS/2026_11_03/results_pct_20261103.zip"},
+    {"id": "minnesota_senate", "provider": "Minnesota Secretary of State", "kind": "official", "adapter": "minnesota", "office": "senate", "url": "https://electionresults.sos.mn.gov/Results/Index?ErsElectionId=201&electionDate=11/03/2026+00:00:00&officeInElectionIdList=-1&officeInElectionIdList=38485&scenario=USSenate"},
+    {"id": "minnesota_governor", "provider": "Minnesota Secretary of State", "kind": "official", "adapter": "minnesota", "office": "governor", "url": "https://electionresults.sos.mn.gov/Results/Index?ersElectionId=201&officeInElectionId=38695&scenario=Governor"},
+    {"id": "minnesota_house", "provider": "Minnesota Secretary of State", "kind": "official", "adapter": "minnesota", "office": "house", "url": "https://electionresults.sos.mn.gov/Results/Index?ersElectionId=201&scenario=USRepresentative"},
+    {"id": "ap_senate_calls", "provider": "Associated Press", "kind": "media", "adapter": "ap_senate", "url": "https://www.ap.org/the-definitive-source/behind-the-news/calling-control-of-congress-in-the-2026-midterm-elections/"},
+    {"id": "ap_texas", "provider": "Associated Press", "kind": "media", "adapter": "reviewed_calls", "url": "https://apnews.com/article/6e285484736b5116629a3b6e37e1dda5"},
+    {"id": "ap_minnesota_governor", "provider": "Associated Press via WNEM", "kind": "media", "adapter": "reviewed_calls", "url": "https://www.wnem.com/2026/11/04/democrat-amy-klobuchar-wins-election-governor-minnesota/"},
+    {"id": "ap_nh_governor", "provider": "Associated Press", "kind": "media", "adapter": "reviewed_calls", "url": "https://apnews.com/article/9661abe26ba84eaba966abd0c9ad10b8"},
+    {"id": "ap_california_house_07", "provider": "Associated Press", "kind": "media", "adapter": "reviewed_calls", "url": "https://apnews.com/article/9306dd0fd0604c4295cf9325e8cbfa9a"},
+    {"id": "eac_status_policy", "provider": "U.S. Election Assistance Commission", "kind": "official", "adapter": "reference", "url": "https://www.eac.gov/election-officials/election-results-canvass-and-certification"},
+    {"id": "fec_election_offices", "provider": "Federal Election Commission", "kind": "official", "adapter": "reference", "url": "https://www.fec.gov/introduction-campaign-finance/election-results-and-voting-information/"},
+    {"id": "fec_state_directory", "provider": "Federal Election Commission", "kind": "official", "adapter": "state_directory", "url": "https://www.fec.gov/introduction-campaign-finance/how-to-research-public-records/state-election-offices/"},
+    {"id": "ap_governors_overview", "provider": "Associated Press via WNEM", "kind": "media", "adapter": "reviewed_calls", "url": "https://www.wnem.com/2026/11/04/democrats-press-win-majority-governors-offices-midterms-after-power-struggles-with-trump/"},
+    {"id": "cbs_tx_33", "provider": "CBS News", "kind": "media", "adapter": "reviewed_calls", "url": "https://www.cbsnews.com/texas/news/texas-district-33-election-results-2026/"},
+    {"id": "cbs_tx_15", "provider": "CBS News", "kind": "media", "adapter": "reviewed_calls", "url": "https://www.cbsnews.com/news/texas-15-district-pulido-de-la-cruz/"},
+    {"id": "wral_nc_house", "provider": "WRAL", "kind": "media", "adapter": "reviewed_calls", "url": "https://www.wral.com/news/nccapitol/north-carolina-democrats-flip-republican-us-house-nc-midterm-november-2026/"}
+  ]
+}

@@ -80,7 +80,9 @@ test("server-renders the forecast dashboard and social metadata", async () => {
     assert.equal(data.final_release.as_of,data.updated_at);
     assert.equal(data.final_release.release_kind,'final_pre_result_forecast');
   }
-  contains(html, new RegExp(`${data.days_to_election}(?:<!-- -->)? DAYS OUT`));
+  // The results phase replaces the countdown; the frozen horizon stays in the data.
+  contains(html, /ELECTION OVER · POST-ELECTION REVIEW/);
+  assert.equal(data.days_to_election, 0);
   contains(html, new RegExp(`${data.validation_horizon}(?:<!-- -->)?-day Brier`));
   const races = data.races.filter((race) => ["senate", "house", "governor"].includes(race.office));
   contains(html, new RegExp(`${races.length}(?:<!-- -->)? races covered`));
@@ -121,4 +123,28 @@ test("server-renders the forecast dashboard and social metadata", async () => {
   }
   contains(html, /election-forecast-lab-og-v2-1200x630\.png/);
   assert.ok(!/codex-preview|react-loading-skeleton/i.test(html));
+});
+
+test("server-renders the post-election review without altering the frozen forecast", async () => {
+  const html = await (await render()).text();
+  const data = JSON.parse(await readFile(new URL("../lib/forecast-data.json", import.meta.url), "utf8"));
+  const results = JSON.parse(await readFile(new URL("../lib/results-data.json", import.meta.url), "utf8"));
+  contains(html, /id="results"/);
+  contains(html, /Democrats won the House and the Senate/);
+  contains(html, /RESULTS VS\. FROZEN FORECAST/);
+  contains(html, /Everything below is the sealed pre-election forecast/);
+  assert.equal(results.frozen_at, data.final_release.frozen_at);
+  const byOffice = Object.fromEntries(results.chambers.map((c) => [c.office, c]));
+  assert.equal(byOffice.House.forecast.median, data.control.house.median_dem_seats);
+  assert.equal(byOffice.Senate.forecast.p95, data.control.senate.p95_dem_seats);
+  for (const chamber of results.chambers) {
+    contains(html, new RegExp(`data-result-office="${chamber.office.toLowerCase()}" data-within-90="${chamber.result.within_90}"`));
+    assert.ok(chamber.result.dem_low <= chamber.result.dem_high);
+  }
+  assert.equal(byOffice.Senate.result.within_90, "inside");
+  assert.equal(byOffice.House.result.within_90, "above");
+  assert.ok(results.misses.every((race) => race.winner && race.forecast_dem_probability < 0.5));
+  for (const race of results.misses) contains(html, new RegExp(race.race));
+  contains(html, /docs\/2026_retrospective\.md/);
+  contains(html, /<title>Election Forecast Lab · 2026 Midterms Review<\/title>/);
 });

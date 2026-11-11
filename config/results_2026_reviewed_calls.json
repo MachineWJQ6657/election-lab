@@ -1,0 +1,269 @@
+[
+  {
+    "office": "governor",
+    "location": "GA",
+    "winner_candidate": "Keisha Lance Bottoms",
+    "source_id": "ap_governors_overview",
+    "required_terms": [
+      "Keisha Lance Bottoms"
+    ],
+    "status": "called",
+    "status_evidence": "Reviewed AP reporting explicitly describes this candidate's gubernatorial victory; media call, not certification."
+  },
+  {
+    "office": "governor",
+    "location": "OH",
+    "winner_candidate": "Amy Acton",
+    "source_id": "ap_governors_overview",
+    "required_terms": [
+      "Amy Acton"
+    ],
+    "status": "called",
+    "status_evidence": "Reviewed AP reporting explicitly describes this candidate's gubernatorial victory; media call, not certification."
+  },
+  {
+    "office": "governor",
+    "location": "IA",
+    "winner_candidate": "Rob Sand",
+    "source_id": "ap_governors_overview",
+    "required_terms": [
+      "Rob Sand"
+    ],
+    "status": "called",
+    "status_evidence": "Reviewed AP reporting explicitly describes this candidate's gubernatorial victory; media call, not certification."
+  },
+  {
+    "office": "governor",
+    "location": "TX",
+    "winner_candidate": "Gina Hinojosa",
+    "source_id": "ap_governors_overview",
+    "required_terms": [
+      "Gina Hinojosa"
+    ],
+    "status": "called",
+    "status_evidence": "Reviewed AP reporting explicitly describes this candidate's gubernatorial victory; media call, not certification."
+  },
+  {
+    "office": "governor",
+    "location": "FL",
+    "winner_candidate": "Byron Donalds",
+    "source_id": "ap_governors_overview",
+    "required_terms": [
+      "Byron Donalds"
+    ],
+    "status": "called",
+    "status_evidence": "Reviewed AP reporting explicitly describes this candidate's gubernatorial victory; media call, not certification."
+  },
+  {
+    "office": "governor",
+    "location": "NY",
+    "winner_candidate": "Kathy Hochul",
+    "source_id": "ap_governors_overview",
+    "required_terms": [
+      "Kathy Hochul"
+    ],
+    "status": "called",
+    "status_evidence": "Reviewed AP reporting explicitly describes this candidate's gubernatorial victory; media call, not certification."
+  },
+  {
+    "office": "governor",
+    "location": "CA",
+    "winner_candidate": "Xavier Becerra",
+    "source_id": "ap_governors_overview",
+    "required_terms": [
+      "Xavier Becerra"
+    ],
+    "status": "called",
+    "status_evidence": "Reviewed AP reporting explicitly describes this candidate's gubernatorial victory; media call, not certification."
+  },
+  {
+    "office": "governor",
+    "location": "PA",
+    "winner_candidate": "Josh Shapiro",
+    "source_id": "ap_governors_overview",
+    "required_terms": [
+      "Josh Shapiro"
+    ],
+    "status": "called",
+    "status_evidence": "Reviewed AP reporting explicitly describes this candidate's gubernatorial victory; media call, not certification."
+  },
+  {
+    "office": "governor",
+    "location": "WI",
+    "winner_candidate": "David Crowley",
+    "source_id": "ap_governors_overview",
+    "required_terms": [
+      "David Crowley"
+    ],
+    "status": "called",
+    "status_evidence": "Reviewed AP reporting explicitly describes this candidate's gubernatorial victory; media call, not certification."
+  },
+  {
+    "office": "governor",
+    "location": "MI",
+    "winner_candidate": "Jocelyn Benson",
+    "source_id": "ap_governors_overview",
+    "required_terms": [
+      "Jocelyn Benson"
+    ],
+    "status": "called",
+    "status_evidence": "Reviewed AP reporting explicitly describes this candidate's gubernatorial victory; media call, not certification."
+  },
+  {
+    "office": "governor",
+    "location": "MD",
+    "winner_candidate": "Wes Moore",
+    "source_id": "ap_governors_overview",
+    "required_terms": [
+      "Wes Moore"
+    ],
+    "status": "called",
+    "status_evidence": "Reviewed AP reporting explicitly describes this candidate's gubernatorial victory; media call, not certification."
+  },
+  {
+    "office": "governor",
+    "location": "IL",
+    "winner_candidate": "JB Pritzker",
+    "source_id": "ap_governors_overview",
+    "required_terms": [
+      "JB Pritzker"
+    ],
+    "status": "called",
+    "status_evidence": "Reviewed AP reporting explicitly describes this candidate's gubernatorial victory; media call, not certification."
+  },
+  {
+    "office": "governor",
+    "location": "NM",
+    "winner_candidate": "Deb Haaland",
+    "source_id": "ap_governors_overview",
+    "required_terms": [
+      "Deb Haaland"
+    ],
+    "status": "called",
+    "status_evidence": "Reviewed AP reporting explicitly describes this candidate's gubernatorial victory; media call, not certification."
+  },
+  {
+    "office": "governor",
+    "location": "MN",
+    "winner_candidate": "Amy Klobuchar",
+    "source_id": "ap_minnesota_governor",
+    "required_terms": [
+      "Amy Klobuchar won election",
+      "defeating Republican Lisa Demuth"
+    ],
+    "status": "called",
+    "status_evidence": "Reviewed AP dispatch explicitly reports the governor winner; media call, not certification."
+  },
+  {
+    "office": "house",
+    "location": "NC-01",
+    "winner_candidate": "Don Davis",
+    "source_id": "wral_nc_house",
+    "required_terms": [
+      "Don Davis"
+    ],
+    "status": "called",
+    "status_evidence": "Reviewed WRAL reporting explicitly distinguishes this winner from its listed uncalled/recount races."
+  },
+  {
+    "office": "house",
+    "location": "NC-06",
+    "winner_candidate": "Cyril Jefferson",
+    "source_id": "wral_nc_house",
+    "required_terms": [
+      "Cyril Jefferson"
+    ],
+    "status": "called",
+    "status_evidence": "Reviewed WRAL reporting explicitly distinguishes this winner from its listed uncalled/recount races."
+  },
+  {
+    "office": "house",
+    "location": "NC-08",
+    "winner_candidate": "Mark Harris",
+    "source_id": "wral_nc_house",
+    "required_terms": [
+      "Mark Harris"
+    ],
+    "status": "called",
+    "status_evidence": "Reviewed WRAL reporting explicitly distinguishes this winner from its listed uncalled/recount races."
+  },
+  {
+    "office": "house",
+    "location": "NC-09",
+    "winner_candidate": "Richard Ojeda",
+    "source_id": "wral_nc_house",
+    "required_terms": [
+      "Richard Ojeda"
+    ],
+    "status": "called",
+    "status_evidence": "Reviewed WRAL reporting explicitly distinguishes this winner from its listed uncalled/recount races."
+  },
+  {
+    "office": "house",
+    "location": "NC-10",
+    "winner_candidate": "Pat Harrigan",
+    "source_id": "wral_nc_house",
+    "required_terms": [
+      "Pat Harrigan"
+    ],
+    "status": "called",
+    "status_evidence": "Reviewed WRAL reporting explicitly distinguishes this winner from its listed uncalled/recount races."
+  },
+  {
+    "office": "house",
+    "location": "NC-11",
+    "winner_candidate": "Jamie Ager",
+    "source_id": "wral_nc_house",
+    "required_terms": [
+      "Jamie Ager"
+    ],
+    "status": "called",
+    "status_evidence": "Reviewed WRAL reporting explicitly distinguishes this winner from its listed uncalled/recount races."
+  },
+  {
+    "office": "house",
+    "location": "NC-13",
+    "winner_candidate": "Paul Barringer",
+    "source_id": "wral_nc_house",
+    "required_terms": [
+      "Paul Barringer"
+    ],
+    "status": "called",
+    "status_evidence": "Reviewed WRAL reporting explicitly distinguishes this winner from its listed uncalled/recount races."
+  },
+  {
+    "office": "house",
+    "location": "NC-14",
+    "winner_candidate": "LaKesha Womack",
+    "source_id": "wral_nc_house",
+    "required_terms": [
+      "LaKesha Womack"
+    ],
+    "status": "called",
+    "status_evidence": "Reviewed WRAL reporting explicitly distinguishes this winner from its listed uncalled/recount races."
+  },
+  {
+    "office": "house",
+    "location": "TX-33",
+    "winner_candidate": "Colin Allred",
+    "source_id": "cbs_tx_33",
+    "required_terms": [
+      "Colin Allred",
+      "projects"
+    ],
+    "status": "called",
+    "status_evidence": "Reviewed CBS News projection for this named congressional district; not certification."
+  },
+  {
+    "office": "house",
+    "location": "TX-15",
+    "winner_candidate": "Bobby Pulido",
+    "source_id": "cbs_tx_15",
+    "required_terms": [
+      "Bobby Pulido",
+      "projects"
+    ],
+    "status": "called",
+    "status_evidence": "Reviewed CBS News projection for this named congressional district; not certification."
+  }
+]

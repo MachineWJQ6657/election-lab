@@ -3,6 +3,7 @@
 import { useMemo, useState } from "react";
 import { EarlyVotingPanel, type EarlyVotingData } from "./EarlyVotingPanel";
 import { ElectionMap } from "./ElectionMap";
+import { ResultsReview, type ResultsData } from "./ResultsReview";
 import type { MapSeatControl } from "../lib/election-map";
 
 type Office = "senate" | "house" | "governor";
@@ -78,7 +79,7 @@ function DistributionChart({ data, office }: { data: Distribution[]; office: "ho
   </div>;
 }
 
-export function ForecastDashboard({ data }: { data: ForecastData }) {
+export function ForecastDashboard({ data, results }: { data: ForecastData; results?: ResultsData }) {
   const [office, setOffice] = useState<Office>("senate");
   const [query, setQuery] = useState("");
   const [mapState, setMapState] = useState<string | null>(null);
@@ -129,17 +130,22 @@ export function ForecastDashboard({ data }: { data: ForecastData }) {
   return <main className="forecast-shell" data-snapshot-id={data.snapshot_id}>
     <header className="desk-header" id="top">
       <a className="desk-wordmark" href="#top" aria-label="Election Forecast Lab home"><b>EF</b><span>Election Forecast Lab</span></a>
-      <nav aria-label="Primary navigation"><a href="#forecast">Forecast</a><a href="#election-map">Map</a><a href="#races">Races</a><a href="#early-vote">Early vote</a><a href="#methodology">Methods</a></nav>
-      <div className="desk-status"><i /> Updated {updateLabel}</div>
+      <nav aria-label="Primary navigation">{results && <a href="#results">Results</a>}<a href="#forecast">Forecast</a><a href="#election-map">Map</a><a href="#races">Races</a><a href="#methodology">Methods</a></nav>
+      <div className="desk-status"><i className={results ? "closed" : undefined} /> {results ? `Results as of ${results.compiled_at}` : `Updated ${updateLabel}`}</div>
     </header>
-    {data.final_release && <aside className="early-caution" data-final-forecast="locked"><strong>FINAL PRE-RESULT FORECAST · LOCKED {observationTime(data.final_release.frozen_at)}</strong><br />Fresh retrieval began {observationTime(data.final_release.refresh_started_at)}; {data.final_release.source_observations} source observations passed the refresh-window check. {data.final_release.archived_primary_review_urls.length > 0 && `${data.final_release.archived_primary_review_urls.length} older primary-release verification used a flagged archive, not a new live response. `}{data.final_release.scope}</aside>}
 
     <section className="desk-intro">
       <div className="desk-intro-copy">
-        <div className="desk-edition"><span>2026 MIDTERMS</span><span>{data.days_to_election} DAYS OUT</span><span>MODEL № 01</span></div>
-        <p className="desk-eyebrow">CURRENT CONTROL OUTLOOK</p>
-        <h1>{controlRead("House", houseMarket.bounded_market_context_probability)}<br /><span>{controlRead("Senate", senateMarket.bounded_market_context_probability)}</span></h1>
-        <p className="desk-deck">A race-by-race forecast combining sourced polling, historical fundamentals, candidate evidence and bounded prediction-market signals. Latest poll: {data.latest_poll_date}.</p>
+        <div className="desk-edition"><span>2026 MIDTERMS</span><span>{results ? "ELECTION OVER · POST-ELECTION REVIEW" : `${data.days_to_election} DAYS OUT`}</span><span>MODEL № 01</span></div>
+        {results ? <>
+          <p className="desk-eyebrow">ELECTION RESULT · NOVEMBER 3, 2026</p>
+          <h1>Democrats won the House and the Senate.<br /><span>The forecast had the right direction and too small a wave.</span></h1>
+          <p className="desk-deck">The final forecast was frozen before any results. It gave Democrats {pct(data.control.house.dem_control_probability)} to win the House and {pct(data.control.senate.dem_control_probability)} to win the Senate. Both happened. The Senate and governor counts landed inside the 90% ranges. The House landed above its range because the national swing was about {Math.round(results.national_vote.observed_dem_margin - results.national_vote.forecast_dem_margin)} points larger than projected. The forecast below is unchanged from the frozen release.</p>
+        </> : <>
+          <p className="desk-eyebrow">CURRENT CONTROL OUTLOOK</p>
+          <h1>{controlRead("House", houseMarket.bounded_market_context_probability)}<br /><span>{controlRead("Senate", senateMarket.bounded_market_context_probability)}</span></h1>
+          <p className="desk-deck">A race-by-race forecast combining sourced polling, historical fundamentals, candidate evidence and bounded prediction-market signals. Latest poll: {data.latest_poll_date}.</p>
+        </>}
       </div>
       <aside className="snapshot-panel" aria-label="Forecast data snapshot">
         <p>MODEL SNAPSHOT</p>
@@ -152,8 +158,12 @@ export function ForecastDashboard({ data }: { data: ForecastData }) {
       </aside>
     </section>
 
+    {results && <ResultsReview data={results} />}
+
+    {data.final_release && <aside className="section-shell final-lock"><p className="early-caution" data-final-forecast="locked"><strong>FINAL PRE-RESULT FORECAST · LOCKED {observationTime(data.final_release.frozen_at)}</strong><br />Everything below is the sealed pre-election forecast, unchanged after results. Fresh retrieval began {observationTime(data.final_release.refresh_started_at)}; {data.final_release.source_observations} source observations passed the refresh-window check. {data.final_release.archived_primary_review_urls.length > 0 && `${data.final_release.archived_primary_review_urls.length} older primary-release verification used a flagged archive, not a new live response. `}{data.final_release.scope}</p></aside>}
+
     <section className="control-board" id="forecast" aria-label="Forecast overview">
-      <div className="board-heading"><div><span>01</span><h2>Balance of power</h2></div><p>Model + bounded market context</p></div>
+      <div className="board-heading"><div><span>01</span><h2>Balance of power</h2></div><p>{results ? `Final forecast: ${controlRead("House", houseMarket.bounded_market_context_probability)} ${controlRead("Senate", senateMarket.bounded_market_context_probability)}` : "Model + bounded market context"}</p></div>
       <div className="control-list">
         {controlCards.map((card) => <article className="control-row" key={card.label}>
           <div className="control-name"><span>{card.label}</span><small>{card.note}</small></div>

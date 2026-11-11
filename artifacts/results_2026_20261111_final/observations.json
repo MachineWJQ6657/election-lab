@@ -1,0 +1,2832 @@
+[
+  {
+    "cycle": 2026,
+    "election_date": "2026-11-03",
+    "stage": "general",
+    "office": "senate",
+    "location": "TX",
+    "contest_type": "regular",
+    "source_id": "texas",
+    "status": "preliminary",
+    "winner_candidate": null,
+    "candidates": [
+      {
+        "name": "KEN PAXTON",
+        "party": "REPUBLICAN",
+        "votes": 4249373
+      },
+      {
+        "name": "JAMES TALARICO",
+        "party": "DEMOCRATIC",
+        "votes": 5444982
+      },
+      {
+        "name": "TED BROWN",
+        "party": "LIBERTARIAN",
+        "votes": 190237
+      },
+      {
+        "name": "AVERY AYERS",
+        "party": "WRITE-IN",
+        "votes": 1925
+      },
+      {
+        "name": "JADE SIMMONS",
+        "party": "WRITE-IN",
+        "votes": 1738
+      },
+      {
+        "name": "BRADFORD 'BRAD' HALL",
+        "party": "WRITE-IN",
+        "votes": 1263
+      },
+      {
+        "name": "ZUL MOHAMED",
+        "party": "WRITE-IN",
+        "votes": 186
+      }
+    ],
+    "vote_basis": "plurality",
+    "all_candidates_included": true,
+    "source_updated_at": "11/04/2026 04:59 PM",
+    "status_evidence": "Official reporting feed; no certificate of canvass or winner assertion.",
+    "certification_url": null,
+    "certified_at": null
+  },
+  {
+    "cycle": 2026,
+    "election_date": "2026-11-03",
+    "stage": "general",
+    "office": "house",
+    "location": "TX-01",
+    "contest_type": "regular",
+    "source_id": "texas",
+    "status": "preliminary",
+    "winner_candidate": null,
+    "candidates": [
+      {
+        "name": "NATHANIEL MORAN",
+        "party": "REPUBLICAN",
+        "votes": 181987
+      },
+      {
+        "name": "YOLANDA R.  PRINCE",
+        "party": "DEMOCRATIC",
+        "votes": 81598
+      }
+    ],
+    "vote_basis": "plurality",
+    "all_candidates_included": true,
+    "source_updated_at": "11/04/2026 04:59 PM",
+    "status_evidence": "Official reporting feed; no certificate of canvass or winner assertion.",
+    "certification_url": null,
+    "certified_at": null
+  },
+  {
+    "cycle": 2026,
+    "election_date": "2026-11-03",
+    "stage": "general",
+    "office": "house",
+    "location": "TX-02",
+    "contest_type": "regular",
+    "source_id": "texas",
+    "status": "preliminary",
+    "winner_candidate": null,
+    "candidates": [
+      {
+        "name": "STEVE TOTH",
+        "party": "REPUBLICAN",
+        "votes": 144748
+      },
+      {
+        "name": "SHAUN FINNIE",
+        "party": "DEMOCRATIC",
+        "votes": 139167
+      }
+    ],
+    "vote_basis": "plurality",
+    "all_candidates_included": true,
+    "source_updated_at": "11/04/2026 04:59 PM",
+    "status_evidence": "Official reporting feed; no certificate of canvass or winner assertion.",
+    "certification_url": null,
+    "certified_at": null
+  },
+  {
+    "cycle": 2026,
+    "election_date": "2026-11-03",
+    "stage": "general",
+    "office": "house",
+    "location": "TX-03",
+    "contest_type": "regular",
+    "source_id": "texas",
+    "status": "preliminary",
+    "winner_candidate": null,
+    "candidates": [
+      {
+        "name": "KEITH SELF",
+        "party": "REPUBLICAN",
+        "votes": 169243
+      },
+      {
+        "name": "EVAN HUNT",
+        "party": "DEMOCRATIC",
+        "votes": 151667
+      }
+    ],
+    "vote_basis": "plurality",
+    "all_candidates_included": true,
+    "source_updated_at": "11/04/2026 04:59 PM",
+    "status_evidence": "Official reporting feed; no certificate of canvass or winner assertion.",
+    "certification_url": null,
+    "certified_at": null
+  },
+  {
+    "cycle": 2026,
+    "election_date": "2026-11-03",
+    "stage": "general",
+    "office": "house",
+    "location": "TX-04",
+    "contest_type": "regular",
+    "source_id": "texas",
+    "status": "preliminary",
+    "winner_candidate": null,
+    "candidates": [
+      {
+        "name": "PAT FALLON",
+        "party": "REPUBLICAN",
+        "votes": 171652
+      },
+      {
+        "name": "JASON PEARCE",
+        "party": "DEMOCRATIC",
+        "votes": 134563
+      }
+    ],
+    "vote_basis": "plurality",
+    "all_candidates_included": true,
+    "source_updated_at": "11/04/2026 04:59 PM",
+    "status_evidence": "Official reporting feed; no certificate of canvass or winner assertion.",
+    "certification_url": null,
+    "certified_at": null
+  },
+  {
+    "cycle": 2026,
+    "election_date": "2026-11-03",
+    "stage": "general",
+    "office": "house",
+    "location": "TX-05",
+    "contest_type": "regular",
+    "source_id": "texas",
+    "status": "preliminary",
+    "winner_candidate": null,
+    "candidates": [
+      {
+        "name": "LANCE GOODEN",
+        "party": "REPUBLICAN",
+        "votes": 130278
+      },
+      {
+        "name": "CHELSEY HOCKETT",
+        "party": "DEMOCRATIC",
+        "votes": 122855
+      }
+    ],
+    "vote_basis": "plurality",
+    "all_candidates_included": true,
+    "source_updated_at": "11/04/2026 04:59 PM",
+    "status_evidence": "Official reporting feed; no certificate of canvass or winner assertion.",
+    "certification_url": null,
+    "certified_at": null
+  },
+  {
+    "cycle": 2026,
+    "election_date": "2026-11-03",
+    "stage": "general",
+    "office": "house",
+    "location": "TX-06",
+    "contest_type": "regular",
+    "source_id": "texas",
+    "status": "preliminary",
+    "winner_candidate": null,
+    "candidates": [
+      {
+        "name": "JAKE ELLZEY",
+        "party": "REPUBLICAN",
+        "votes": 140014
+      },
+      {
+        "name": "DANNY MINTON",
+        "party": "DEMOCRATIC",
+        "votes": 128394
+      }
+    ],
+    "vote_basis": "plurality",
+    "all_candidates_included": true,
+    "source_updated_at": "11/04/2026 04:59 PM",
+    "status_evidence": "Official reporting feed; no certificate of canvass or winner assertion.",
+    "certification_url": null,
+    "certified_at": null
+  },
+  {
+    "cycle": 2026,
+    "election_date": "2026-11-03",
+    "stage": "general",
+    "office": "house",
+    "location": "TX-07",
+    "contest_type": "regular",
+    "source_id": "texas",
+    "status": "preliminary",
+    "winner_candidate": null,
+    "candidates": [
+      {
+        "name": "ALEXANDER HALE",
+        "party": "REPUBLICAN",
+        "votes": 62385
+      },
+      {
+        "name": "LIZZIE PANNILL FLETCHER",
+        "party": "DEMOCRATIC",
+        "votes": 160453
+      },
+      {
+        "name": "ESPOIR NGABO",
+        "party": "GREEN",
+        "votes": 3652
+      }
+    ],
+    "vote_basis": "plurality",
+    "all_candidates_included": true,
+    "source_updated_at": "11/04/2026 04:59 PM",
+    "status_evidence": "Official reporting feed; no certificate of canvass or winner assertion.",
+    "certification_url": null,
+    "certified_at": null
+  },
+  {
+    "cycle": 2026,
+    "election_date": "2026-11-03",
+    "stage": "general",
+    "office": "house",
+    "location": "TX-08",
+    "contest_type": "regular",
+    "source_id": "texas",
+    "status": "preliminary",
+    "winner_candidate": null,
+    "candidates": [
+      {
+        "name": "JESSICA HART STEINMANN",
+        "party": "REPUBLICAN",
+        "votes": 141786
+      },
+      {
+        "name": "LAURA JONES",
+        "party": "DEMOCRATIC",
+        "votes": 124680
+      }
+    ],
+    "vote_basis": "plurality",
+    "all_candidates_included": true,
+    "source_updated_at": "11/04/2026 04:59 PM",
+    "status_evidence": "Official reporting feed; no certificate of canvass or winner assertion.",
+    "certification_url": null,
+    "certified_at": null
+  },
+  {
+    "cycle": 2026,
+    "election_date": "2026-11-03",
+    "stage": "general",
+    "office": "house",
+    "location": "TX-09",
+    "contest_type": "regular",
+    "source_id": "texas",
+    "status": "preliminary",
+    "winner_candidate": null,
+    "candidates": [
+      {
+        "name": "ALEX MEALER",
+        "party": "REPUBLICAN",
+        "votes": 72340
+      },
+      {
+        "name": "LETICIA GUTIERREZ",
+        "party": "DEMOCRATIC",
+        "votes": 98079
+      }
+    ],
+    "vote_basis": "plurality",
+    "all_candidates_included": true,
+    "source_updated_at": "11/04/2026 04:59 PM",
+    "status_evidence": "Official reporting feed; no certificate of canvass or winner assertion.",
+    "certification_url": null,
+    "certified_at": null
+  },
+  {
+    "cycle": 2026,
+    "election_date": "2026-11-03",
+    "stage": "general",
+    "office": "house",
+    "location": "TX-10",
+    "contest_type": "regular",
+    "source_id": "texas",
+    "status": "preliminary",
+    "winner_candidate": null,
+    "candidates": [
+      {
+        "name": "CHRIS GOBER",
+        "party": "REPUBLICAN",
+        "votes": 161425
+      },
+      {
+        "name": "CAITLIN ROURK",
+        "party": "DEMOCRATIC",
+        "votes": 138832
+      }
+    ],
+    "vote_basis": "plurality",
+    "all_candidates_included": true,
+    "source_updated_at": "11/04/2026 04:59 PM",
+    "status_evidence": "Official reporting feed; no certificate of canvass or winner assertion.",
+    "certification_url": null,
+    "certified_at": null
+  },
+  {
+    "cycle": 2026,
+    "election_date": "2026-11-03",
+    "stage": "general",
+    "office": "house",
+    "location": "TX-11",
+    "contest_type": "regular",
+    "source_id": "texas",
+    "status": "preliminary",
+    "winner_candidate": null,
+    "candidates": [
+      {
+        "name": "AUGUST PFLUGER",
+        "party": "REPUBLICAN",
+        "votes": 138627
+      },
+      {
+        "name": "CLAIRE REYNOLDS",
+        "party": "DEMOCRATIC",
+        "votes": 94353
+      }
+    ],
+    "vote_basis": "plurality",
+    "all_candidates_included": true,
+    "source_updated_at": "11/04/2026 04:59 PM",
+    "status_evidence": "Official reporting feed; no certificate of canvass or winner assertion.",
+    "certification_url": null,
+    "certified_at": null
+  },
+  {
+    "cycle": 2026,
+    "election_date": "2026-11-03",
+    "stage": "general",
+    "office": "house",
+    "location": "TX-12",
+    "contest_type": "regular",
+    "source_id": "texas",
+    "status": "preliminary",
+    "winner_candidate": null,
+    "candidates": [
+      {
+        "name": "CRAIG GOLDMAN",
+        "party": "REPUBLICAN",
+        "votes": 144438
+      },
+      {
+        "name": "ANGELA 'HELI' RODRIGUEZ PRILLIMAN",
+        "party": "DEMOCRATIC",
+        "votes": 127456
+      }
+    ],
+    "vote_basis": "plurality",
+    "all_candidates_included": true,
+    "source_updated_at": "11/04/2026 04:59 PM",
+    "status_evidence": "Official reporting feed; no certificate of canvass or winner assertion.",
+    "certification_url": null,
+    "certified_at": null
+  },
+  {
+    "cycle": 2026,
+    "election_date": "2026-11-03",
+    "stage": "general",
+    "office": "house",
+    "location": "TX-13",
+    "contest_type": "regular",
+    "source_id": "texas",
+    "status": "preliminary",
+    "winner_candidate": null,
+    "candidates": [
+      {
+        "name": "RONNY JACKSON",
+        "party": "REPUBLICAN",
+        "votes": 158134
+      },
+      {
+        "name": "MARK NAIR",
+        "party": "DEMOCRATIC",
+        "votes": 84197
+      }
+    ],
+    "vote_basis": "plurality",
+    "all_candidates_included": true,
+    "source_updated_at": "11/04/2026 04:59 PM",
+    "status_evidence": "Official reporting feed; no certificate of canvass or winner assertion.",
+    "certification_url": null,
+    "certified_at": null
+  },
+  {
+    "cycle": 2026,
+    "election_date": "2026-11-03",
+    "stage": "general",
+    "office": "house",
+    "location": "TX-14",
+    "contest_type": "regular",
+    "source_id": "texas",
+    "status": "preliminary",
+    "winner_candidate": null,
+    "candidates": [
+      {
+        "name": "RANDY WEBER",
+        "party": "REPUBLICAN",
+        "votes": 152618
+      },
+      {
+        "name": "THURMAN BILL BARTIE",
+        "party": "DEMOCRATIC",
+        "votes": 129931
+      }
+    ],
+    "vote_basis": "plurality",
+    "all_candidates_included": true,
+    "source_updated_at": "11/04/2026 04:59 PM",
+    "status_evidence": "Official reporting feed; no certificate of canvass or winner assertion.",
+    "certification_url": null,
+    "certified_at": null
+  },
+  {
+    "cycle": 2026,
+    "election_date": "2026-11-03",
+    "stage": "general",
+    "office": "house",
+    "location": "TX-15",
+    "contest_type": "regular",
+    "source_id": "texas",
+    "status": "preliminary",
+    "winner_candidate": null,
+    "candidates": [
+      {
+        "name": "MONICA DE LA CRUZ",
+        "party": "REPUBLICAN",
+        "votes": 76305
+      },
+      {
+        "name": "BOBBY PULIDO",
+        "party": "DEMOCRATIC",
+        "votes": 126204
+      }
+    ],
+    "vote_basis": "plurality",
+    "all_candidates_included": true,
+    "source_updated_at": "11/04/2026 04:59 PM",
+    "status_evidence": "Official reporting feed; no certificate of canvass or winner assertion.",
+    "certification_url": null,
+    "certified_at": null
+  },
+  {
+    "cycle": 2026,
+    "election_date": "2026-11-03",
+    "stage": "general",
+    "office": "house",
+    "location": "TX-16",
+    "contest_type": "regular",
+    "source_id": "texas",
+    "status": "preliminary",
+    "winner_candidate": null,
+    "candidates": [
+      {
+        "name": "ADAM BAUMAN",
+        "party": "REPUBLICAN",
+        "votes": 57247
+      },
+      {
+        "name": "VERONICA ESCOBAR",
+        "party": "DEMOCRATIC",
+        "votes": 138543
+      }
+    ],
+    "vote_basis": "plurality",
+    "all_candidates_included": true,
+    "source_updated_at": "11/04/2026 04:59 PM",
+    "status_evidence": "Official reporting feed; no certificate of canvass or winner assertion.",
+    "certification_url": null,
+    "certified_at": null
+  },
+  {
+    "cycle": 2026,
+    "election_date": "2026-11-03",
+    "stage": "general",
+    "office": "house",
+    "location": "TX-17",
+    "contest_type": "regular",
+    "source_id": "texas",
+    "status": "preliminary",
+    "winner_candidate": null,
+    "candidates": [
+      {
+        "name": "PETE SESSIONS",
+        "party": "REPUBLICAN",
+        "votes": 143524
+      },
+      {
+        "name": "CASEY SHEPARD",
+        "party": "DEMOCRATIC",
+        "votes": 124433
+      }
+    ],
+    "vote_basis": "plurality",
+    "all_candidates_included": true,
+    "source_updated_at": "11/04/2026 04:59 PM",
+    "status_evidence": "Official reporting feed; no certificate of canvass or winner assertion.",
+    "certification_url": null,
+    "certified_at": null
+  },
+  {
+    "cycle": 2026,
+    "election_date": "2026-11-03",
+    "stage": "general",
+    "office": "house",
+    "location": "TX-18",
+    "contest_type": "regular",
+    "source_id": "texas",
+    "status": "preliminary",
+    "winner_candidate": null,
+    "candidates": [
+      {
+        "name": "RONALD DWAYNE WHITFIELD",
+        "party": "REPUBLICAN",
+        "votes": 31333
+      },
+      {
+        "name": "CHRISTIAN DASHAUN MENEFEE",
+        "party": "DEMOCRATIC",
+        "votes": 193144
+      }
+    ],
+    "vote_basis": "plurality",
+    "all_candidates_included": true,
+    "source_updated_at": "11/04/2026 04:59 PM",
+    "status_evidence": "Official reporting feed; no certificate of canvass or winner assertion.",
+    "certification_url": null,
+    "certified_at": null
+  },
+  {
+    "cycle": 2026,
+    "election_date": "2026-11-03",
+    "stage": "general",
+    "office": "house",
+    "location": "TX-19",
+    "contest_type": "regular",
+    "source_id": "texas",
+    "status": "preliminary",
+    "winner_candidate": null,
+    "candidates": [
+      {
+        "name": "TOM SELL",
+        "party": "REPUBLICAN",
+        "votes": 154079
+      },
+      {
+        "name": "KYLE RABLE",
+        "party": "DEMOCRATIC",
+        "votes": 67674
+      }
+    ],
+    "vote_basis": "plurality",
+    "all_candidates_included": true,
+    "source_updated_at": "11/04/2026 04:59 PM",
+    "status_evidence": "Official reporting feed; no certificate of canvass or winner assertion.",
+    "certification_url": null,
+    "certified_at": null
+  },
+  {
+    "cycle": 2026,
+    "election_date": "2026-11-03",
+    "stage": "general",
+    "office": "house",
+    "location": "TX-20",
+    "contest_type": "regular",
+    "source_id": "texas",
+    "status": "preliminary",
+    "winner_candidate": null,
+    "candidates": [
+      {
+        "name": "EDGARDO RAFAEL BAEZ",
+        "party": "REPUBLICAN",
+        "votes": 43097
+      },
+      {
+        "name": "JOAQUIN CASTRO",
+        "party": "DEMOCRATIC",
+        "votes": 149397
+      }
+    ],
+    "vote_basis": "plurality",
+    "all_candidates_included": true,
+    "source_updated_at": "11/04/2026 04:59 PM",
+    "status_evidence": "Official reporting feed; no certificate of canvass or winner assertion.",
+    "certification_url": null,
+    "certified_at": null
+  },
+  {
+    "cycle": 2026,
+    "election_date": "2026-11-03",
+    "stage": "general",
+    "office": "house",
+    "location": "TX-21",
+    "contest_type": "regular",
+    "source_id": "texas",
+    "status": "preliminary",
+    "winner_candidate": null,
+    "candidates": [
+      {
+        "name": "MARK TEIXEIRA",
+        "party": "REPUBLICAN",
+        "votes": 194302
+      },
+      {
+        "name": "KRISTIN HOOK",
+        "party": "DEMOCRATIC",
+        "votes": 162088
+      }
+    ],
+    "vote_basis": "plurality",
+    "all_candidates_included": true,
+    "source_updated_at": "11/04/2026 04:59 PM",
+    "status_evidence": "Official reporting feed; no certificate of canvass or winner assertion.",
+    "certification_url": null,
+    "certified_at": null
+  },
+  {
+    "cycle": 2026,
+    "election_date": "2026-11-03",
+    "stage": "general",
+    "office": "house",
+    "location": "TX-22",
+    "contest_type": "regular",
+    "source_id": "texas",
+    "status": "preliminary",
+    "winner_candidate": null,
+    "candidates": [
+      {
+        "name": "TREVER NEHLS",
+        "party": "REPUBLICAN",
+        "votes": 150164
+      },
+      {
+        "name": "MARQUETTE GREENE-SCOTT",
+        "party": "DEMOCRATIC",
+        "votes": 139601
+      }
+    ],
+    "vote_basis": "plurality",
+    "all_candidates_included": true,
+    "source_updated_at": "11/04/2026 04:59 PM",
+    "status_evidence": "Official reporting feed; no certificate of canvass or winner assertion.",
+    "certification_url": null,
+    "certified_at": null
+  },
+  {
+    "cycle": 2026,
+    "election_date": "2026-11-03",
+    "stage": "general",
+    "office": "house",
+    "location": "TX-23",
+    "contest_type": "regular",
+    "source_id": "texas",
+    "status": "preliminary",
+    "winner_candidate": null,
+    "candidates": [
+      {
+        "name": "BRANDON HERRERA",
+        "party": "REPUBLICAN",
+        "votes": 119795
+      },
+      {
+        "name": "KATY PADILLA STOUT",
+        "party": "DEMOCRATIC",
+        "votes": 142032
+      },
+      {
+        "name": "BEN MENDOZA",
+        "party": "INDEPENDENT",
+        "votes": 10610
+      }
+    ],
+    "vote_basis": "plurality",
+    "all_candidates_included": true,
+    "source_updated_at": "11/04/2026 04:59 PM",
+    "status_evidence": "Official reporting feed; no certificate of canvass or winner assertion.",
+    "certification_url": null,
+    "certified_at": null
+  },
+  {
+    "cycle": 2026,
+    "election_date": "2026-11-03",
+    "stage": "general",
+    "office": "house",
+    "location": "TX-24",
+    "contest_type": "regular",
+    "source_id": "texas",
+    "status": "preliminary",
+    "winner_candidate": null,
+    "candidates": [
+      {
+        "name": "BETH VAN DUYNE",
+        "party": "REPUBLICAN",
+        "votes": 171751
+      },
+      {
+        "name": "KEVIN BURGE",
+        "party": "DEMOCRATIC",
+        "votes": 149697
+      }
+    ],
+    "vote_basis": "plurality",
+    "all_candidates_included": true,
+    "source_updated_at": "11/04/2026 04:59 PM",
+    "status_evidence": "Official reporting feed; no certificate of canvass or winner assertion.",
+    "certification_url": null,
+    "certified_at": null
+  },
+  {
+    "cycle": 2026,
+    "election_date": "2026-11-03",
+    "stage": "general",
+    "office": "house",
+    "location": "TX-25",
+    "contest_type": "regular",
+    "source_id": "texas",
+    "status": "preliminary",
+    "winner_candidate": null,
+    "candidates": [
+      {
+        "name": "ROGER WILLIAMS",
+        "party": "REPUBLICAN",
+        "votes": 142721
+      },
+      {
+        "name": "DIONE SIMS",
+        "party": "DEMOCRATIC",
+        "votes": 122854
+      }
+    ],
+    "vote_basis": "plurality",
+    "all_candidates_included": true,
+    "source_updated_at": "11/04/2026 04:59 PM",
+    "status_evidence": "Official reporting feed; no certificate of canvass or winner assertion.",
+    "certification_url": null,
+    "certified_at": null
+  },
+  {
+    "cycle": 2026,
+    "election_date": "2026-11-03",
+    "stage": "general",
+    "office": "house",
+    "location": "TX-26",
+    "contest_type": "regular",
+    "source_id": "texas",
+    "status": "preliminary",
+    "winner_candidate": null,
+    "candidates": [
+      {
+        "name": "BRANDON GILL",
+        "party": "REPUBLICAN",
+        "votes": 182648
+      },
+      {
+        "name": "STEVEN SHOOK",
+        "party": "DEMOCRATIC",
+        "votes": 147944
+      },
+      {
+        "name": "PHIL GRAY",
+        "party": "LIBERTARIAN",
+        "votes": 4308
+      }
+    ],
+    "vote_basis": "plurality",
+    "all_candidates_included": true,
+    "source_updated_at": "11/04/2026 04:59 PM",
+    "status_evidence": "Official reporting feed; no certificate of canvass or winner assertion.",
+    "certification_url": null,
+    "certified_at": null
+  },
+  {
+    "cycle": 2026,
+    "election_date": "2026-11-03",
+    "stage": "general",
+    "office": "house",
+    "location": "TX-27",
+    "contest_type": "regular",
+    "source_id": "texas",
+    "status": "preliminary",
+    "winner_candidate": null,
+    "candidates": [
+      {
+        "name": "MICHAEL CLOUD",
+        "party": "REPUBLICAN",
+        "votes": 144467
+      },
+      {
+        "name": "TANYA LLOYD",
+        "party": "DEMOCRATIC",
+        "votes": 137927
+      },
+      {
+        "name": "WAYNE RAASCH",
+        "party": "WRITE-IN",
+        "votes": 22
+      }
+    ],
+    "vote_basis": "plurality",
+    "all_candidates_included": true,
+    "source_updated_at": "11/04/2026 04:59 PM",
+    "status_evidence": "Official reporting feed; no certificate of canvass or winner assertion.",
+    "certification_url": null,
+    "certified_at": null
+  },
+  {
+    "cycle": 2026,
+    "election_date": "2026-11-03",
+    "stage": "general",
+    "office": "house",
+    "location": "TX-28",
+    "contest_type": "regular",
+    "source_id": "texas",
+    "status": "preliminary",
+    "winner_candidate": null,
+    "candidates": [
+      {
+        "name": "TANO E. TIJERINA",
+        "party": "REPUBLICAN",
+        "votes": 51065
+      },
+      {
+        "name": "HENRY CUELLAR",
+        "party": "DEMOCRATIC",
+        "votes": 113315
+      },
+      {
+        "name": "MARL\u00d3N DUR\u00c1N",
+        "party": "GREEN",
+        "votes": 7932
+      }
+    ],
+    "vote_basis": "plurality",
+    "all_candidates_included": true,
+    "source_updated_at": "11/04/2026 04:59 PM",
+    "status_evidence": "Official reporting feed; no certificate of canvass or winner assertion.",
+    "certification_url": null,
+    "certified_at": null
+  },
+  {
+    "cycle": 2026,
+    "election_date": "2026-11-03",
+    "stage": "general",
+    "office": "house",
+    "location": "TX-29",
+    "contest_type": "regular",
+    "source_id": "texas",
+    "status": "preliminary",
+    "winner_candidate": null,
+    "candidates": [
+      {
+        "name": "MARTHA FIERRO",
+        "party": "REPUBLICAN",
+        "votes": 33619
+      },
+      {
+        "name": "SYLVIA GARCIA",
+        "party": "DEMOCRATIC",
+        "votes": 133989
+      }
+    ],
+    "vote_basis": "plurality",
+    "all_candidates_included": true,
+    "source_updated_at": "11/04/2026 04:59 PM",
+    "status_evidence": "Official reporting feed; no certificate of canvass or winner assertion.",
+    "certification_url": null,
+    "certified_at": null
+  },
+  {
+    "cycle": 2026,
+    "election_date": "2026-11-03",
+    "stage": "general",
+    "office": "house",
+    "location": "TX-30",
+    "contest_type": "regular",
+    "source_id": "texas",
+    "status": "preliminary",
+    "winner_candidate": null,
+    "candidates": [
+      {
+        "name": "EVERETT JACKSON",
+        "party": "REPUBLICAN",
+        "votes": 39247
+      },
+      {
+        "name": "FREDERICK D. HAYNES III",
+        "party": "DEMOCRATIC",
+        "votes": 186871
+      }
+    ],
+    "vote_basis": "plurality",
+    "all_candidates_included": true,
+    "source_updated_at": "11/04/2026 04:59 PM",
+    "status_evidence": "Official reporting feed; no certificate of canvass or winner assertion.",
+    "certification_url": null,
+    "certified_at": null
+  },
+  {
+    "cycle": 2026,
+    "election_date": "2026-11-03",
+    "stage": "general",
+    "office": "house",
+    "location": "TX-31",
+    "contest_type": "regular",
+    "source_id": "texas",
+    "status": "preliminary",
+    "winner_candidate": null,
+    "candidates": [
+      {
+        "name": "JOHN CARTER",
+        "party": "REPUBLICAN",
+        "votes": 164012
+      },
+      {
+        "name": "JUSTIN EARLY",
+        "party": "DEMOCRATIC",
+        "votes": 136734
+      },
+      {
+        "name": "GREG STOKER",
+        "party": "GREEN",
+        "votes": 4227
+      }
+    ],
+    "vote_basis": "plurality",
+    "all_candidates_included": true,
+    "source_updated_at": "11/04/2026 04:59 PM",
+    "status_evidence": "Official reporting feed; no certificate of canvass or winner assertion.",
+    "certification_url": null,
+    "certified_at": null
+  },
+  {
+    "cycle": 2026,
+    "election_date": "2026-11-03",
+    "stage": "general",
+    "office": "house",
+    "location": "TX-32",
+    "contest_type": "regular",
+    "source_id": "texas",
+    "status": "preliminary",
+    "winner_candidate": null,
+    "candidates": [
+      {
+        "name": "JACE YARBROUGH",
+        "party": "REPUBLICAN",
+        "votes": 142834
+      },
+      {
+        "name": "DAN BARRIOS",
+        "party": "DEMOCRATIC",
+        "votes": 134781
+      }
+    ],
+    "vote_basis": "plurality",
+    "all_candidates_included": true,
+    "source_updated_at": "11/04/2026 04:59 PM",
+    "status_evidence": "Official reporting feed; no certificate of canvass or winner assertion.",
+    "certification_url": null,
+    "certified_at": null
+  },
+  {
+    "cycle": 2026,
+    "election_date": "2026-11-03",
+    "stage": "general",
+    "office": "house",
+    "location": "TX-33",
+    "contest_type": "regular",
+    "source_id": "texas",
+    "status": "preliminary",
+    "winner_candidate": null,
+    "candidates": [
+      {
+        "name": "PATRICK DAVID GILLESPIE",
+        "party": "REPUBLICAN",
+        "votes": 41157
+      },
+      {
+        "name": "COLIN ALLRED",
+        "party": "DEMOCRATIC",
+        "votes": 150891
+      },
+      {
+        "name": "MICHELLE CRAIG",
+        "party": "WRITE-IN",
+        "votes": 52
+      }
+    ],
+    "vote_basis": "plurality",
+    "all_candidates_included": true,
+    "source_updated_at": "11/04/2026 04:59 PM",
+    "status_evidence": "Official reporting feed; no certificate of canvass or winner assertion.",
+    "certification_url": null,
+    "certified_at": null
+  },
+  {
+    "cycle": 2026,
+    "election_date": "2026-11-03",
+    "stage": "general",
+    "office": "house",
+    "location": "TX-34",
+    "contest_type": "regular",
+    "source_id": "texas",
+    "status": "preliminary",
+    "winner_candidate": null,
+    "candidates": [
+      {
+        "name": "ERIC FLORES",
+        "party": "REPUBLICAN",
+        "votes": 80168
+      },
+      {
+        "name": "VICENTE GONZALEZ",
+        "party": "DEMOCRATIC",
+        "votes": 112547
+      },
+      {
+        "name": "CHRIS ROYAL",
+        "party": "LIBERTARIAN",
+        "votes": 4639
+      },
+      {
+        "name": "EDDIE ESPINOZA",
+        "party": "GREEN",
+        "votes": 4737
+      }
+    ],
+    "vote_basis": "plurality",
+    "all_candidates_included": true,
+    "source_updated_at": "11/04/2026 04:59 PM",
+    "status_evidence": "Official reporting feed; no certificate of canvass or winner assertion.",
+    "certification_url": null,
+    "certified_at": null
+  },
+  {
+    "cycle": 2026,
+    "election_date": "2026-11-03",
+    "stage": "general",
+    "office": "house",
+    "location": "TX-35",
+    "contest_type": "regular",
+    "source_id": "texas",
+    "status": "preliminary",
+    "winner_candidate": null,
+    "candidates": [
+      {
+        "name": "CARLOS DE LA CRUZ",
+        "party": "REPUBLICAN",
+        "votes": 112574
+      },
+      {
+        "name": "JOHNNY C. GARCIA",
+        "party": "DEMOCRATIC",
+        "votes": 139984
+      }
+    ],
+    "vote_basis": "plurality",
+    "all_candidates_included": true,
+    "source_updated_at": "11/04/2026 04:59 PM",
+    "status_evidence": "Official reporting feed; no certificate of canvass or winner assertion.",
+    "certification_url": null,
+    "certified_at": null
+  },
+  {
+    "cycle": 2026,
+    "election_date": "2026-11-03",
+    "stage": "general",
+    "office": "house",
+    "location": "TX-36",
+    "contest_type": "regular",
+    "source_id": "texas",
+    "status": "preliminary",
+    "winner_candidate": null,
+    "candidates": [
+      {
+        "name": "BRIAN BABIN",
+        "party": "REPUBLICAN",
+        "votes": 138008
+      },
+      {
+        "name": "RHONDA HART",
+        "party": "DEMOCRATIC",
+        "votes": 119681
+      }
+    ],
+    "vote_basis": "plurality",
+    "all_candidates_included": true,
+    "source_updated_at": "11/04/2026 04:59 PM",
+    "status_evidence": "Official reporting feed; no certificate of canvass or winner assertion.",
+    "certification_url": null,
+    "certified_at": null
+  },
+  {
+    "cycle": 2026,
+    "election_date": "2026-11-03",
+    "stage": "general",
+    "office": "house",
+    "location": "TX-37",
+    "contest_type": "regular",
+    "source_id": "texas",
+    "status": "preliminary",
+    "winner_candidate": null,
+    "candidates": [
+      {
+        "name": "LAUREN B. PE\u00d1A",
+        "party": "REPUBLICAN",
+        "votes": 49469
+      },
+      {
+        "name": "GREG CASAR",
+        "party": "DEMOCRATIC",
+        "votes": 254957
+      }
+    ],
+    "vote_basis": "plurality",
+    "all_candidates_included": true,
+    "source_updated_at": "11/04/2026 04:59 PM",
+    "status_evidence": "Official reporting feed; no certificate of canvass or winner assertion.",
+    "certification_url": null,
+    "certified_at": null
+  },
+  {
+    "cycle": 2026,
+    "election_date": "2026-11-03",
+    "stage": "general",
+    "office": "house",
+    "location": "TX-38",
+    "contest_type": "regular",
+    "source_id": "texas",
+    "status": "preliminary",
+    "winner_candidate": null,
+    "candidates": [
+      {
+        "name": "JON BONCK",
+        "party": "REPUBLICAN",
+        "votes": 157261
+      },
+      {
+        "name": "MELISSA MCDONOUGH",
+        "party": "DEMOCRATIC",
+        "votes": 144397
+      },
+      {
+        "name": "ALEX MCMENEMY",
+        "party": "GREEN",
+        "votes": 3443
+      }
+    ],
+    "vote_basis": "plurality",
+    "all_candidates_included": true,
+    "source_updated_at": "11/04/2026 04:59 PM",
+    "status_evidence": "Official reporting feed; no certificate of canvass or winner assertion.",
+    "certification_url": null,
+    "certified_at": null
+  },
+  {
+    "cycle": 2026,
+    "election_date": "2026-11-03",
+    "stage": "general",
+    "office": "governor",
+    "location": "TX",
+    "contest_type": "regular",
+    "source_id": "texas",
+    "status": "preliminary",
+    "winner_candidate": null,
+    "candidates": [
+      {
+        "name": "GREG ABBOTT",
+        "party": "REPUBLICAN",
+        "votes": 4524527
+      },
+      {
+        "name": "GINA HINOJOSA",
+        "party": "DEMOCRATIC",
+        "votes": 5230789
+      },
+      {
+        "name": "PAT DIXON",
+        "party": "LIBERTARIAN",
+        "votes": 148078
+      },
+      {
+        "name": "JENN MACK",
+        "party": "WRITE-IN",
+        "votes": 2198
+      },
+      {
+        "name": "MIKE MILLER",
+        "party": "WRITE-IN",
+        "votes": 1266
+      },
+      {
+        "name": "EDWARD EARL GILES",
+        "party": "WRITE-IN",
+        "votes": 449
+      },
+      {
+        "name": "JINGHPAW MAJOISHINGRA",
+        "party": "WRITE-IN",
+        "votes": 74
+      }
+    ],
+    "vote_basis": "plurality",
+    "all_candidates_included": true,
+    "source_updated_at": "11/04/2026 04:59 PM",
+    "status_evidence": "Official reporting feed; no certificate of canvass or winner assertion.",
+    "certification_url": null,
+    "certified_at": null
+  },
+  {
+    "cycle": 2026,
+    "election_date": "2026-11-03",
+    "stage": "general",
+    "office": "house",
+    "location": "NC-01",
+    "contest_type": "regular",
+    "source_id": "north_carolina",
+    "status": "preliminary",
+    "winner_candidate": null,
+    "candidates": [
+      {
+        "name": "Don Davis",
+        "party": "DEM",
+        "votes": 157489
+      },
+      {
+        "name": "Laurie Buckhout",
+        "party": "REP",
+        "votes": 146700
+      },
+      {
+        "name": "Tom Bailey",
+        "party": "LIB",
+        "votes": 9945
+      }
+    ],
+    "vote_basis": "plurality",
+    "all_candidates_included": true,
+    "source_updated_at": null,
+    "status_evidence": "Official reporting feed; no certificate of canvass or winner assertion.",
+    "certification_url": null,
+    "certified_at": null
+  },
+  {
+    "cycle": 2026,
+    "election_date": "2026-11-03",
+    "stage": "general",
+    "office": "house",
+    "location": "NC-02",
+    "contest_type": "regular",
+    "source_id": "north_carolina",
+    "status": "preliminary",
+    "winner_candidate": null,
+    "candidates": [
+      {
+        "name": "Deborah K. Ross",
+        "party": "DEM",
+        "votes": 246476
+      },
+      {
+        "name": "Eugene F. Douglass",
+        "party": "REP",
+        "votes": 76980
+      },
+      {
+        "name": "Matthew Laszacs",
+        "party": "LIB",
+        "votes": 4298
+      },
+      {
+        "name": "Write-In (Miscellaneous)",
+        "party": "nan",
+        "votes": 535
+      }
+    ],
+    "vote_basis": "plurality",
+    "all_candidates_included": true,
+    "source_updated_at": null,
+    "status_evidence": "Official reporting feed; no certificate of canvass or winner assertion.",
+    "certification_url": null,
+    "certified_at": null
+  },
+  {
+    "cycle": 2026,
+    "election_date": "2026-11-03",
+    "stage": "general",
+    "office": "house",
+    "location": "NC-03",
+    "contest_type": "regular",
+    "source_id": "north_carolina",
+    "status": "preliminary",
+    "winner_candidate": null,
+    "candidates": [
+      {
+        "name": "Daniel Cavender",
+        "party": "LIB",
+        "votes": 3007
+      },
+      {
+        "name": "Greg Murphy",
+        "party": "REP",
+        "votes": 118195
+      },
+      {
+        "name": "Raymond Smith",
+        "party": "DEM",
+        "votes": 118488
+      }
+    ],
+    "vote_basis": "plurality",
+    "all_candidates_included": true,
+    "source_updated_at": null,
+    "status_evidence": "Official reporting feed; no certificate of canvass or winner assertion.",
+    "certification_url": null,
+    "certified_at": null
+  },
+  {
+    "cycle": 2026,
+    "election_date": "2026-11-03",
+    "stage": "general",
+    "office": "house",
+    "location": "NC-04",
+    "contest_type": "regular",
+    "source_id": "north_carolina",
+    "status": "preliminary",
+    "winner_candidate": null,
+    "candidates": [
+      {
+        "name": "Guy Meilleur",
+        "party": "LIB",
+        "votes": 7005
+      },
+      {
+        "name": "Mahesh (Max) Ganorkar",
+        "party": "REP",
+        "votes": 68025
+      },
+      {
+        "name": "Valerie P. Foushee",
+        "party": "DEM",
+        "votes": 284629
+      }
+    ],
+    "vote_basis": "plurality",
+    "all_candidates_included": true,
+    "source_updated_at": null,
+    "status_evidence": "Official reporting feed; no certificate of canvass or winner assertion.",
+    "certification_url": null,
+    "certified_at": null
+  },
+  {
+    "cycle": 2026,
+    "election_date": "2026-11-03",
+    "stage": "general",
+    "office": "house",
+    "location": "NC-05",
+    "contest_type": "regular",
+    "source_id": "north_carolina",
+    "status": "preliminary",
+    "winner_candidate": null,
+    "candidates": [
+      {
+        "name": "Chuck Hubbard",
+        "party": "DEM",
+        "votes": 139672
+      },
+      {
+        "name": "Robert B. Luffman",
+        "party": "LIB",
+        "votes": 7574
+      },
+      {
+        "name": "Virginia Foxx",
+        "party": "REP",
+        "votes": 139347
+      }
+    ],
+    "vote_basis": "plurality",
+    "all_candidates_included": true,
+    "source_updated_at": null,
+    "status_evidence": "Official reporting feed; no certificate of canvass or winner assertion.",
+    "certification_url": null,
+    "certified_at": null
+  },
+  {
+    "cycle": 2026,
+    "election_date": "2026-11-03",
+    "stage": "general",
+    "office": "house",
+    "location": "NC-06",
+    "contest_type": "regular",
+    "source_id": "north_carolina",
+    "status": "preliminary",
+    "winner_candidate": null,
+    "candidates": [
+      {
+        "name": "Addison McDowell",
+        "party": "REP",
+        "votes": 134108
+      },
+      {
+        "name": "Cyril Jefferson",
+        "party": "DEM",
+        "votes": 140727
+      }
+    ],
+    "vote_basis": "plurality",
+    "all_candidates_included": true,
+    "source_updated_at": null,
+    "status_evidence": "Official reporting feed; no certificate of canvass or winner assertion.",
+    "certification_url": null,
+    "certified_at": null
+  },
+  {
+    "cycle": 2026,
+    "election_date": "2026-11-03",
+    "stage": "general",
+    "office": "house",
+    "location": "NC-07",
+    "contest_type": "regular",
+    "source_id": "north_carolina",
+    "status": "preliminary",
+    "winner_candidate": null,
+    "candidates": [
+      {
+        "name": "David Rouzer",
+        "party": "REP",
+        "votes": 160605
+      },
+      {
+        "name": "Kimberly Hardy",
+        "party": "DEM",
+        "votes": 158227
+      },
+      {
+        "name": "Maad Abu-Ghazalah",
+        "party": "LIB",
+        "votes": 3165
+      }
+    ],
+    "vote_basis": "plurality",
+    "all_candidates_included": true,
+    "source_updated_at": null,
+    "status_evidence": "Official reporting feed; no certificate of canvass or winner assertion.",
+    "certification_url": null,
+    "certified_at": null
+  },
+  {
+    "cycle": 2026,
+    "election_date": "2026-11-03",
+    "stage": "general",
+    "office": "house",
+    "location": "NC-08",
+    "contest_type": "regular",
+    "source_id": "north_carolina",
+    "status": "preliminary",
+    "winner_candidate": null,
+    "candidates": [
+      {
+        "name": "Bo Whitehead",
+        "party": "GRE",
+        "votes": 2909
+      },
+      {
+        "name": "Colby Watson",
+        "party": "DEM",
+        "votes": 142672
+      },
+      {
+        "name": "Mark Harris",
+        "party": "REP",
+        "votes": 147687
+      }
+    ],
+    "vote_basis": "plurality",
+    "all_candidates_included": true,
+    "source_updated_at": null,
+    "status_evidence": "Official reporting feed; no certificate of canvass or winner assertion.",
+    "certification_url": null,
+    "certified_at": null
+  },
+  {
+    "cycle": 2026,
+    "election_date": "2026-11-03",
+    "stage": "general",
+    "office": "house",
+    "location": "NC-09",
+    "contest_type": "regular",
+    "source_id": "north_carolina",
+    "status": "preliminary",
+    "winner_candidate": null,
+    "candidates": [
+      {
+        "name": "Richard Hudson",
+        "party": "REP",
+        "votes": 132906
+      },
+      {
+        "name": "Richard N. Ojeda II",
+        "party": "DEM",
+        "votes": 139124
+      }
+    ],
+    "vote_basis": "plurality",
+    "all_candidates_included": true,
+    "source_updated_at": null,
+    "status_evidence": "Official reporting feed; no certificate of canvass or winner assertion.",
+    "certification_url": null,
+    "certified_at": null
+  },
+  {
+    "cycle": 2026,
+    "election_date": "2026-11-03",
+    "stage": "general",
+    "office": "house",
+    "location": "NC-10",
+    "contest_type": "regular",
+    "source_id": "north_carolina",
+    "status": "preliminary",
+    "winner_candidate": null,
+    "candidates": [
+      {
+        "name": "Ashley Bell",
+        "party": "DEM",
+        "votes": 144109
+      },
+      {
+        "name": "Pat Harrigan",
+        "party": "REP",
+        "votes": 146594
+      },
+      {
+        "name": "Steven Feldman",
+        "party": "LIB",
+        "votes": 4711
+      }
+    ],
+    "vote_basis": "plurality",
+    "all_candidates_included": true,
+    "source_updated_at": null,
+    "status_evidence": "Official reporting feed; no certificate of canvass or winner assertion.",
+    "certification_url": null,
+    "certified_at": null
+  },
+  {
+    "cycle": 2026,
+    "election_date": "2026-11-03",
+    "stage": "general",
+    "office": "house",
+    "location": "NC-11",
+    "contest_type": "regular",
+    "source_id": "north_carolina",
+    "status": "preliminary",
+    "winner_candidate": null,
+    "candidates": [
+      {
+        "name": "Jamie Ager",
+        "party": "DEM",
+        "votes": 196285
+      },
+      {
+        "name": "Jennifer Capps Balkcom",
+        "party": "REP",
+        "votes": 141890
+      },
+      {
+        "name": "Travis Groo",
+        "party": "LIB",
+        "votes": 5367
+      }
+    ],
+    "vote_basis": "plurality",
+    "all_candidates_included": true,
+    "source_updated_at": null,
+    "status_evidence": "Official reporting feed; no certificate of canvass or winner assertion.",
+    "certification_url": null,
+    "certified_at": null
+  },
+  {
+    "cycle": 2026,
+    "election_date": "2026-11-03",
+    "stage": "general",
+    "office": "house",
+    "location": "NC-12",
+    "contest_type": "regular",
+    "source_id": "north_carolina",
+    "status": "preliminary",
+    "winner_candidate": null,
+    "candidates": [
+      {
+        "name": "Alma S. Adams",
+        "party": "DEM",
+        "votes": 220788
+      },
+      {
+        "name": "Jack Codiga",
+        "party": "REP",
+        "votes": 51024
+      }
+    ],
+    "vote_basis": "plurality",
+    "all_candidates_included": true,
+    "source_updated_at": null,
+    "status_evidence": "Official reporting feed; no certificate of canvass or winner assertion.",
+    "certification_url": null,
+    "certified_at": null
+  },
+  {
+    "cycle": 2026,
+    "election_date": "2026-11-03",
+    "stage": "general",
+    "office": "house",
+    "location": "NC-13",
+    "contest_type": "regular",
+    "source_id": "north_carolina",
+    "status": "preliminary",
+    "winner_candidate": null,
+    "candidates": [
+      {
+        "name": "Brad Knott",
+        "party": "REP",
+        "votes": 152849
+      },
+      {
+        "name": "Paul Barringer",
+        "party": "DEM",
+        "votes": 160826
+      },
+      {
+        "name": "Steven Swinton",
+        "party": "LIB",
+        "votes": 4510
+      }
+    ],
+    "vote_basis": "plurality",
+    "all_candidates_included": true,
+    "source_updated_at": null,
+    "status_evidence": "Official reporting feed; no certificate of canvass or winner assertion.",
+    "certification_url": null,
+    "certified_at": null
+  },
+  {
+    "cycle": 2026,
+    "election_date": "2026-11-03",
+    "stage": "general",
+    "office": "house",
+    "location": "NC-14",
+    "contest_type": "regular",
+    "source_id": "north_carolina",
+    "status": "preliminary",
+    "winner_candidate": null,
+    "candidates": [
+      {
+        "name": "Lakesha Womack",
+        "party": "DEM",
+        "votes": 147935
+      },
+      {
+        "name": "Tim Moore",
+        "party": "REP",
+        "votes": 141362
+      }
+    ],
+    "vote_basis": "plurality",
+    "all_candidates_included": true,
+    "source_updated_at": null,
+    "status_evidence": "Official reporting feed; no certificate of canvass or winner assertion.",
+    "certification_url": null,
+    "certified_at": null
+  },
+  {
+    "cycle": 2026,
+    "election_date": "2026-11-03",
+    "stage": "general",
+    "office": "senate",
+    "location": "NC",
+    "contest_type": "regular",
+    "source_id": "north_carolina",
+    "status": "preliminary",
+    "winner_candidate": null,
+    "candidates": [
+      {
+        "name": "Michael Dublin",
+        "party": "GRE",
+        "votes": 36702
+      },
+      {
+        "name": "Michael Whatley",
+        "party": "REP",
+        "votes": 1648464
+      },
+      {
+        "name": "Roy Cooper",
+        "party": "DEM",
+        "votes": 2480272
+      },
+      {
+        "name": "Shannon W. Bray",
+        "party": "LIB",
+        "votes": 56063
+      }
+    ],
+    "vote_basis": "plurality",
+    "all_candidates_included": true,
+    "source_updated_at": null,
+    "status_evidence": "Official reporting feed; no certificate of canvass or winner assertion.",
+    "certification_url": null,
+    "certified_at": null
+  },
+  {
+    "cycle": 2026,
+    "election_date": "2026-11-03",
+    "stage": "general",
+    "office": "senate",
+    "location": "MN",
+    "contest_type": "regular",
+    "source_id": "minnesota_senate",
+    "status": "preliminary",
+    "winner_candidate": null,
+    "candidates": [
+      {
+        "name": "Marisa Simonetti",
+        "party": "IND",
+        "votes": 41564
+      },
+      {
+        "name": "Rebecca Whiting",
+        "party": "LIB",
+        "votes": 32473
+      },
+      {
+        "name": "Peggy Flanagan",
+        "party": "DFL",
+        "votes": 1520908
+      },
+      {
+        "name": "Michele Tafoya",
+        "party": "R",
+        "votes": 1233466
+      },
+      {
+        "name": "WRITE-IN",
+        "party": "WI",
+        "votes": 3346
+      }
+    ],
+    "vote_basis": "plurality",
+    "all_candidates_included": true,
+    "source_updated_at": "11/10/26 3:08 PM",
+    "status_evidence": "Official reporting feed; no certificate of canvass or winner assertion.",
+    "certification_url": null,
+    "certified_at": null
+  },
+  {
+    "cycle": 2026,
+    "election_date": "2026-11-03",
+    "stage": "general",
+    "office": "governor",
+    "location": "MN",
+    "contest_type": "regular",
+    "source_id": "ap_minnesota_governor",
+    "status": "called",
+    "winner_candidate": "Amy Klobuchar",
+    "candidates": [],
+    "vote_basis": "plurality",
+    "all_candidates_included": false,
+    "source_updated_at": null,
+    "status_evidence": "Reviewed AP dispatch explicitly reports the governor winner; media call, not certification.",
+    "certification_url": null,
+    "certified_at": null
+  },
+  {
+    "cycle": 2026,
+    "election_date": "2026-11-03",
+    "stage": "general",
+    "office": "senate",
+    "location": "VA",
+    "contest_type": "regular",
+    "source_id": "ap_senate_web",
+    "status": "called",
+    "winner_candidate": "Mark Warner",
+    "candidates": [],
+    "vote_basis": "plurality",
+    "all_candidates_included": false,
+    "source_updated_at": "2026-11-05",
+    "status_evidence": "Explicit AP race-call entry in the November 5 Senate chronology.",
+    "certification_url": null,
+    "certified_at": null
+  },
+  {
+    "cycle": 2026,
+    "election_date": "2026-11-03",
+    "stage": "general",
+    "office": "senate",
+    "location": "GA",
+    "contest_type": "regular",
+    "source_id": "ap_senate_web",
+    "status": "called",
+    "winner_candidate": "Jon Ossoff",
+    "candidates": [],
+    "vote_basis": "plurality",
+    "all_candidates_included": false,
+    "source_updated_at": "2026-11-05",
+    "status_evidence": "Explicit AP race-call entry in the November 5 Senate chronology.",
+    "certification_url": null,
+    "certified_at": null
+  },
+  {
+    "cycle": 2026,
+    "election_date": "2026-11-03",
+    "stage": "general",
+    "office": "senate",
+    "location": "DE",
+    "contest_type": "regular",
+    "source_id": "ap_senate_web",
+    "status": "called",
+    "winner_candidate": "Chris Coons",
+    "candidates": [],
+    "vote_basis": "plurality",
+    "all_candidates_included": false,
+    "source_updated_at": "2026-11-05",
+    "status_evidence": "Explicit AP race-call entry in the November 5 Senate chronology.",
+    "certification_url": null,
+    "certified_at": null
+  },
+  {
+    "cycle": 2026,
+    "election_date": "2026-11-03",
+    "stage": "general",
+    "office": "senate",
+    "location": "IL",
+    "contest_type": "regular",
+    "source_id": "ap_senate_web",
+    "status": "called",
+    "winner_candidate": "Juliana Stratton",
+    "candidates": [],
+    "vote_basis": "plurality",
+    "all_candidates_included": false,
+    "source_updated_at": "2026-11-05",
+    "status_evidence": "Explicit AP race-call entry in the November 5 Senate chronology.",
+    "certification_url": null,
+    "certified_at": null
+  },
+  {
+    "cycle": 2026,
+    "election_date": "2026-11-03",
+    "stage": "general",
+    "office": "senate",
+    "location": "NJ",
+    "contest_type": "regular",
+    "source_id": "ap_senate_web",
+    "status": "called",
+    "winner_candidate": "Cory Booker",
+    "candidates": [],
+    "vote_basis": "plurality",
+    "all_candidates_included": false,
+    "source_updated_at": "2026-11-05",
+    "status_evidence": "Explicit AP race-call entry in the November 5 Senate chronology.",
+    "certification_url": null,
+    "certified_at": null
+  },
+  {
+    "cycle": 2026,
+    "election_date": "2026-11-03",
+    "stage": "general",
+    "office": "senate",
+    "location": "RI",
+    "contest_type": "regular",
+    "source_id": "ap_senate_web",
+    "status": "called",
+    "winner_candidate": "John Reed",
+    "candidates": [],
+    "vote_basis": "plurality",
+    "all_candidates_included": false,
+    "source_updated_at": "2026-11-05",
+    "status_evidence": "Explicit AP race-call entry in the November 5 Senate chronology.",
+    "certification_url": null,
+    "certified_at": null
+  },
+  {
+    "cycle": 2026,
+    "election_date": "2026-11-03",
+    "stage": "general",
+    "office": "senate",
+    "location": "MA",
+    "contest_type": "regular",
+    "source_id": "ap_senate_web",
+    "status": "called",
+    "winner_candidate": "Edward Markey",
+    "candidates": [],
+    "vote_basis": "plurality",
+    "all_candidates_included": false,
+    "source_updated_at": "2026-11-05",
+    "status_evidence": "Explicit AP race-call entry in the November 5 Senate chronology.",
+    "certification_url": null,
+    "certified_at": null
+  },
+  {
+    "cycle": 2026,
+    "election_date": "2026-11-03",
+    "stage": "general",
+    "office": "senate",
+    "location": "NH",
+    "contest_type": "regular",
+    "source_id": "ap_senate_web",
+    "status": "called",
+    "winner_candidate": "Chris Pappas",
+    "candidates": [],
+    "vote_basis": "plurality",
+    "all_candidates_included": false,
+    "source_updated_at": "2026-11-05",
+    "status_evidence": "Explicit AP race-call entry in the November 5 Senate chronology.",
+    "certification_url": null,
+    "certified_at": null
+  },
+  {
+    "cycle": 2026,
+    "election_date": "2026-11-03",
+    "stage": "general",
+    "office": "senate",
+    "location": "NC",
+    "contest_type": "regular",
+    "source_id": "ap_senate_web",
+    "status": "called",
+    "winner_candidate": "Roy Cooper",
+    "candidates": [],
+    "vote_basis": "plurality",
+    "all_candidates_included": false,
+    "source_updated_at": "2026-11-05",
+    "status_evidence": "Explicit AP race-call entry in the November 5 Senate chronology.",
+    "certification_url": null,
+    "certified_at": null
+  },
+  {
+    "cycle": 2026,
+    "election_date": "2026-11-03",
+    "stage": "general",
+    "office": "senate",
+    "location": "FL",
+    "contest_type": "special",
+    "source_id": "ap_senate_web",
+    "status": "called",
+    "winner_candidate": "Ashley Moody",
+    "candidates": [],
+    "vote_basis": "plurality",
+    "all_candidates_included": false,
+    "source_updated_at": "2026-11-05",
+    "status_evidence": "Explicit AP race-call entry in the November 5 Senate chronology.",
+    "certification_url": null,
+    "certified_at": null
+  },
+  {
+    "cycle": 2026,
+    "election_date": "2026-11-03",
+    "stage": "general",
+    "office": "senate",
+    "location": "WV",
+    "contest_type": "regular",
+    "source_id": "ap_senate_web",
+    "status": "called",
+    "winner_candidate": "Shelley Capito",
+    "candidates": [],
+    "vote_basis": "plurality",
+    "all_candidates_included": false,
+    "source_updated_at": "2026-11-05",
+    "status_evidence": "Explicit AP race-call entry in the November 5 Senate chronology.",
+    "certification_url": null,
+    "certified_at": null
+  },
+  {
+    "cycle": 2026,
+    "election_date": "2026-11-03",
+    "stage": "general",
+    "office": "senate",
+    "location": "WY",
+    "contest_type": "regular",
+    "source_id": "ap_senate_web",
+    "status": "called",
+    "winner_candidate": "Harriet Hageman",
+    "candidates": [],
+    "vote_basis": "plurality",
+    "all_candidates_included": false,
+    "source_updated_at": "2026-11-05",
+    "status_evidence": "Explicit AP race-call entry in the November 5 Senate chronology.",
+    "certification_url": null,
+    "certified_at": null
+  },
+  {
+    "cycle": 2026,
+    "election_date": "2026-11-03",
+    "stage": "general",
+    "office": "senate",
+    "location": "CO",
+    "contest_type": "regular",
+    "source_id": "ap_senate_web",
+    "status": "called",
+    "winner_candidate": "John Hickenlooper",
+    "candidates": [],
+    "vote_basis": "plurality",
+    "all_candidates_included": false,
+    "source_updated_at": "2026-11-05",
+    "status_evidence": "Explicit AP race-call entry in the November 5 Senate chronology.",
+    "certification_url": null,
+    "certified_at": null
+  },
+  {
+    "cycle": 2026,
+    "election_date": "2026-11-03",
+    "stage": "general",
+    "office": "senate",
+    "location": "NM",
+    "contest_type": "regular",
+    "source_id": "ap_senate_web",
+    "status": "called",
+    "winner_candidate": "Ben Lujan",
+    "candidates": [],
+    "vote_basis": "plurality",
+    "all_candidates_included": false,
+    "source_updated_at": "2026-11-05",
+    "status_evidence": "Explicit AP race-call entry in the November 5 Senate chronology.",
+    "certification_url": null,
+    "certified_at": null
+  },
+  {
+    "cycle": 2026,
+    "election_date": "2026-11-03",
+    "stage": "general",
+    "office": "senate",
+    "location": "KY",
+    "contest_type": "regular",
+    "source_id": "ap_senate_web",
+    "status": "called",
+    "winner_candidate": "Andy Barr",
+    "candidates": [],
+    "vote_basis": "plurality",
+    "all_candidates_included": false,
+    "source_updated_at": "2026-11-05",
+    "status_evidence": "Explicit AP race-call entry in the November 5 Senate chronology.",
+    "certification_url": null,
+    "certified_at": null
+  },
+  {
+    "cycle": 2026,
+    "election_date": "2026-11-03",
+    "stage": "general",
+    "office": "senate",
+    "location": "OK",
+    "contest_type": "regular",
+    "source_id": "ap_senate_web",
+    "status": "called",
+    "winner_candidate": "Kevin Hern",
+    "candidates": [],
+    "vote_basis": "plurality",
+    "all_candidates_included": false,
+    "source_updated_at": "2026-11-05",
+    "status_evidence": "Explicit AP race-call entry in the November 5 Senate chronology.",
+    "certification_url": null,
+    "certified_at": null
+  },
+  {
+    "cycle": 2026,
+    "election_date": "2026-11-03",
+    "stage": "general",
+    "office": "senate",
+    "location": "SC",
+    "contest_type": "regular",
+    "source_id": "ap_senate_web",
+    "status": "called",
+    "winner_candidate": "Annie Andrews",
+    "candidates": [],
+    "vote_basis": "plurality",
+    "all_candidates_included": false,
+    "source_updated_at": "2026-11-05",
+    "status_evidence": "Explicit AP race-call entry in the November 5 Senate chronology.",
+    "certification_url": null,
+    "certified_at": null
+  },
+  {
+    "cycle": 2026,
+    "election_date": "2026-11-03",
+    "stage": "general",
+    "office": "senate",
+    "location": "AR",
+    "contest_type": "regular",
+    "source_id": "ap_senate_web",
+    "status": "called",
+    "winner_candidate": "Tom Cotton",
+    "candidates": [],
+    "vote_basis": "plurality",
+    "all_candidates_included": false,
+    "source_updated_at": "2026-11-05",
+    "status_evidence": "Explicit AP race-call entry in the November 5 Senate chronology.",
+    "certification_url": null,
+    "certified_at": null
+  },
+  {
+    "cycle": 2026,
+    "election_date": "2026-11-03",
+    "stage": "general",
+    "office": "senate",
+    "location": "OR",
+    "contest_type": "regular",
+    "source_id": "ap_senate_web",
+    "status": "called",
+    "winner_candidate": "Jeff Merkley",
+    "candidates": [],
+    "vote_basis": "plurality",
+    "all_candidates_included": false,
+    "source_updated_at": "2026-11-05",
+    "status_evidence": "Explicit AP race-call entry in the November 5 Senate chronology.",
+    "certification_url": null,
+    "certified_at": null
+  },
+  {
+    "cycle": 2026,
+    "election_date": "2026-11-03",
+    "stage": "general",
+    "office": "senate",
+    "location": "TX",
+    "contest_type": "regular",
+    "source_id": "ap_senate_web",
+    "status": "called",
+    "winner_candidate": "James Talarico",
+    "candidates": [],
+    "vote_basis": "plurality",
+    "all_candidates_included": false,
+    "source_updated_at": "2026-11-05",
+    "status_evidence": "Explicit AP race-call entry in the November 5 Senate chronology.",
+    "certification_url": null,
+    "certified_at": null
+  },
+  {
+    "cycle": 2026,
+    "election_date": "2026-11-03",
+    "stage": "general",
+    "office": "senate",
+    "location": "OH",
+    "contest_type": "special",
+    "source_id": "ap_senate_web",
+    "status": "called",
+    "winner_candidate": "Sherrod Brown",
+    "candidates": [],
+    "vote_basis": "plurality",
+    "all_candidates_included": false,
+    "source_updated_at": "2026-11-05",
+    "status_evidence": "Explicit AP race-call entry in the November 5 Senate chronology.",
+    "certification_url": null,
+    "certified_at": null
+  },
+  {
+    "cycle": 2026,
+    "election_date": "2026-11-03",
+    "stage": "general",
+    "office": "senate",
+    "location": "AL",
+    "contest_type": "regular",
+    "source_id": "ap_senate_web",
+    "status": "called",
+    "winner_candidate": "Barry Moore",
+    "candidates": [],
+    "vote_basis": "plurality",
+    "all_candidates_included": false,
+    "source_updated_at": "2026-11-05",
+    "status_evidence": "Explicit AP race-call entry in the November 5 Senate chronology.",
+    "certification_url": null,
+    "certified_at": null
+  },
+  {
+    "cycle": 2026,
+    "election_date": "2026-11-03",
+    "stage": "general",
+    "office": "senate",
+    "location": "KS",
+    "contest_type": "regular",
+    "source_id": "ap_senate_web",
+    "status": "called",
+    "winner_candidate": "Adam Hamilton",
+    "candidates": [],
+    "vote_basis": "plurality",
+    "all_candidates_included": false,
+    "source_updated_at": "2026-11-05",
+    "status_evidence": "Explicit AP race-call entry in the November 5 Senate chronology.",
+    "certification_url": null,
+    "certified_at": null
+  },
+  {
+    "cycle": 2026,
+    "election_date": "2026-11-03",
+    "stage": "general",
+    "office": "senate",
+    "location": "TN",
+    "contest_type": "regular",
+    "source_id": "ap_senate_web",
+    "status": "called",
+    "winner_candidate": "Bill Hagerty",
+    "candidates": [],
+    "vote_basis": "plurality",
+    "all_candidates_included": false,
+    "source_updated_at": "2026-11-05",
+    "status_evidence": "Explicit AP race-call entry in the November 5 Senate chronology.",
+    "certification_url": null,
+    "certified_at": null
+  },
+  {
+    "cycle": 2026,
+    "election_date": "2026-11-03",
+    "stage": "general",
+    "office": "senate",
+    "location": "IA",
+    "contest_type": "regular",
+    "source_id": "ap_senate_web",
+    "status": "called",
+    "winner_candidate": "Josh Turek",
+    "candidates": [],
+    "vote_basis": "plurality",
+    "all_candidates_included": false,
+    "source_updated_at": "2026-11-05",
+    "status_evidence": "Explicit AP race-call entry in the November 5 Senate chronology.",
+    "certification_url": null,
+    "certified_at": null
+  },
+  {
+    "cycle": 2026,
+    "election_date": "2026-11-03",
+    "stage": "general",
+    "office": "senate",
+    "location": "SD",
+    "contest_type": "regular",
+    "source_id": "ap_senate_web",
+    "status": "called",
+    "winner_candidate": "Mike Rounds",
+    "candidates": [],
+    "vote_basis": "plurality",
+    "all_candidates_included": false,
+    "source_updated_at": "2026-11-05",
+    "status_evidence": "Explicit AP race-call entry in the November 5 Senate chronology.",
+    "certification_url": null,
+    "certified_at": null
+  },
+  {
+    "cycle": 2026,
+    "election_date": "2026-11-03",
+    "stage": "general",
+    "office": "senate",
+    "location": "MN",
+    "contest_type": "regular",
+    "source_id": "ap_senate_web",
+    "status": "called",
+    "winner_candidate": "Peggy Flanagan",
+    "candidates": [],
+    "vote_basis": "plurality",
+    "all_candidates_included": false,
+    "source_updated_at": "2026-11-05",
+    "status_evidence": "Explicit AP race-call entry in the November 5 Senate chronology.",
+    "certification_url": null,
+    "certified_at": null
+  },
+  {
+    "cycle": 2026,
+    "election_date": "2026-11-03",
+    "stage": "general",
+    "office": "senate",
+    "location": "LA",
+    "contest_type": "regular",
+    "source_id": "ap_senate_web",
+    "status": "called",
+    "winner_candidate": "Julia Letlow",
+    "candidates": [],
+    "vote_basis": "plurality",
+    "all_candidates_included": false,
+    "source_updated_at": "2026-11-05",
+    "status_evidence": "Explicit AP race-call entry in the November 5 Senate chronology.",
+    "certification_url": null,
+    "certified_at": null
+  },
+  {
+    "cycle": 2026,
+    "election_date": "2026-11-03",
+    "stage": "general",
+    "office": "senate",
+    "location": "ME",
+    "contest_type": "regular",
+    "source_id": "ap_senate_web",
+    "status": "called",
+    "winner_candidate": "Troy Jackson",
+    "candidates": [],
+    "vote_basis": "plurality",
+    "all_candidates_included": false,
+    "source_updated_at": "2026-11-05",
+    "status_evidence": "Explicit AP race-call entry in the November 5 Senate chronology.",
+    "certification_url": null,
+    "certified_at": null
+  },
+  {
+    "cycle": 2026,
+    "election_date": "2026-11-03",
+    "stage": "general",
+    "office": "senate",
+    "location": "ID",
+    "contest_type": "regular",
+    "source_id": "ap_senate_web",
+    "status": "called",
+    "winner_candidate": "Jim Risch",
+    "candidates": [],
+    "vote_basis": "plurality",
+    "all_candidates_included": false,
+    "source_updated_at": "2026-11-05",
+    "status_evidence": "Explicit AP race-call entry in the November 5 Senate chronology.",
+    "certification_url": null,
+    "certified_at": null
+  },
+  {
+    "cycle": 2026,
+    "election_date": "2026-11-03",
+    "stage": "general",
+    "office": "senate",
+    "location": "MI",
+    "contest_type": "regular",
+    "source_id": "ap_senate_web",
+    "status": "called",
+    "winner_candidate": "Abdul El-Sayed",
+    "candidates": [],
+    "vote_basis": "plurality",
+    "all_candidates_included": false,
+    "source_updated_at": "2026-11-05",
+    "status_evidence": "Explicit AP race-call entry in the November 5 Senate chronology.",
+    "certification_url": null,
+    "certified_at": null
+  },
+  {
+    "cycle": 2026,
+    "election_date": "2026-11-03",
+    "stage": "general",
+    "office": "senate",
+    "location": "MT",
+    "contest_type": "regular",
+    "source_id": "ap_senate_web",
+    "status": "called",
+    "winner_candidate": "Kurt Alme",
+    "candidates": [],
+    "vote_basis": "plurality",
+    "all_candidates_included": false,
+    "source_updated_at": "2026-11-05",
+    "status_evidence": "Explicit AP race-call entry in the November 5 Senate chronology.",
+    "certification_url": null,
+    "certified_at": null
+  },
+  {
+    "cycle": 2026,
+    "election_date": "2026-11-03",
+    "stage": "general",
+    "office": "senate",
+    "location": "NE",
+    "contest_type": "regular",
+    "source_id": "ap_senate_web",
+    "status": "called",
+    "winner_candidate": "Pete Ricketts",
+    "candidates": [],
+    "vote_basis": "plurality",
+    "all_candidates_included": false,
+    "source_updated_at": "2026-11-05",
+    "status_evidence": "Explicit AP race-call entry in the November 5 Senate chronology.",
+    "certification_url": null,
+    "certified_at": null
+  },
+  {
+    "cycle": 2026,
+    "election_date": "2026-11-03",
+    "stage": "general",
+    "office": "governor",
+    "location": "GA",
+    "contest_type": "regular",
+    "source_id": "ap_governors_overview",
+    "status": "called",
+    "winner_candidate": "Keisha Lance Bottoms",
+    "candidates": [],
+    "vote_basis": "plurality",
+    "all_candidates_included": false,
+    "source_updated_at": null,
+    "status_evidence": "Reviewed AP reporting explicitly describes this candidate's gubernatorial victory; media call, not certification.",
+    "certification_url": null,
+    "certified_at": null
+  },
+  {
+    "cycle": 2026,
+    "election_date": "2026-11-03",
+    "stage": "general",
+    "office": "governor",
+    "location": "OH",
+    "contest_type": "regular",
+    "source_id": "ap_governors_overview",
+    "status": "called",
+    "winner_candidate": "Amy Acton",
+    "candidates": [],
+    "vote_basis": "plurality",
+    "all_candidates_included": false,
+    "source_updated_at": null,
+    "status_evidence": "Reviewed AP reporting explicitly describes this candidate's gubernatorial victory; media call, not certification.",
+    "certification_url": null,
+    "certified_at": null
+  },
+  {
+    "cycle": 2026,
+    "election_date": "2026-11-03",
+    "stage": "general",
+    "office": "governor",
+    "location": "IA",
+    "contest_type": "regular",
+    "source_id": "ap_governors_overview",
+    "status": "called",
+    "winner_candidate": "Rob Sand",
+    "candidates": [],
+    "vote_basis": "plurality",
+    "all_candidates_included": false,
+    "source_updated_at": null,
+    "status_evidence": "Reviewed AP reporting explicitly describes this candidate's gubernatorial victory; media call, not certification.",
+    "certification_url": null,
+    "certified_at": null
+  },
+  {
+    "cycle": 2026,
+    "election_date": "2026-11-03",
+    "stage": "general",
+    "office": "governor",
+    "location": "TX",
+    "contest_type": "regular",
+    "source_id": "ap_governors_overview",
+    "status": "called",
+    "winner_candidate": "Gina Hinojosa",
+    "candidates": [],
+    "vote_basis": "plurality",
+    "all_candidates_included": false,
+    "source_updated_at": null,
+    "status_evidence": "Reviewed AP reporting explicitly describes this candidate's gubernatorial victory; media call, not certification.",
+    "certification_url": null,
+    "certified_at": null
+  },
+  {
+    "cycle": 2026,
+    "election_date": "2026-11-03",
+    "stage": "general",
+    "office": "governor",
+    "location": "FL",
+    "contest_type": "regular",
+    "source_id": "ap_governors_overview",
+    "status": "called",
+    "winner_candidate": "Byron Donalds",
+    "candidates": [],
+    "vote_basis": "plurality",
+    "all_candidates_included": false,
+    "source_updated_at": null,
+    "status_evidence": "Reviewed AP reporting explicitly describes this candidate's gubernatorial victory; media call, not certification.",
+    "certification_url": null,
+    "certified_at": null
+  },
+  {
+    "cycle": 2026,
+    "election_date": "2026-11-03",
+    "stage": "general",
+    "office": "governor",
+    "location": "NY",
+    "contest_type": "regular",
+    "source_id": "ap_governors_overview",
+    "status": "called",
+    "winner_candidate": "Kathy Hochul",
+    "candidates": [],
+    "vote_basis": "plurality",
+    "all_candidates_included": false,
+    "source_updated_at": null,
+    "status_evidence": "Reviewed AP reporting explicitly describes this candidate's gubernatorial victory; media call, not certification.",
+    "certification_url": null,
+    "certified_at": null
+  },
+  {
+    "cycle": 2026,
+    "election_date": "2026-11-03",
+    "stage": "general",
+    "office": "governor",
+    "location": "CA",
+    "contest_type": "regular",
+    "source_id": "ap_governors_overview",
+    "status": "called",
+    "winner_candidate": "Xavier Becerra",
+    "candidates": [],
+    "vote_basis": "plurality",
+    "all_candidates_included": false,
+    "source_updated_at": null,
+    "status_evidence": "Reviewed AP reporting explicitly describes this candidate's gubernatorial victory; media call, not certification.",
+    "certification_url": null,
+    "certified_at": null
+  },
+  {
+    "cycle": 2026,
+    "election_date": "2026-11-03",
+    "stage": "general",
+    "office": "governor",
+    "location": "PA",
+    "contest_type": "regular",
+    "source_id": "ap_governors_overview",
+    "status": "called",
+    "winner_candidate": "Josh Shapiro",
+    "candidates": [],
+    "vote_basis": "plurality",
+    "all_candidates_included": false,
+    "source_updated_at": null,
+    "status_evidence": "Reviewed AP reporting explicitly describes this candidate's gubernatorial victory; media call, not certification.",
+    "certification_url": null,
+    "certified_at": null
+  },
+  {
+    "cycle": 2026,
+    "election_date": "2026-11-03",
+    "stage": "general",
+    "office": "governor",
+    "location": "WI",
+    "contest_type": "regular",
+    "source_id": "ap_governors_overview",
+    "status": "called",
+    "winner_candidate": "David Crowley",
+    "candidates": [],
+    "vote_basis": "plurality",
+    "all_candidates_included": false,
+    "source_updated_at": null,
+    "status_evidence": "Reviewed AP reporting explicitly describes this candidate's gubernatorial victory; media call, not certification.",
+    "certification_url": null,
+    "certified_at": null
+  },
+  {
+    "cycle": 2026,
+    "election_date": "2026-11-03",
+    "stage": "general",
+    "office": "governor",
+    "location": "MI",
+    "contest_type": "regular",
+    "source_id": "ap_governors_overview",
+    "status": "called",
+    "winner_candidate": "Jocelyn Benson",
+    "candidates": [],
+    "vote_basis": "plurality",
+    "all_candidates_included": false,
+    "source_updated_at": null,
+    "status_evidence": "Reviewed AP reporting explicitly describes this candidate's gubernatorial victory; media call, not certification.",
+    "certification_url": null,
+    "certified_at": null
+  },
+  {
+    "cycle": 2026,
+    "election_date": "2026-11-03",
+    "stage": "general",
+    "office": "governor",
+    "location": "MD",
+    "contest_type": "regular",
+    "source_id": "ap_governors_overview",
+    "status": "called",
+    "winner_candidate": "Wes Moore",
+    "candidates": [],
+    "vote_basis": "plurality",
+    "all_candidates_included": false,
+    "source_updated_at": null,
+    "status_evidence": "Reviewed AP reporting explicitly describes this candidate's gubernatorial victory; media call, not certification.",
+    "certification_url": null,
+    "certified_at": null
+  },
+  {
+    "cycle": 2026,
+    "election_date": "2026-11-03",
+    "stage": "general",
+    "office": "governor",
+    "location": "IL",
+    "contest_type": "regular",
+    "source_id": "ap_governors_overview",
+    "status": "called",
+    "winner_candidate": "JB Pritzker",
+    "candidates": [],
+    "vote_basis": "plurality",
+    "all_candidates_included": false,
+    "source_updated_at": null,
+    "status_evidence": "Reviewed AP reporting explicitly describes this candidate's gubernatorial victory; media call, not certification.",
+    "certification_url": null,
+    "certified_at": null
+  },
+  {
+    "cycle": 2026,
+    "election_date": "2026-11-03",
+    "stage": "general",
+    "office": "governor",
+    "location": "NM",
+    "contest_type": "regular",
+    "source_id": "ap_governors_overview",
+    "status": "called",
+    "winner_candidate": "Deb Haaland",
+    "candidates": [],
+    "vote_basis": "plurality",
+    "all_candidates_included": false,
+    "source_updated_at": null,
+    "status_evidence": "Reviewed AP reporting explicitly describes this candidate's gubernatorial victory; media call, not certification.",
+    "certification_url": null,
+    "certified_at": null
+  },
+  {
+    "cycle": 2026,
+    "election_date": "2026-11-03",
+    "stage": "general",
+    "office": "house",
+    "location": "TX-33",
+    "contest_type": "regular",
+    "source_id": "cbs_tx_33",
+    "status": "called",
+    "winner_candidate": "Colin Allred",
+    "candidates": [],
+    "vote_basis": "plurality",
+    "all_candidates_included": false,
+    "source_updated_at": null,
+    "status_evidence": "Reviewed CBS News projection for this named congressional district; not certification.",
+    "certification_url": null,
+    "certified_at": null
+  },
+  {
+    "cycle": 2026,
+    "election_date": "2026-11-03",
+    "stage": "general",
+    "office": "house",
+    "location": "TX-15",
+    "contest_type": "regular",
+    "source_id": "cbs_tx_15",
+    "status": "called",
+    "winner_candidate": "Bobby Pulido",
+    "candidates": [],
+    "vote_basis": "plurality",
+    "all_candidates_included": false,
+    "source_updated_at": null,
+    "status_evidence": "Reviewed CBS News projection for this named congressional district; not certification.",
+    "certification_url": null,
+    "certified_at": null
+  },
+  {
+    "cycle": 2026,
+    "election_date": "2026-11-03",
+    "stage": "general",
+    "office": "house",
+    "location": "NC-01",
+    "contest_type": "regular",
+    "source_id": "wral_nc_house",
+    "status": "called",
+    "winner_candidate": "Don Davis",
+    "candidates": [],
+    "vote_basis": "plurality",
+    "all_candidates_included": false,
+    "source_updated_at": null,
+    "status_evidence": "Reviewed WRAL reporting explicitly distinguishes this winner from its listed uncalled/recount races.",
+    "certification_url": null,
+    "certified_at": null
+  },
+  {
+    "cycle": 2026,
+    "election_date": "2026-11-03",
+    "stage": "general",
+    "office": "house",
+    "location": "NC-06",
+    "contest_type": "regular",
+    "source_id": "wral_nc_house",
+    "status": "called",
+    "winner_candidate": "Cyril Jefferson",
+    "candidates": [],
+    "vote_basis": "plurality",
+    "all_candidates_included": false,
+    "source_updated_at": null,
+    "status_evidence": "Reviewed WRAL reporting explicitly distinguishes this winner from its listed uncalled/recount races.",
+    "certification_url": null,
+    "certified_at": null
+  },
+  {
+    "cycle": 2026,
+    "election_date": "2026-11-03",
+    "stage": "general",
+    "office": "house",
+    "location": "NC-08",
+    "contest_type": "regular",
+    "source_id": "wral_nc_house",
+    "status": "called",
+    "winner_candidate": "Mark Harris",
+    "candidates": [],
+    "vote_basis": "plurality",
+    "all_candidates_included": false,
+    "source_updated_at": null,
+    "status_evidence": "Reviewed WRAL reporting explicitly distinguishes this winner from its listed uncalled/recount races.",
+    "certification_url": null,
+    "certified_at": null
+  },
+  {
+    "cycle": 2026,
+    "election_date": "2026-11-03",
+    "stage": "general",
+    "office": "house",
+    "location": "NC-09",
+    "contest_type": "regular",
+    "source_id": "wral_nc_house",
+    "status": "called",
+    "winner_candidate": "Richard Ojeda",
+    "candidates": [],
+    "vote_basis": "plurality",
+    "all_candidates_included": false,
+    "source_updated_at": null,
+    "status_evidence": "Reviewed WRAL reporting explicitly distinguishes this winner from its listed uncalled/recount races.",
+    "certification_url": null,
+    "certified_at": null
+  },
+  {
+    "cycle": 2026,
+    "election_date": "2026-11-03",
+    "stage": "general",
+    "office": "house",
+    "location": "NC-10",
+    "contest_type": "regular",
+    "source_id": "wral_nc_house",
+    "status": "called",
+    "winner_candidate": "Pat Harrigan",
+    "candidates": [],
+    "vote_basis": "plurality",
+    "all_candidates_included": false,
+    "source_updated_at": null,
+    "status_evidence": "Reviewed WRAL reporting explicitly distinguishes this winner from its listed uncalled/recount races.",
+    "certification_url": null,
+    "certified_at": null
+  },
+  {
+    "cycle": 2026,
+    "election_date": "2026-11-03",
+    "stage": "general",
+    "office": "house",
+    "location": "NC-11",
+    "contest_type": "regular",
+    "source_id": "wral_nc_house",
+    "status": "called",
+    "winner_candidate": "Jamie Ager",
+    "candidates": [],
+    "vote_basis": "plurality",
+    "all_candidates_included": false,
+    "source_updated_at": null,
+    "status_evidence": "Reviewed WRAL reporting explicitly distinguishes this winner from its listed uncalled/recount races.",
+    "certification_url": null,
+    "certified_at": null
+  },
+  {
+    "cycle": 2026,
+    "election_date": "2026-11-03",
+    "stage": "general",
+    "office": "house",
+    "location": "NC-13",
+    "contest_type": "regular",
+    "source_id": "wral_nc_house",
+    "status": "called",
+    "winner_candidate": "Paul Barringer",
+    "candidates": [],
+    "vote_basis": "plurality",
+    "all_candidates_included": false,
+    "source_updated_at": null,
+    "status_evidence": "Reviewed WRAL reporting explicitly distinguishes this winner from its listed uncalled/recount races.",
+    "certification_url": null,
+    "certified_at": null
+  },
+  {
+    "cycle": 2026,
+    "election_date": "2026-11-03",
+    "stage": "general",
+    "office": "house",
+    "location": "NC-14",
+    "contest_type": "regular",
+    "source_id": "wral_nc_house",
+    "status": "called",
+    "winner_candidate": "LaKesha Womack",
+    "candidates": [],
+    "vote_basis": "plurality",
+    "all_candidates_included": false,
+    "source_updated_at": null,
+    "status_evidence": "Reviewed WRAL reporting explicitly distinguishes this winner from its listed uncalled/recount races.",
+    "certification_url": null,
+    "certified_at": null
+  }
+]

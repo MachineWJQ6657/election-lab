@@ -10,8 +10,8 @@ export default async function RootLayout({ children }: Readonly<{ children: Reac
   const host = requestHeaders.get("x-forwarded-host") ?? requestHeaders.get("host") ?? "localhost";
   const protocol = requestHeaders.get("x-forwarded-proto") ?? (host.startsWith("localhost") ? "http" : "https");
   const preview = `${protocol}://${host}/election-forecast-lab-og-v2-1200x630.png`;
-  const title = "Election Forecast Lab · 2026 Midterms";
-  const description = "An auditable, poll-driven forecast of the 2026 U.S. midterm elections.";
+  const title = "Election Forecast Lab · 2026 Midterms Review";
+  const description = "Post-election review of an auditable, poll-driven 2026 U.S. midterm forecast: frozen predictions scored against results.";
 
   return (
     <html lang="en">
